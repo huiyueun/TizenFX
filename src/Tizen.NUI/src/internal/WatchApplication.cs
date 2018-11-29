@@ -213,7 +213,6 @@ namespace Tizen.NUI
             e.WatchTime = WatchTime.GetWatchTimeFromPtr(watchTime);
 
             _timeTickEventHandler?.Invoke(this, e);
-
         }
 
         internal WatchTimeSignal TimeTickSignal()
