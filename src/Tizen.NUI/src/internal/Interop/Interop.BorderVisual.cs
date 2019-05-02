@@ -14,15 +14,15 @@ namespace Tizen.NUI
             }
 
 
-            [global::System.Runtime.InteropServices.DllImport("libdali-csharp-binder.so", EntryPoint = "CSharp_Dali_BORDER_VISUAL_COLOR_get")]
+            [global::System.Runtime.InteropServices.DllImport(NDalicPINVOKE.Lib, EntryPoint = "CSharp_Dali_BORDER_VISUAL_COLOR_get")]
             public static extern int BORDER_VISUAL_COLOR_get();
 
 
-            [global::System.Runtime.InteropServices.DllImport("libdali-csharp-binder.so", EntryPoint = "CSharp_Dali_BORDER_VISUAL_SIZE_get")]
+            [global::System.Runtime.InteropServices.DllImport(NDalicPINVOKE.Lib, EntryPoint = "CSharp_Dali_BORDER_VISUAL_SIZE_get")]
             public static extern int BORDER_VISUAL_SIZE_get();
 
 
-            [global::System.Runtime.InteropServices.DllImport("libdali-csharp-binder.so", EntryPoint = "CSharp_Dali_BORDER_VISUAL_ANTI_ALIASING_get")]
+            [global::System.Runtime.InteropServices.DllImport(NDalicPINVOKE.Lib, EntryPoint = "CSharp_Dali_BORDER_VISUAL_ANTI_ALIASING_get")]
             public static extern int BORDER_VISUAL_ANTI_ALIASING_get();
 
         }

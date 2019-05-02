@@ -9,7 +9,7 @@ namespace Tizen.NUI
         internal static partial class KeyboardEventSignalType
         {
 
-            [global::System.Runtime.InteropServices.DllImport("libdali-csharp-binder.so", EntryPoint = "CSharp_Dali_KeyboardEventSignalType_Empty")]
+            [global::System.Runtime.InteropServices.DllImport(NDalicPINVOKE.Lib, EntryPoint = "CSharp_Dali_KeyboardEventSignalType_Empty")]
             public static extern bool KeyboardEventSignalType_Empty(global::System.Runtime.InteropServices.HandleRef jarg1);
 
 

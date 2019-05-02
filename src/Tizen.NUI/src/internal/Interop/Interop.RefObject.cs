@@ -14,18 +14,18 @@ namespace Tizen.NUI
                 ulong ret = Interop.Util.GetNanoSeconds();
                 Tizen.Log.Error("NUI", "RefObject : " + ret);
             }
-            [global::System.Runtime.InteropServices.DllImport("libdali-csharp-binder.so", EntryPoint = "CSharp_Dali_RefObject_Reference")]
+            [global::System.Runtime.InteropServices.DllImport(NDalicPINVOKE.Lib, EntryPoint = "CSharp_Dali_RefObject_Reference")]
             public static extern void RefObject_Reference(global::System.Runtime.InteropServices.HandleRef jarg1);
 
 
-            [global::System.Runtime.InteropServices.DllImport("libdali-csharp-binder.so", EntryPoint = "CSharp_Dali_RefObject_Unreference")]
+            [global::System.Runtime.InteropServices.DllImport(NDalicPINVOKE.Lib, EntryPoint = "CSharp_Dali_RefObject_Unreference")]
             public static extern void RefObject_Unreference(global::System.Runtime.InteropServices.HandleRef jarg1);
 
 
-            [global::System.Runtime.InteropServices.DllImport("libdali-csharp-binder.so", EntryPoint = "CSharp_Dali_RefObject_ReferenceCount")]
+            [global::System.Runtime.InteropServices.DllImport(NDalicPINVOKE.Lib, EntryPoint = "CSharp_Dali_RefObject_ReferenceCount")]
             public static extern int RefObject_ReferenceCount(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-            [global::System.Runtime.InteropServices.DllImport("libdali-csharp-binder.so", EntryPoint = "CSharp_Dali_GetRefObjectPtr")]
+            [global::System.Runtime.InteropServices.DllImport(NDalicPINVOKE.Lib, EntryPoint = "CSharp_Dali_GetRefObjectPtr")]
             public static extern global::System.IntPtr GetRefObjectPtr(global::System.IntPtr jarg1);
         }
     }
