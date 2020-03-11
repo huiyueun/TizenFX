@@ -1,0 +1,1 @@
+/usr/bin/cc     -Wl,-zdefs -fpic -fPIC -Werror -O0 -g  -shared -Wl,-soname,libcapi-appfw-app-manager.so.0 -o libcapi-appfw-app-manager.so.1 CMakeFiles/capi-appfw-app-manager.dir/src/app-manager.c.o 

@@ -1,0 +1,1 @@
+/usr/bin/cc     -Wl,-zdefs -fpic -fPIC -Werror -O0 -g  -shared -Wl,-soname,libdlog.so.0 -o libdlog.so.1 CMakeFiles/dlog.dir/src/dlog.c.o 

@@ -1,0 +1,10 @@
+/home/huiyu/dali-env/opt/lib/libcapi-appfw-app-common.so.1
+/home/huiyu/dali-env/opt/lib/libcapi-appfw-app-common.so.0
+/home/huiyu/dali-env/opt/lib/libcapi-appfw-app-common.so
+/home/huiyu/dali-env/opt/lib/libcapi-appfw-app-manager.so.1
+/home/huiyu/dali-env/opt/lib/libcapi-appfw-app-manager.so.0
+/home/huiyu/dali-env/opt/lib/libcapi-appfw-app-manager.so
+/home/huiyu/dali-env/opt/lib/libdlog.so.1
+/home/huiyu/dali-env/opt/lib/libdlog.so.0
+/home/huiyu/dali-env/opt/lib/libdlog.so
+/home/huiyu/dali-env/opt/include/app-common/app_common.h

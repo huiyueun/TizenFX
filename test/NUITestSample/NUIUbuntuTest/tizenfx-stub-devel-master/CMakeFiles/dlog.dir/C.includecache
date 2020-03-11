@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/huiyu/Shared/workspace/tizenfx/github/TizenFX/test/NUITestSample/NUIUbuntuTest/tizenfx-stub-devel-master/src/dlog.c
+stdio.h
+-
+stdarg.h
+-
+stdlib.h
+-
+dlog.h
+/home/huiyu/Shared/workspace/tizenfx/github/TizenFX/test/NUITestSample/NUIUbuntuTest/tizenfx-stub-devel-master/src/dlog.h
+
+/home/huiyu/Shared/workspace/tizenfx/github/TizenFX/test/NUITestSample/NUIUbuntuTest/tizenfx-stub-devel-master/src/dlog.h
+stdarg.h
+-
+string.h
+-
+tizen_error.h
+-
+dlog.h
+-
+dlog.h
+-
+
+src/tizen_error.h
+errno.h
+-
+

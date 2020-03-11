@@ -1,0 +1,9 @@
+/home/huiyu/Shared/workspace/tizenfx/github/TizenFX/test/NUITestSample/NUIUbuntuTest/tizenfx-stub-devel-master/CMakeFiles/rebuild_cache.dir
+/home/huiyu/Shared/workspace/tizenfx/github/TizenFX/test/NUITestSample/NUIUbuntuTest/tizenfx-stub-devel-master/CMakeFiles/list_install_components.dir
+/home/huiyu/Shared/workspace/tizenfx/github/TizenFX/test/NUITestSample/NUIUbuntuTest/tizenfx-stub-devel-master/CMakeFiles/capi-appfw-app-manager.dir
+/home/huiyu/Shared/workspace/tizenfx/github/TizenFX/test/NUITestSample/NUIUbuntuTest/tizenfx-stub-devel-master/CMakeFiles/install/local.dir
+/home/huiyu/Shared/workspace/tizenfx/github/TizenFX/test/NUITestSample/NUIUbuntuTest/tizenfx-stub-devel-master/CMakeFiles/edit_cache.dir
+/home/huiyu/Shared/workspace/tizenfx/github/TizenFX/test/NUITestSample/NUIUbuntuTest/tizenfx-stub-devel-master/CMakeFiles/capi-appfw-app-common.dir
+/home/huiyu/Shared/workspace/tizenfx/github/TizenFX/test/NUITestSample/NUIUbuntuTest/tizenfx-stub-devel-master/CMakeFiles/dlog.dir
+/home/huiyu/Shared/workspace/tizenfx/github/TizenFX/test/NUITestSample/NUIUbuntuTest/tizenfx-stub-devel-master/CMakeFiles/install/strip.dir
+/home/huiyu/Shared/workspace/tizenfx/github/TizenFX/test/NUITestSample/NUIUbuntuTest/tizenfx-stub-devel-master/CMakeFiles/install.dir

@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/huiyu/Shared/workspace/tizenfx/github/TizenFX/test/NUITestSample/NUIUbuntuTest/tizenfx-stub-devel-master/src/app-common.c
+linux/limits.h
+-
+stdio.h
+-
+string.h
+-
+stdlib.h
+-
+
