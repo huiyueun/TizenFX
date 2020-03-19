@@ -10,7 +10,7 @@ namespace NUITestSample
         [STAThread]
         static void Main(string[] args)
         {
-            new HelloWorldTest.Example().Run(args);
+            new HelloRotary().Run(args);
         }
     }
 }
