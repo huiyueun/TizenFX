@@ -22,42 +22,6 @@ using Tizen.NUI.BaseComponents;
 
 namespace Tizen.NUI
 {
-    public class RotaryIndicator
-    {
-        public RotaryIndicator()
-        {
-        }
-
-
-        private double DegreeToRadian(double angle)
-        {
-            return Math.PI * angle / 180.0f;
-        }
-        public void TestRotary(View parent)
-        {
-            Size size = new Size(480, 600);
-            float radius = (size.Width < size.Height) ? size.Width/2 : size.Height/2;
-            //radius -= 200;
-
-            for (int i = 0; i < 13; i++)
-            {
-                float calValue = (float)i / 13;
-                float x = (float)(size.Width/2 + 100 * Math.Cos((float)i / 13 * 2 * Math.PI - Math.PI / 2));
-                float y = (float)(size.Height/2 + 100 * Math.Sin((float)i / 13 * 2 * Math.PI - Math.PI / 2));
-                View item = new View
-                {
-                    Size = new Size(5, 5),
-                    Position = new Position(x, y),
-                    BackgroundColor = Color.Red,
-                    //ParentOrigin = ParentOrigin.Center,
-                };
-                Window.Instance.Add(item);
-            }
-        }
-
-        
-
-    }
     public class RotarySelector : View
     {
         private ImageView contentView;
@@ -69,7 +33,7 @@ namespace Tizen.NUI
 
         private ContentType contentType;
 
-        private bool isEditMode;
+        private bool isEditMode = true;
 
         private Color backgroundColor;
 
@@ -79,15 +43,13 @@ namespace Tizen.NUI
         private int numberOfDrawObjects = 11;
         private int maxPage = 1;
 
-
+        //private RotaryIndicator rotaryIndicator;
         public RotarySelector(ContentType contentType = ContentType.MainTextOnly)
         {
             Initialize();
 
-
-            RotaryIndicator Ri  = new RotaryIndicator();
-            Ri.TestRotary(this);
-
+            //rotaryIndicator = new RotaryIndicator();
+            //rotaryIndicator.CreateIndicator(this);
         }
 
         public List<RotarySelectorItem> GetRotarySelectorItems()
@@ -98,6 +60,7 @@ namespace Tizen.NUI
         public void AppendItem(RotarySelectorItem item)
         {
             itemList.Add(item);
+            item.TouchEvent += Item_TouchEvent;    
             iconLayerView.Add(item);
             DrawCircurlarIcon();
         }
@@ -181,6 +144,7 @@ namespace Tizen.NUI
                 PivotPoint = Tizen.NUI.PivotPoint.Center,
                 PositionUsesPivotPoint = true,
             };
+
             this.Add(iconLayerView);
             CreateContent();
 
@@ -241,20 +205,20 @@ namespace Tizen.NUI
             bool isReverse = false;
             if ( page == currentPage )
             {
-                item.RaiseToTop();
+                //item.RaiseToTop();
             }
             if ( page < currentPage )
             {
                 //cnt = 120;
                 //startDegree = 70;
-                item.RaiseToTop();
+                //item.RaiseToTop();
                 isReverse = true;
             }
             else if ( page > currentPage )
             {
                 //cnt = 120;
                 //startDegree = 113;
-                item.LowerToBottom();
+                //item.LowerToBottom();
                 isReverse = true;
             }
 
@@ -350,6 +314,12 @@ namespace Tizen.NUI
                     RotarySelectorItem item = itemList[itemIdx];
                     item.PivotPoint = Tizen.NUI.PivotPoint.Center;
                     item.PositionUsesPivotPoint = true;
+                    
+                    if(isNextPage)
+                        item.CurrentIndex = (uint)numberOfDrawObjects-1-j;
+                    else
+                        item.CurrentIndex = j;
+                    
 
                     PlayRotaryAnimation(item, isNextPage, i, j);
 
@@ -362,5 +332,133 @@ namespace Tizen.NUI
             }
             return true;
         }
+
+
+        View tempIconView;
+        RotarySelectorItem selectedItem;
+        uint tempSelectIdx;
+        bool isProcessed = false;
+        private bool Item_TouchEvent(object source, View.TouchEventArgs e)
+        {
+            if(!isEditMode)
+            {
+                RotarySelectorItem item = source as RotarySelectorItem;
+                //rotaryIndicator.SetRotaryPosition(item.CurrentIndex);
+                //item.AnimateSelectAnimation();
+            }
+            else
+            {
+                if(selectedItem == null)
+                {
+                    selectedItem = source as RotarySelectorItem;
+                    tempSelectIdx = selectedItem.CurrentIndex;
+                    if(tempIconView==null)
+                    {
+                        tempIconView = new View()
+                        {
+                            Size = selectedItem.Size,
+                            PositionX = selectedItem.ScreenPosition.X,
+                            PositionY = selectedItem.ScreenPosition.Y-25,
+                            PivotPoint = Tizen.NUI.PivotPoint.Center,
+                            PositionUsesPivotPoint = true,
+                            BackgroundColor = Color.Cyan,
+                        };
+                        iconLayerView.Add(tempIconView);
+                        tempIconView.LowerToBottom();
+
+                    }
+                    Window.Instance.TouchEvent += Instance_TouchEvent;
+                    selectedItem.TouchEvent -= Item_TouchEvent;
+
+                }
+                else
+                {
+                    if(!isProcessed)
+                    {
+                        isProcessed = true;
+                        RotarySelectorItem secondItem = source as RotarySelectorItem;
+                        
+                        bool isReverse = false;
+                        if(selectedItem.CurrentIndex < secondItem.CurrentIndex)
+                        {
+                            isReverse = true;
+                        }
+                        else
+                        {
+                            isReverse = false;
+                        }
+                        //tempIconView.PositionX = secondItem.ScreenPosition.X;
+                        //tempIconView.PositionY = secondItem.ScreenPosition.Y - 30;
+                        secondItem.BackgroundColor = Color.Red;
+                        //secondItem.SetRotaryPosition(secondItem.CurrentIndex - 1);
+
+                        tempSelectIdx  = secondItem.CurrentIndex;
+                        //secondItem.SetRotaryPosition(tempSelectIdx - 1, isReverse);
+                        secondItem.CurrentIndex = tempSelectIdx;
+                        foreach(RotarySelectorItem item in itemList)
+                        {
+                            if(item == selectedItem) continue;
+                            if(item.Opacity == 1.0f)
+                            {
+                                if(isReverse)
+                                {
+                                    if(item.CurrentIndex < secondItem.CurrentIndex && item.CurrentIndex>selectedItem.CurrentIndex)
+                                    {
+                                        item.BackgroundColor = Color.Red;
+                                    //    item.SetRotaryPosition(item.CurrentIndex - 1, isReverse);
+                                        item.CurrentIndex = item.CurrentIndex - 1;
+                                    }
+                                }
+                                else
+                                {
+                                    if(item.CurrentIndex > secondItem.CurrentIndex&& item.CurrentIndex<selectedItem.CurrentIndex)
+                                    {
+                                        item.BackgroundColor = Color.Red;
+                                        //item.SetRotaryPosition(item.CurrentIndex - 1, isReverse);
+                                        item.CurrentIndex = item.CurrentIndex - 1;
+                                    }
+
+                                }
+                            }
+                        }
+
+                        
+                        Tizen.Log.Error("NUI", "idx : " + secondItem.CurrentIndex + '\n');
+
+                        isProcessed = false;
+                    }
+
+                }
+
+            }
+            return true;
+        }
+        private void Instance_TouchEvent(object sender, Window.TouchEventArgs e)
+        {
+            if(isEditMode && selectedItem != null)
+            {
+                if (e.Touch.GetState(0) == PointStateType.Down)
+                {
+                }
+                else if ((e.Touch.GetState(0) == PointStateType.Up))
+                {
+                    //selectedItem.SetRotaryPosition(tempSelectIdx, false, false);
+                    //selectedItem.CurrentIndex = tempSelectIdx;
+                    selectedItem.RaiseToTop();
+
+
+                    Window.Instance.TouchEvent -= Instance_TouchEvent;
+                    selectedItem.TouchEvent += Item_TouchEvent;
+                    selectedItem = null;
+                }
+                else if ((e.Touch.GetState(0) == PointStateType.Motion))
+                {
+                    selectedItem.Position = new Position(e.Touch.GetScreenPosition(0).X, e.Touch.GetScreenPosition(0).Y);
+                }
+
+            }
+
+        }
+
     }
 }

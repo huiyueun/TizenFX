@@ -9,7 +9,8 @@ namespace NUITestSample
 
     public class HelloRotary : NUIApplication
     {
-        RotarySelector rs;
+        RotarySelector2 rs;
+        TextLabel editlabel;
         protected override void OnCreate()
         {
             base.OnCreate();
@@ -29,17 +30,17 @@ namespace NUITestSample
         {
           TextLabel label = new TextLabel()
           {
-            Text = "Layout Sample",
+            Text = "RotarySelector Sample",
             PointSize = 20,
           };
           Window.Instance.Add(label);
 
 
-        rs = new RotarySelector()
+        rs = new RotarySelector2()
         {
             Size2D =  new Size2D(480,600),
             Position2D = new Position2D(0,30),
-            //BackgroundColor = Color.Black,
+            BackgroundColor = Color.Black,
         };
 
         Color[] colorList = new Color[5]
@@ -55,15 +56,16 @@ namespace NUITestSample
           RotarySelectorItem item = new RotarySelectorItem()
           {
             Size = new Size(50,50),
-            BackgroundColor = Color.Black,//colorList[i%5],
-            MainText = "item " + i,
+            BackgroundColor = Color.White,//colorList[i%5],
+            MainText = "Main " + i,
+            SubText = "Sub " + i,
           };
 
           TextLabel t = new TextLabel()
           {
             Text = "" +(i),
             PointSize = 10,
-            TextColor = Color.White,
+            TextColor = Color.Black,
           };
           item.Add(t);
 
@@ -72,6 +74,15 @@ namespace NUITestSample
         
 
         Window.Instance.Add(rs);
+
+          editlabel = new TextLabel()
+          {
+            Text = "Mode : NormalMode",
+            PointSize = 16,
+            TextColor = Color.White,
+            Position2D = new Position2D(0,30),
+          };
+          Window.Instance.Add(editlabel);
 
           View bottomView = new View()
           {
@@ -89,7 +100,7 @@ namespace NUITestSample
 
           Button btn_1 = new Button()
           {
-            Text = "Grid_V",
+            Text = "ChangeMode",
             Size = new Size(100,50),
             Margin = 10,
           };
@@ -137,13 +148,13 @@ namespace NUITestSample
 
           Button btn_5 = new Button()
           {
-            Text = "++",
+            Text = "<<",
             Size = new Size(50,50),
             Margin = 10,
           };
           Button btn_6 = new Button()
           {
-            Text = "--",
+            Text = ">>",
             Size = new Size(50,50),
             Margin = 10,
           };
@@ -156,7 +167,19 @@ namespace NUITestSample
         
         private void Btn1_ClickEvent(object sender, Button.ClickEventArgs e)
         {
-          rs.DrawCircurlarIcon();
+          //rs.DrawCircurlarIcon();
+          rs.IsEditMode = !rs.IsEditMode;
+          if(rs.IsEditMode)
+          {
+            editlabel.Text = "Mode : EditMode";
+
+          }
+          else
+          {
+
+            editlabel.Text = "Mode : NormalMode";
+          }
+
         }
 
         private void Btn2_ClickEvent(object sender, Button.ClickEventArgs e)
