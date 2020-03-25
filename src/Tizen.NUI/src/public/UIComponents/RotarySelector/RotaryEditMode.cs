@@ -15,6 +15,7 @@ namespace Tizen.NUI
         public event FinishEditingIconHandler FinishEditing;
 
         private bool isProcessing = false;
+        private int cancelIdx = 0;
 
         public void ProcessTouchEvent(RotarySelectorItem item)
         {
@@ -27,7 +28,7 @@ namespace Tizen.NUI
             }
 
         }
-        public void ProcessMotionEvent(List<RotaryItemWrapper> wrapperList, RotarySelectorItem item)
+        public void ProcessMotionEvent(int currentPage, List<RotaryItemWrapper> wrapperList, RotarySelectorItem item)
         {
             if(item == SelectedItem)
             {
@@ -44,6 +45,7 @@ namespace Tizen.NUI
                 collisionItem.BackgroundColor = Color.Red;
                 //DisconnectItemTouchEvent(item);
 
+                int page = (currentPage % 2) * 11;
                 int selIdx = (int)SelectedItem?.CurrentIndex;
                 int colIdx = (int)collisionItem?.CurrentIndex;
                 item.BackgroundColor = Color.Red;
@@ -51,28 +53,36 @@ namespace Tizen.NUI
                 {
                     for(int i = selIdx; i < colIdx; i++)
                     {
-                        wrapperList[i].SetCurrentItem(wrapperList[i+1].GetCurrentItem());
-                        wrapperList[i].GetCurrentItem().BackgroundColor = Color.Red;
-                        wrapperList[i].PlayRotaryPathAnimation(200);
+                        int idx = page + i;
+                        wrapperList[idx].SetCurrentItem(wrapperList[idx + 1].GetCurrentItem());
+                        wrapperList[idx].GetCurrentItem().BackgroundColor = Color.Red;
+                        wrapperList[idx].PlayRotaryPathAnimation(200);
                     } 
                 }
                 else
                 {
                     for(int i = selIdx; i > colIdx; i--)
                     {
-                        wrapperList[i].SetCurrentItem(wrapperList[i-1].GetCurrentItem());
-                        wrapperList[i].GetCurrentItem().BackgroundColor = Color.Red;
-                        wrapperList[i].PlayRotaryPathAnimation(200, false);
+                        int idx = page + i;
+                        wrapperList[idx].SetCurrentItem(wrapperList[idx - 1].GetCurrentItem());
+                        wrapperList[idx].GetCurrentItem().BackgroundColor = Color.Red;
+                        wrapperList[idx].PlayRotaryPathAnimation(200, false);
                     } 
                 }
-                wrapperList[colIdx].SetCurrentItem(SelectedItem);
-                
-
-                isProcessing = false;
+                wrapperList[page + colIdx].SetCurrentItem(SelectedItem);
+                Timer animationProcessTimer = new Timer(200);
+                animationProcessTimer.Tick += Timer_Tick;
+                animationProcessTimer.Start();
                 return;
             }
-
             return;
+        }
+
+        private bool Timer_Tick(object source, Timer.TickEventArgs e)
+        {
+            Tizen.Log.Error("MYLOG","timer tick \n");
+            isProcessing = false;
+            return false;
         }
 
         private void Instance_TouchEvent(object sender, Window.TouchEventArgs e)

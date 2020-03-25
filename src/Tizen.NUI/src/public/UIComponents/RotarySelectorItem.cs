@@ -7,6 +7,7 @@ namespace Tizen.NUI
 {
     public class RotarySelectorItem : View
     {
+        internal View MyParent {get; set;}
         private string mainText;
         private string subText;
         

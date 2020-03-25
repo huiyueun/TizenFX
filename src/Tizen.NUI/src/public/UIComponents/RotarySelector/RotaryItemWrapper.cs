@@ -7,6 +7,8 @@ namespace Tizen.NUI
 {
     public class RotaryItemWrapper
     {
+        private Animation RotaryAnimation = new Animation();
+
         private Size parentSize;
         internal Position Position { get; set; }
 
@@ -16,6 +18,8 @@ namespace Tizen.NUI
         private RotarySelectorItem item;
 
         internal uint CurrentIndex { get; set; }
+
+        internal bool isHidden{ get; set; }
 
         internal RotaryItemWrapper()
         {
@@ -27,41 +31,96 @@ namespace Tizen.NUI
             return item;
         }
 
+        internal void ShowItem()
+        {
+            item.Show();
+        }
+        
+        internal void HideItem()
+        {
+            item.Hide();
+        }
+
         internal void SetCurrentItem(RotarySelectorItem item, bool isSetPosition = false)
         {
+            if(this.item != null)
+            {
+            }
+
             this.item = item;
+            //this.item.Unparent();
+            this.item.MyParent.Add(this.item);
+            
             this.item.CurrentIndex = CurrentIndex;
             Position = GetRotaryPosition(CurrentIndex + 1);
             if(isSetPosition)
             {
                 this.item.Position = Position;
             }
+            if(isHidden)
+            {
+                this.item.Hide();
+            }
             //PlayRotaryPathAnimation(200);
         }
 
-        internal void PlayRotaryPathAnimation(int time, bool isReverse = true)
+        internal void PlayRotaryPathAnimation(int time, bool isReverse = true, bool finished = false)
         {
-            Animation ani = new Animation(time);
-            ani.SetDefaultAlphaFunction(new AlphaFunction(AlphaFunction.BuiltinFunctions.EaseOutSquare));
-            ani.AnimatePath(this.item, GetRotaryPositionPathIndex(isReverse), Vector3.Zero);
-            ani.Play();
-            //ani.AnimateTo(this, "Position",new Position(x,y));
+            Animation RotaryAnimation = new Animation(time);
+            RotaryAnimation.Duration = time;
+            RotaryAnimation.SetDefaultAlphaFunction(new AlphaFunction(AlphaFunction.BuiltinFunctions.EaseOutSquare));
+            RotaryAnimation.AnimatePath(this.item, GetRotaryPositionPathIndex(isReverse), Vector3.Zero);
+            RotaryAnimation.Play();
+            if(finished)
+            {
+                RotaryAnimation.Finished += Ani_Finished;
+            }
+        }
+
+        private void Ani_Finished(object sender, EventArgs e)
+        {
+            RotaryAnimation.Finished -= Ani_Finished;
         }
 
         internal void PlayRotaryPageAnimation(int time, bool isReverse = true)
         {
+            RotaryAnimation.Clear();
             this.item.Opacity =  0.0f;
-            Animation ani = new Animation(time);
-            ani.SetDefaultAlphaFunction(new AlphaFunction(AlphaFunction.BuiltinFunctions.EaseOutSquare));
-            ani.AnimatePath(this.item, GetRotaryPositionPath(isReverse), Vector3.Zero);
-            ani.AnimateTo(this.item, "Opacity", 1.0f, 0, 100);
-            ani.Play();
+            RotaryAnimation.Duration = time;
+            RotaryAnimation.SetDefaultAlphaFunction(new AlphaFunction(AlphaFunction.BuiltinFunctions.EaseOutSquare));
+            RotaryAnimation.AnimatePath(this.item, GetRotaryPositionPath(isReverse), Vector3.Zero);
+            RotaryAnimation.AnimateTo(this.item, "Opacity", 1.0f, 0, 200);
+            RotaryAnimation.Play();
+            //ani.AnimateTo(this, "Position",new Position(x,y));
+        }
+
+        internal void PlayRotaryPageHideAnimation(int time, bool isReverse = true)
+        {
+            RotaryAnimation.Clear();
+            this.item.Opacity =   1.0f;
+            RotaryAnimation.Duration = time;
+            RotaryAnimation.SetDefaultAlphaFunction(new AlphaFunction(AlphaFunction.BuiltinFunctions.EaseOutSquare));
+            RotaryAnimation.AnimatePath(this.item, GetRotaryPositionHidePath(isReverse), Vector3.Zero);
+            RotaryAnimation.AnimateTo(this.item, "Opacity", 0.0f, 0, 200);
+            RotaryAnimation.Play();
             //ani.AnimateTo(this, "Position",new Position(x,y));
         }
 
         internal double DegreeToRadian(double angle)
         {
             return Math.PI * angle / 180.0f;
+        }
+
+
+        internal Position GetRotaryHidePosition(float i)
+        {
+            Size size = this.parentSize;
+            float radius = (size.Width < size.Height) ? size.Width/2 : size.Height/2;
+
+            float x = (float)(size.Width / 2 + 200 * -Math.Cos((float)i / 12 * 2 * Math.PI - Math.PI / 2));
+         
+            float y = (float)(size.Height / 2 + 200 * Math.Sin((float)i  / 12 * 2 * Math.PI - Math.PI / 2));
+            return new Position(x, y);
         }
 
         internal Position GetRotaryPosition(float i)
@@ -100,6 +159,32 @@ namespace Tizen.NUI
             return path;
         }
 
+        internal Path GetRotaryPositionHidePath(bool isReverse = true)
+        {
+
+            
+            Path path = new Path();
+            float fIndex = CurrentIndex + 1;
+
+            if(isReverse)
+            {
+                for (int j = (int)fIndex; j >= 0; j--)
+                {
+                    path.AddPoint(GetRotaryHidePosition(j));
+                    //fIndex += (isReverse ? -0.1f : 0.1f);
+                }
+            }
+            else
+            {
+                for (int j = (int)fIndex; j <= 12; j++)
+                {
+                    path.AddPoint(GetRotaryHidePosition(j));
+                    //fIndex += (isReverse ? -0.1f : 0.1f);
+                }
+            }
+            path.GenerateControlPoints(0);
+            return path;
+        }
         internal Path GetRotaryPositionPathIndex(bool isReverse = true)
         {
             Path path = new Path();

@@ -85,17 +85,36 @@ namespace Tizen.NUI
                 rotaryIndicator.Show();
                 
             }
-
         }
+
+        internal void PlayIndicatorAnimation()
+        {
+            Animation ani = new Animation(150);
+            ani.SetDefaultAlphaFunction(new AlphaFunction(AlphaFunction.BuiltinFunctions.EaseOutSquare));
+            ani.AnimateTo(this.rotaryIndicator, "Opacity", 0.0f);
+            ani.Play();
+
+            ani.Finished += Ani_Finished;
+        }
+
+        private void Ani_Finished(object sender, EventArgs e)
+        {
+            Animation ani = new Animation(100);
+            ani.SetDefaultAlphaFunction(new AlphaFunction(AlphaFunction.BuiltinFunctions.EaseOutSquare));
+            ani.AnimateTo(this.rotaryIndicator, "Opacity", 1.0f);
+            ani.Play();
+        }
+
         internal void AppendItem(RotarySelectorItem item)
         {
             item.ItemSelected += ChangeItemCallback;
             itemList.Add(item);
+            item.MyParent = this;
             //item.TouchEvent += Item_TouchEvent;    
 
             item.PivotPoint = Tizen.NUI.PivotPoint.Center;
             item.PositionUsesPivotPoint = true;
-            this.Add(item);
+            //this.Add(item);
 
         }
         internal void PrependItem(RotarySelectorItem item)

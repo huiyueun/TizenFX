@@ -15,6 +15,7 @@ namespace NUITestSample
         {
             base.OnCreate();
             Initialize();
+            
         }
 
         public void Initialize()
@@ -194,11 +195,11 @@ namespace NUITestSample
 
         private void Btn5_ClickEvent(object sender, Button.ClickEventArgs e)
         {
-          rs.NextPage();
+          rs.PrevPage();
         }
         private void Btn6_ClickEvent(object sender, Button.ClickEventArgs e)
         {
-          rs.PrevPage();
+          rs.NextPage();
         }
 
         public void OnKeyEvent(object sender, Window.KeyEventArgs e)

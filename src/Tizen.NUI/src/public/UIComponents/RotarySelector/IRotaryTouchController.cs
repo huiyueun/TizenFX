@@ -6,6 +6,6 @@ namespace Tizen.NUI
     public interface IRotaryTouchController
     {
         void ProcessTouchEvent(RotarySelectorItem item);
-        void ProcessMotionEvent(List<RotaryItemWrapper> wrapperList, RotarySelectorItem item);
+        void ProcessMotionEvent(int currentPage, List<RotaryItemWrapper> wrapperList, RotarySelectorItem item);
     }
 }

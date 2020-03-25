@@ -14,8 +14,12 @@ namespace Tizen.NUI
         private List<RotaryItemWrapper> wrapperList;
 
         private uint currentPage = 0;
+        private int lastPage = 0;
         private uint currentWrapIdx = 0;
         private Size rotarySize;
+
+        private int itemTotalCount = 0;
+        
 
         internal RotarySelectorManager2(Size rotarySize)
         {
@@ -23,12 +27,24 @@ namespace Tizen.NUI
 
             wrapperList = new List<RotaryItemWrapper>();
 
+            // First Page
             for(uint i = 0; i < MAX_ITEM_COUNT; i++)
             {
                 RotaryItemWrapper rotaryItemWrapper = new RotaryItemWrapper();
                 rotaryItemWrapper.CurrentIndex = i;
+                rotaryItemWrapper.isHidden = false;
                 wrapperList.Add(rotaryItemWrapper);
             }
+
+            // Second Page -> hide
+            for(uint i = 0; i < MAX_ITEM_COUNT; i++)
+            {
+                RotaryItemWrapper rotaryItemWrapper = new RotaryItemWrapper();
+                rotaryItemWrapper.CurrentIndex = i;
+                rotaryItemWrapper.isHidden = true;
+                wrapperList.Add(rotaryItemWrapper);
+            }
+
             rotaryTouchController = new RotaryNormalMode();
         }
         
@@ -39,21 +55,64 @@ namespace Tizen.NUI
                 wrapperList[(int)currentWrapIdx].SetCurrentItem(item, true);
                 currentWrapIdx++;
             }
-        }
-        internal void NextPage()
-        {
-            foreach(RotaryItemWrapper wrapper in wrapperList)
+            else
             {
-                wrapper.PlayRotaryPageAnimation(300, false);
+                item.Hide();
+            }
+            itemTotalCount++;
+
+            int remainder = 0;
+            lastPage = Math.DivRem(itemTotalCount, 11, out remainder);
+            lastPage += (remainder > 0) ? 1 : 0;
+        }
+
+        internal void NextPage(List<RotarySelectorItem> itemList)
+        {
+            if(currentPage + 1 < lastPage)
+            {
+                int sIdx = ((int)currentPage % 2) * 11;
+                int eIdx = ((int)(currentPage + 1) % 2) * 11;
+                int setIdx = (int)(currentPage + 1) * 11;
+
+                for(int i = sIdx, j = eIdx; i < sIdx + 11; i++, j++)
+                {
+                    wrapperList[i].PlayRotaryPageHideAnimation(400, false);
+                    wrapperList[i].isHidden = true;
+
+                    if(setIdx < itemTotalCount)
+                    {
+                        wrapperList[j].SetCurrentItem(itemList[setIdx++]);
+                        wrapperList[j].ShowItem();
+                        wrapperList[j].PlayRotaryPageAnimation(400, false);
+                        wrapperList[j].isHidden = false;
+                    }
+                }
+
+                currentPage++;
             }
         }
 
-        internal void PrevPage()
+        internal void PrevPage(List<RotarySelectorItem> itemList)
         {
-            foreach(RotaryItemWrapper wrapper in wrapperList)
+            if(currentPage > 0)
             {
-                wrapper.PlayRotaryPageAnimation(300);
+                int sIdx = ((int)currentPage % 2) * 11;
+                int eIdx = ((int)(currentPage - 1) % 2) * 11;
+                int setIdx = (int)(currentPage - 1) * 11;
+
+                for(int i = sIdx, j = eIdx; i < sIdx + 11; i++, j++)
+                {
+                    wrapperList[i].PlayRotaryPageHideAnimation(800);
+                    wrapperList[i].isHidden = true;
+
+                    wrapperList[j].SetCurrentItem(itemList[setIdx++]);
+                    wrapperList[j].ShowItem();
+                    wrapperList[j].PlayRotaryPageAnimation(800);
+                    wrapperList[j].isHidden = false;
+                }
+                currentPage--;
             }
+
         }
 
         internal void SetRotarySelectorMode(bool isEditMode)
@@ -78,14 +137,11 @@ namespace Tizen.NUI
             item.TouchEvent += Item_TouchEvent;
         }
     
-
         internal void DisconnectItemTouchEvent(RotarySelectorItem item)
         {
             item.TouchEvent -= Item_TouchEvent;
         }
         
-        private bool isProcessing = false;
-
         internal bool Item_TouchEvent(object source, View.TouchEventArgs e)
         {
             RotarySelectorItem item = source as RotarySelectorItem;
@@ -95,17 +151,20 @@ namespace Tizen.NUI
             }
             if ((e.Touch.GetState(0) == PointStateType.Motion))
             {
-                rotaryTouchController.ProcessMotionEvent(wrapperList, item);
+                rotaryTouchController.ProcessMotionEvent((int)currentPage, wrapperList, item);
             }
             return false;
         }
 
         private void EiditingFinish(RotarySelectorItem item)
         {
-            wrapperList[(int)item.CurrentIndex].SetCurrentItem(item, true);
+            int wrapperIdx = (int)(currentPage % 2) * 11;
+            wrapperList[wrapperIdx + (int)item.CurrentIndex].SetCurrentItem(item, true);
+            //wrapperList[(int)item.CurrentIndex].GetCurrentItem().BackgroundColor = Color.White;
             foreach(RotaryItemWrapper wrapper in wrapperList)
             {
-                wrapper.GetCurrentItem().BackgroundColor = Color.White;
+                if(wrapper.GetCurrentItem() != null)
+                    wrapper.GetCurrentItem().BackgroundColor = Color.White;
             }
         }
 

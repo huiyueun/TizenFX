@@ -70,12 +70,16 @@ namespace Tizen.NUI
 
         public void NextPage()
         {
-            rotarySelectorManager.NextPage();
+            rotaryLayerView.PlayIndicatorAnimation();
+            rotarySelectorManager.NextPage(rotaryLayerView.ItemList);
         }
+
         public void PrevPage()
         {
-            rotarySelectorManager.PrevPage();
+            rotaryLayerView.PlayIndicatorAnimation();
+            rotarySelectorManager.PrevPage(rotaryLayerView.ItemList);
         }
+
         public bool IsEditMode
         {
             get

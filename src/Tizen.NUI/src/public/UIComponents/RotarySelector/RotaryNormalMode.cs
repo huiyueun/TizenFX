@@ -37,7 +37,7 @@ namespace Tizen.NUI
 
 
 
-        public void ProcessMotionEvent(List<RotaryItemWrapper> wrapperList, RotarySelectorItem item)
+        public void ProcessMotionEvent(int currentPage, List<RotaryItemWrapper> wrapperList, RotarySelectorItem item)
         {
             //Nothing
         }
