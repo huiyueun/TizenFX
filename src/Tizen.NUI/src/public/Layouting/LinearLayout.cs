@@ -864,5 +864,17 @@ namespace Tizen.NUI
                 }
             }
         }
+
+        private int mFirstItemIndex = 0;
+
+        public override int RecycleItemByCurrentPosition(Position scrollPosition, int spareItemCount)
+        {
+            float currentScrolledPosition = LinearOrientation == Orientation.Horizontal?scrollPosition.X:scrollPosition.Y;
+            float itemSize = LinearOrientation == Orientation.Horizontal?LayoutChildren[0].MeasuredWidth.Size.AsRoundedValue():LayoutChildren[0].MeasuredHeight.Size.AsRoundedValue();
+
+            int candidateStartDataIndex = (int)Math.Abs(currentScrolledPosition/itemSize);
+
+            return 0;
+        }
     } //LinearLayout
 } // namespace

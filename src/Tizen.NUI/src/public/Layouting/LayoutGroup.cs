@@ -563,5 +563,10 @@ namespace Tizen.NUI
             child.Measure( childWidthMeasureSpec, childHeightMeasureSpec );
 
         }
+
+        public virtual int RecycleItemByCurrentPosition(Position scrollPosition, int spareItemCount)
+        {
+            return 0;
+        }
     }
 }
