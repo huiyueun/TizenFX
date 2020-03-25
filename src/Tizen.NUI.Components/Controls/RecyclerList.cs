@@ -14,7 +14,7 @@ namespace Tizen.NUI.Components
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class RecyclerList : ScrollableBase
     {
-        private Adaptor mAdaptor;
+        private ListAdapter mAdapter;
         private View mContainer;
         private Size mListItemSize;
 
@@ -26,29 +26,19 @@ namespace Tizen.NUI.Components
             }
         }
 
-        public class Adaptor
+        public class ListAdapter
         {
             private List<object> mData = new List<object>();
-            public Adaptor()
+            public ListAdapter()
             {
             }
 
-            internal ListItem GetListItem()
-            {
-                return CreateListItem();
-            }
-
-            internal void BindDataWithItem(ListItem item, int index)
-            {
-                BindData(item,index);
-            }
-
-            protected virtual ListItem CreateListItem()
+            public virtual ListItem CreateListItem()
             {
                 return new ListItem();
             }
 
-            protected virtual void BindData(ListItem item, int index)
+            public virtual void BindData(ListItem item, int index)
             {
 
             }
@@ -74,10 +64,9 @@ namespace Tizen.NUI.Components
             
         }
 
-        public RecyclerList(Adaptor adaptor, LayoutItem layout)
+        public RecyclerList()
         {
             Name = "[RecyclerList]";
-            mAdaptor = adaptor;
             mContainer = new View()
             {
                 WidthSpecification = ScrollingDirection == Direction.Vertical? LayoutParamPolicies.MatchParent:LayoutParamPolicies.WrapContent,
@@ -89,82 +78,95 @@ namespace Tizen.NUI.Components
                 Name="Container"
             };
             Add(mContainer);
-
             ScrollEvent += OnScroll;
-            InitializeChild();
         }
 
-        public int SpareChildren{get;set;} = 5;
-        private int mFirstBindedIndex = 0;
-
-        private void InitializeChild()
-        {
-            mFirstBindedIndex = 0;
-
-            Color[] colorList = {
-                Color.Red,
-                Color.Yellow,
-                Color.Green,
-                Color.Blue,
-                Color.Magenta,
-            };
-
-            for(int i = 0 ; i< SpareChildren ; i++)
+        public ListAdapter Adapter{
+            get
             {
-                ListItem item = mAdaptor.GetListItem();
-                item.Name ="["+i+"] recycle";
-                mAdaptor.BindDataWithItem(item,i);
+                return mAdapter;
+            }
+            set
+            {
+                mAdapter = value;
+                InitializeChild();
+            }
+        }
 
-                item.BackgroundColor = colorList[i];
-                item.Position = new Position(0,item.CurrentSize.Height*i);
-                mContainer.Add(item);
-
-                if( mListItemSize == null)
+        public new LayoutItem Layout{
+            get
+            {
+                LayoutItem result = base.Layout;
+                if(mContainer)
                 {
-                    mListItemSize = item.Size;
+                    result = mContainer.Layout;
+                }
+
+                return result;
+            }
+            set
+            {
+                if(mContainer)
+                {
+                    mContainer.Layout = value;
                 }
             }
-
-            mContainer.HeightSpecification = (int)(mListItemSize.Height * mAdaptor.Data.Count);
         }
 
-        public void OnScroll(object source, ScrollableBase.ScrollEventArgs args)
+        private int mSpareItemCount = 5;
+        private int mTotalItemCount = 0;
+        private int mFristItemDataIndex = 0;
+ 
+        private void InitializeChild()
         {
-            RecycleItemByCurrentPosition(args.Position);
+            mListItemSize = mAdapter.CreateListItem().Size;
+            mContainer.HeightSpecification = (int)(mListItemSize.Height * mAdapter.Data.Count);
+            mTotalItemCount = CalculateTotalItemCount();
+
+            for(int i = 0; i< mTotalItemCount && i < mAdapter.Data.Count; i++)
+            {
+                ListItem item = mAdapter.CreateListItem();
+                item.Name ="["+i+"] recycle";
+                mContainer.Add(item);
+
+                mAdapter.BindData(item,i);
+            }
         }
 
-        private void RecycleItemByCurrentPosition(Position position)
+        private int CalculateTotalItemCount()
         {
-            int candidateStart =(int)(-position.Y /  mListItemSize.Height);
+            int visibleItemCount = 0;
 
-            if(mFirstBindedIndex<candidateStart)
+            if(ScrollingDirection == Direction.Horizontal)
             {
-                // remove front and move it to tail
-                ListItem target = mContainer.Children[mFirstBindedIndex%5] as ListItem;
-
-                int targetIndex = mFirstBindedIndex+5;
-                mAdaptor.BindDataWithItem(target,targetIndex);
-                target.Position = new Position(0,(int)((targetIndex)*mListItemSize.Height));
-
+                visibleItemCount = (int)(WidthSpecification/mListItemSize.Width);
             }
-            else if(mFirstBindedIndex>candidateStart)
+            else
             {
-                // remove tail and move it to fornt
-                ListItem target = mContainer.Children[(mFirstBindedIndex+4)%5] as ListItem;
-
-                int targetIndex = mFirstBindedIndex-1;
-                mAdaptor.BindDataWithItem(target,targetIndex);
-                target.Position = new Position(0,(int)((targetIndex)*mListItemSize.Height));
+                visibleItemCount = (int)(HeightSpecification/mListItemSize.Height);
             }
-
-            mFirstBindedIndex = candidateStart;
+            
+            return visibleItemCount + mSpareItemCount*2;
         }
 
-        public void SetAdaptor(Adaptor adaptor){
-            mAdaptor = adaptor;
+        private void OnScroll(object source, ScrollableBase.ScrollEventArgs args)
+        {
+            LayoutGroup containerLayout = mContainer.Layout as LayoutGroup;
+
+            int newFristItemDataIndex = containerLayout.RecycleItemByCurrentPosition(args.Position, mSpareItemCount);
+            if(mFristItemDataIndex != newFristItemDataIndex)
+            {
+                mFristItemDataIndex = newFristItemDataIndex;
+                BindData(newFristItemDataIndex);
+            }
         }
-        public Adaptor GetAdaptor(){
-            return mAdaptor;
+
+        private void BindData(int firstItemDataIndex)
+        {
+            for(int i = firstItemDataIndex; i<(firstItemDataIndex+mTotalItemCount) && i<mAdapter.Data.Count; i++)
+            {
+                mAdapter.BindData(mContainer.Children[i-firstItemDataIndex] as ListItem,i);
+            }
         }
     }
 }
