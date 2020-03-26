@@ -6,16 +6,14 @@ using Tizen.NUI.Components;
 
 namespace NUITestSample
 {
-
     public class HelloRotary : NUIApplication
     {
-        RotarySelector2 rs;
-        TextLabel editlabel;
+        RotarySelector2 rotarySelector;
+        TextLabel modelabel;
         protected override void OnCreate()
         {
             base.OnCreate();
             Initialize();
-            
         }
 
         public void Initialize()
@@ -36,54 +34,44 @@ namespace NUITestSample
           };
           Window.Instance.Add(label);
 
-
-        rs = new RotarySelector2()
-        {
+          rotarySelector = new RotarySelector2()
+          {
             Size2D =  new Size2D(480,600),
             Position2D = new Position2D(0,30),
             BackgroundColor = Color.Black,
-        };
-
-        Color[] colorList = new Color[5]
-        {
-            Color.Red,
-            Color.Yellow,
-            Color.Blue,
-            Color.Cyan,
-            Color.Magenta,
-        };
-        for(int i=1; i<=50; i++)
-        {
-          RotarySelectorItem item = new RotarySelectorItem()
-          {
-            Size = new Size(50,50),
-            BackgroundColor = Color.White,//colorList[i%5],
-            MainText = "Main " + i,
-            SubText = "Sub " + i,
           };
 
-          TextLabel t = new TextLabel()
+          for(int i = 1; i <= 50; i++)
           {
-            Text = "" +(i),
-            PointSize = 10,
-            TextColor = Color.Black,
-          };
-          item.Add(t);
+            RotarySelectorItem item = new RotarySelectorItem()
+            {
+              Size = new Size(50,50),
+              BackgroundColor = Color.White,
+              MainText = "Main " + i,
+              SubText = "Sub " + i,
+            };
 
-          rs.AppendItem(item);
-        }
-        
+            TextLabel numLabel = new TextLabel()
+            {
+              Text = "" +(i),
+              PointSize = 10,
+              TextColor = Color.Black,
+            };
+            item.Add(numLabel);
 
-        Window.Instance.Add(rs);
+            rotarySelector.AppendItem(item);
+          }
+          
+          Window.Instance.Add(rotarySelector);
 
-          editlabel = new TextLabel()
+          modelabel = new TextLabel()
           {
             Text = "Mode : NormalMode",
             PointSize = 16,
             TextColor = Color.White,
             Position2D = new Position2D(0,30),
           };
-          Window.Instance.Add(editlabel);
+          Window.Instance.Add(modelabel);
 
           View bottomView = new View()
           {
@@ -95,7 +83,6 @@ namespace NUITestSample
                 LinearOrientation = LinearLayout.Orientation.Horizontal,
                 LinearAlignment = LinearLayout.Alignment.Center,
               }
-
           };
           Window.Instance.Add(bottomView);
 
@@ -105,34 +92,8 @@ namespace NUITestSample
             Size = new Size(100,50),
             Margin = 10,
           };
-          Button btn_2 = new Button()
-          {
-            Text = "Grid_H",
-            Size = new Size(100,50),
-            Margin = 10,
-          };
-          Button btn_3 = new Button()
-          {
-            Text = "Circular",
-            Size = new Size(100,50),
-            Margin = 10,
-          };
-          Button btn_4 = new Button()
-          {
-            Text = "Wearable",
-            Size = new Size(100,50),
-            Margin = 10,
-          };
           btn_1.ClickEvent += Btn1_ClickEvent;
-          btn_2.ClickEvent += Btn2_ClickEvent;
-          btn_3.ClickEvent += Btn3_ClickEvent;
-          btn_4.ClickEvent += Btn4_ClickEvent;
-
           bottomView.Add(btn_1);
-          bottomView.Add(btn_2);
-          bottomView.Add(btn_3);
-          bottomView.Add(btn_4);
-
 
           View bottomView_2 = new View()
           {
@@ -168,59 +129,34 @@ namespace NUITestSample
         
         private void Btn1_ClickEvent(object sender, Button.ClickEventArgs e)
         {
-          //rs.DrawCircurlarIcon();
-          rs.IsEditMode = !rs.IsEditMode;
-          if(rs.IsEditMode)
-          {
-            editlabel.Text = "Mode : EditMode";
-
-          }
-          else
-          {
-
-            editlabel.Text = "Mode : NormalMode";
-          }
-
-        }
-
-        private void Btn2_ClickEvent(object sender, Button.ClickEventArgs e)
-        {
-        }
-        private void Btn3_ClickEvent(object sender, Button.ClickEventArgs e)
-        {
-        }
-        private void Btn4_ClickEvent(object sender, Button.ClickEventArgs e)
-        {
+          rotarySelector.IsEditMode = !rotarySelector.IsEditMode;
+          modelabel.Text = (rotarySelector.IsEditMode ? "Mode : EditMode" : "Mode : NormalMode" );
         }
 
         private void Btn5_ClickEvent(object sender, Button.ClickEventArgs e)
         {
-          rs.PrevPage();
+          rotarySelector.PrevPage();
         }
+        
         private void Btn6_ClickEvent(object sender, Button.ClickEventArgs e)
         {
-          rs.NextPage();
+          rotarySelector.NextPage();
         }
 
         public void OnKeyEvent(object sender, Window.KeyEventArgs e)
         {
-            if (e.Key.State == Key.StateType.Down )
+          if (e.Key.State == Key.StateType.Down )
+          {
+            switch(e.Key.KeyPressedName)
             {
-              switch(e.Key.KeyPressedName)
+              case "XF86Back":
+              case "Escape":
               {
-                case "XF86Back":
-                case "Escape":
-                {
-                  Exit();
-                  break;
-                }
-                case "1":
-                {
-                  
-                  break;
-                }
+                Exit();
+                break;
               }
             }
+          }
         }
 
         [STAThread]
