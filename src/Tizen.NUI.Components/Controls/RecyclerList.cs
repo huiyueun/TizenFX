@@ -77,7 +77,6 @@ namespace Tizen.NUI.Components
                 },
                 Name="Container"
             };
-            Add(mContainer);
             ScrollEvent += OnScroll;
         }
 
@@ -113,7 +112,7 @@ namespace Tizen.NUI.Components
             }
         }
 
-        private int mSpareItemCount = 5;
+        private int mSpareItemCount = 3;
         private int mTotalItemCount = 0;
         private int mFristItemDataIndex = 0;
  
@@ -122,13 +121,15 @@ namespace Tizen.NUI.Components
             mListItemSize = mAdapter.CreateListItem().Size;
             mContainer.HeightSpecification = (int)(mListItemSize.Height * mAdapter.Data.Count);
             mTotalItemCount = CalculateTotalItemCount();
+            Add(mContainer);
 
             for(int i = 0; i< mTotalItemCount && i < mAdapter.Data.Count; i++)
             {
                 ListItem item = mAdapter.CreateListItem();
                 item.Name ="["+i+"] recycle";
+                TextLabel label = item.Children[0] as TextLabel;
+                label.Text = "["+i+"] recycle";
                 mContainer.Add(item);
-
                 mAdapter.BindData(item,i);
             }
         }
@@ -139,11 +140,11 @@ namespace Tizen.NUI.Components
 
             if(ScrollingDirection == Direction.Horizontal)
             {
-                visibleItemCount = (int)(WidthSpecification/mListItemSize.Width);
+                visibleItemCount = (int)(Size.Width/mListItemSize.Width);
             }
             else
             {
-                visibleItemCount = (int)(HeightSpecification/mListItemSize.Height);
+                visibleItemCount = (int)(Size.Height/mListItemSize.Height);
             }
             
             return visibleItemCount + mSpareItemCount*2;
