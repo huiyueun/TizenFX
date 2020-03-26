@@ -119,7 +119,14 @@ namespace Tizen.NUI.Components
         private void InitializeChild()
         {
             mListItemSize = mAdapter.CreateListItem().Size;
-            mContainer.HeightSpecification = (int)(mListItemSize.Height * mAdapter.Data.Count);
+            if(ScrollingDirection == Direction.Horizontal)
+            {
+                mContainer.WidthSpecification = (int)(mListItemSize.Width * mAdapter.Data.Count);
+            }
+            else
+            {
+                mContainer.HeightSpecification = (int)(mListItemSize.Height * mAdapter.Data.Count);
+            }
             mTotalItemCount = CalculateTotalItemCount();
             Add(mContainer);
 
@@ -155,6 +162,9 @@ namespace Tizen.NUI.Components
             LayoutGroup containerLayout = mContainer.Layout as LayoutGroup;
 
             int newFristItemDataIndex = containerLayout.RecycleItemByCurrentPosition(args.Position, mSpareItemCount);
+
+            Tizen.Log.Error("NUI","==== RESULT INDEX : "+mFristItemDataIndex+" to "+newFristItemDataIndex+" ====\n");
+
             if(mFristItemDataIndex != newFristItemDataIndex)
             {
                 mFristItemDataIndex = newFristItemDataIndex;

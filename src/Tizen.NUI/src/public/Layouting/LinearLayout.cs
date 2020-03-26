@@ -663,7 +663,7 @@ namespace Tizen.NUI
             bool isLayoutRtl = Owner.LayoutDirection == ViewLayoutDirectionType.RTL;
 
             LayoutLength childTop = new LayoutLength(Padding.Top);
-            LayoutLength childLeft = new LayoutLength(Padding.Start);
+            LayoutLength childLeft = new LayoutLength(Padding.Start + mRecycleMargin);
 
             // Where bottom of child should go
             LayoutLength height = new LayoutLength(bottom - top);
@@ -680,17 +680,17 @@ namespace Tizen.NUI
                     // In case of RTL map END alignment to the left edge
                     if (isLayoutRtl)
                     {
-                        childLeft = new LayoutLength(Padding.Start);
+                        childLeft = new LayoutLength(Padding.Start + mRecycleMargin);
                     }
                     else
                     {
-                        childLeft = new LayoutLength(Padding.Start + right.AsDecimal() - left.AsDecimal() - _totalLength);
+                        childLeft = new LayoutLength(Padding.Start + mRecycleMargin + right.AsDecimal() - left.AsDecimal() - _totalLength);
                     }
                     break;
                 case Alignment.CenterHorizontal: // FALL THROUGH
                 case Alignment.Center:
                     // totalLength contains the padding already
-                    childLeft = new LayoutLength(Padding.Start + (right.AsDecimal() - left.AsDecimal() - _totalLength) / 2.0f);
+                    childLeft = new LayoutLength(Padding.Start + mRecycleMargin + (right.AsDecimal() - left.AsDecimal() - _totalLength) / 2.0f);
                     break;
                 case Alignment.Begin: // FALL THROUGH (default)
                 default:
@@ -698,11 +698,11 @@ namespace Tizen.NUI
                     // In case of RTL map BEGIN alignment to the right edge
                     if (isLayoutRtl)
                     {
-                        childLeft = new LayoutLength(Padding.Start  + right.AsDecimal() - left.AsDecimal() - _totalLength);
+                        childLeft = new LayoutLength(Padding.Start + mRecycleMargin  + right.AsDecimal() - left.AsDecimal() - _totalLength);
                     }
                     else
                     {
-                        childLeft = new LayoutLength(Padding.Start);
+                        childLeft = new LayoutLength(Padding.Start + mRecycleMargin);
                     }
                     break;
             }
@@ -870,29 +870,19 @@ namespace Tizen.NUI
 
         public override int RecycleItemByCurrentPosition(Position scrollPosition, int spareItemCount)
         {
-            int result = 0;
-
             float currentScrollPosition = LinearOrientation == Orientation.Horizontal?scrollPosition.X:scrollPosition.Y;
             float prevScrollPosition = LinearOrientation == Orientation.Horizontal?mPrevScrollPosition.X:mPrevScrollPosition.Y;
             float itemSize = LinearOrientation == Orientation.Horizontal?LayoutChildren[0].MeasuredWidth.Size.AsRoundedValue():LayoutChildren[0].MeasuredHeight.Size.AsRoundedValue();
 
+            View firstVisibleItem = Owner.Children[spareItemCount];
+            float firstVisibleItemPosition = LinearOrientation == Orientation.Horizontal?firstVisibleItem.Position.X:firstVisibleItem.Position.Y;
+
             bool checkFront = (prevScrollPosition - currentScrollPosition) > 0;
-
-            // Tizen.Log.Error("NUI","RBC ======== \n");
-            // Tizen.Log.Error("NUI","Current "+currentScrollPosition+"\n");
-            // Tizen.Log.Error("NUI","Prev "+prevScrollPosition+"\n");
-
 
             if(checkFront)
             {
-                View firstVisibleItem = Owner.Children[spareItemCount];
-                float firstVisibleItemPosition = LinearOrientation == Orientation.Horizontal?firstVisibleItem.Position.X:firstVisibleItem.Position.Y;
-
-//                Tizen.Log.Error("NUI","FV vs Current : "+firstVisibleItemPosition+" | "+currentScrollPosition+"\n");
-
                 if(firstVisibleItemPosition<Math.Abs(currentScrollPosition))
                 {
-//                    Tizen.Log.Error("NUI","==== remove from front!!!\n");
                     // Too many item is in front!!! move first item to back!!!!
                     Owner.Children[0].SiblingOrder = Owner.Children.Count-1;
                     mRecycleMargin += itemSize;
@@ -900,15 +890,8 @@ namespace Tizen.NUI
             }
             else
             {
-                View lastVisiblItem = Owner.Children[Owner.Children.Count - spareItemCount];
-                float lastVisibleItemPosition = LinearOrientation == Orientation.Horizontal?lastVisiblItem.Position.X:lastVisiblItem.Position.Y;
-                float diff = LinearOrientation == Orientation.Horizontal?Owner.Parent.Layout.MeasuredWidth.Size.AsRoundedValue():Owner.Parent.Layout.MeasuredHeight.Size.AsRoundedValue();
-//                Tizen.Log.Error("NUI","LV vs Current : "+lastVisibleItemPosition+" | "+(Math.Abs(currentScrollPosition)+diff)+"\n");
-
-                if(lastVisibleItemPosition<Math.Abs(currentScrollPosition)+diff)
+                if(firstVisibleItemPosition>Math.Abs(currentScrollPosition)+itemSize)
                 {
-//                    Tizen.Log.Error("NUI","==== remove from back!!!\n");
-                    // Too many item is in back!!! move last item to front!!!!
                     Owner.Children[Owner.Children.Count-1].SiblingOrder = 0;
                     mRecycleMargin -= itemSize;
                 }
@@ -916,8 +899,8 @@ namespace Tizen.NUI
 
             mPrevScrollPosition = scrollPosition;
 
-            float resultPosition = LinearOrientation == Orientation.Horizontal?Owner.Children[0].Position.X:Owner.Children[0].Position.Y;
-            return (int)(resultPosition/itemSize);
+            float resultPosition = LinearOrientation == Orientation.Horizontal?Owner.Children[1].Position.X:Owner.Children[1].Position.Y;
+            return (int)((resultPosition-itemSize)/itemSize);
         }
     } //LinearLayout
 } // namespace
