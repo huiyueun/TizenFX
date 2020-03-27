@@ -868,7 +868,7 @@ namespace Tizen.NUI
         private Position mPrevScrollPosition = new Position();
         private float mRecycleMargin = 0.0f;
 
-        public override int RecycleItemByCurrentPosition(Position scrollPosition, int spareItemCount)
+        public override Vector2 RecycleItemByCurrentPosition(Position scrollPosition, int spareItemCount)
         {
             float currentScrollPosition = LinearOrientation == Orientation.Horizontal?scrollPosition.X:scrollPosition.Y;
             float prevScrollPosition = LinearOrientation == Orientation.Horizontal?mPrevScrollPosition.X:mPrevScrollPosition.Y;
@@ -900,7 +900,7 @@ namespace Tizen.NUI
             mPrevScrollPosition = scrollPosition;
 
             float resultPosition = LinearOrientation == Orientation.Horizontal?Owner.Children[1].Position.X:Owner.Children[1].Position.Y;
-            return (int)((resultPosition-itemSize)/itemSize);
+            return new Vector2((int)((resultPosition-itemSize)/itemSize), 1);
         }
     } //LinearLayout
 } // namespace

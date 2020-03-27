@@ -119,15 +119,25 @@ namespace Tizen.NUI.Components
         private void InitializeChild()
         {
             mListItemSize = mAdapter.CreateListItem().Size;
+            int itemCount = 1;
+
+            if (mContainer.Layout is GridLayout)
+            {
+                GridLayout gridLayout = mContainer.Layout as GridLayout;
+                itemCount = (gridLayout.LinearOrientation == GridLayout.Orientation.Vertical ) ? gridLayout.Columns : gridLayout.Rows;
+                mSpareItemCount = itemCount; 
+            }
+
             if(ScrollingDirection == Direction.Horizontal)
             {
-                mContainer.WidthSpecification = (int)(mListItemSize.Width * mAdapter.Data.Count);
+                mContainer.WidthSpecification = (int)(mListItemSize.Width * (mAdapter.Data.Count / itemCount));
             }
             else
             {
-                mContainer.HeightSpecification = (int)(mListItemSize.Height * mAdapter.Data.Count);
+                mContainer.HeightSpecification = (int)(mListItemSize.Height * (mAdapter.Data.Count / itemCount));
             }
-            mTotalItemCount = CalculateTotalItemCount();
+
+            mTotalItemCount = CalculateTotalItemCount(itemCount);
             Add(mContainer);
 
             for(int i = 0; i< mTotalItemCount && i < mAdapter.Data.Count; i++)
@@ -141,7 +151,7 @@ namespace Tizen.NUI.Components
             }
         }
 
-        private int CalculateTotalItemCount()
+        private int CalculateTotalItemCount(int lineCount)
         {
             int visibleItemCount = 0;
 
@@ -153,6 +163,7 @@ namespace Tizen.NUI.Components
             {
                 visibleItemCount = (int)(Size.Height/mListItemSize.Height);
             }
+            visibleItemCount *= lineCount;
             
             return visibleItemCount + mSpareItemCount*2;
         }
@@ -161,14 +172,14 @@ namespace Tizen.NUI.Components
         {
             LayoutGroup containerLayout = mContainer.Layout as LayoutGroup;
 
-            int newFristItemDataIndex = containerLayout.RecycleItemByCurrentPosition(args.Position, mSpareItemCount);
+            Vector2 FristItemDataIndex = containerLayout.RecycleItemByCurrentPosition(args.Position, mSpareItemCount);
 
-            Tizen.Log.Error("NUI","==== RESULT INDEX : "+mFristItemDataIndex+" to "+newFristItemDataIndex+" ====\n");
+            Tizen.Log.Error("NUI","==== RESULT INDEX : "+mFristItemDataIndex+" to "+FristItemDataIndex.X+" ====\n");
 
-            if(mFristItemDataIndex != newFristItemDataIndex)
+            if(mFristItemDataIndex != FristItemDataIndex.X)
             {
-                mFristItemDataIndex = newFristItemDataIndex;
-                BindData(newFristItemDataIndex);
+                mFristItemDataIndex = (int)FristItemDataIndex.X;
+                BindData((int)FristItemDataIndex.X);
             }
         }
 

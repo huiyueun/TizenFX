@@ -564,9 +564,9 @@ namespace Tizen.NUI
 
         }
 
-        public virtual int RecycleItemByCurrentPosition(Position scrollPosition, int spareItemCount)
+        public virtual Vector2 RecycleItemByCurrentPosition(Position scrollPosition, int spareItemCount)
         {
-            return 0;
+            return new Vector2();
         }
     }
 }
