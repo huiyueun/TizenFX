@@ -420,6 +420,16 @@ namespace Tizen.NUI
                     int y1 = locations[index].Top;
                     int y2 = locations[index].Bottom;
 
+                    if (LinearOrientation == Orientation.Horizontal)
+                    {
+                        x1 += (int)mRecycleMargin;
+                        x2 += (int)mRecycleMargin;
+                    }
+                    else
+                    {
+                        y1 += (int)mRecycleMargin;
+                        y2 += (int)mRecycleMargin;
+                    }
                     // Offset children by the grids padding if present
                     x1 += gridLayoutPadding.Start;
                     x2 += gridLayoutPadding.Start;
@@ -438,6 +448,68 @@ namespace Tizen.NUI
                     //childLayout.Owner.RaiseToTop();
                 }
             }
+        }
+
+        private Position mPrevScrollPosition = new Position();
+        private float mRecycleMargin = 0.0f;
+
+        public override int RecycleItemByCurrentPosition(Position scrollPosition, int spareItemCount)
+        {
+            float currentScrollPosition = LinearOrientation == Orientation.Horizontal ? scrollPosition.X:scrollPosition.Y;
+            float prevScrollPosition = LinearOrientation == Orientation.Horizontal ? mPrevScrollPosition.X:mPrevScrollPosition.Y;
+            float itemSize = LinearOrientation == Orientation.Horizontal?LayoutChildren[0].MeasuredWidth.Size.AsRoundedValue():LayoutChildren[0].MeasuredHeight.Size.AsRoundedValue();
+
+
+            View firstVisibleItem = Owner.Children[spareItemCount];
+            float firstVisibleItemPosition = LinearOrientation == Orientation.Horizontal?firstVisibleItem.Position.X:firstVisibleItem.Position.Y;
+ 
+            bool checkFront = (prevScrollPosition - currentScrollPosition) > 0;
+
+            if(checkFront)
+            {
+                if(firstVisibleItemPosition < Math.Abs(currentScrollPosition))
+                {
+                    Tizen.Log.Error("NUI","==== remove from front!!!\n");
+                    // Too many item is in front!!! move first item to back!!!!
+                    MoveChildItem(0);
+                    mRecycleMargin += (itemSize);
+                }
+            }
+            else
+            {
+                if(firstVisibleItemPosition > Math.Abs(currentScrollPosition)+itemSize)
+                {
+                    Tizen.Log.Error("NUI","==== remove from back!!!\n");
+                    // Too many item is in back!!! move last item to front!!!!
+
+                    MoveChildItem(Owner.Children.Count - 1);
+                    mRecycleMargin -= itemSize;
+                    
+                } 
+            }
+            Tizen.Log.Error("NUI","Rec margi : " + mRecycleMargin +"\n");
+            mPrevScrollPosition = scrollPosition;
+
+            int idx = GetLineCount();
+            float resultPosition = LinearOrientation == Orientation.Horizontal ? Owner.Children[idx].Position.X : Owner.Children[idx].Position.Y;
+            return (int)((resultPosition-itemSize)/itemSize) * idx;
+        }
+
+        private void MoveChildItem(int idx)
+        {
+            int lineCnt = GetLineCount();
+
+            for(int i=0; i < lineCnt; i++)
+            {
+                Tizen.Log.Error("NUI","move : " + Owner.Children[idx].Name + '\n');
+                Owner.Children[idx].SiblingOrder = Owner.Children.Count - 1 - idx;
+                //Owner.Children[0].BackgroundColor =Color.Red;
+            }
+        }
+
+        private int GetLineCount()
+        {
+            return (LinearOrientation == Orientation.Vertical) ? Columns : Rows;
         }
     }
 }
