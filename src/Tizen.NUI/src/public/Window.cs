@@ -22,6 +22,7 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using global::System.Runtime.InteropServices;
 using Tizen.NUI.BaseComponents;
+using Tizen.Applications;
 
 namespace Tizen.NUI
 {
@@ -38,6 +39,15 @@ namespace Tizen.NUI
         private string _windowTitle;
         private List<Layer> _childLayers = new List<Layer>();
         private LayoutController localController;
+        private FrameBrokerBase _frameBroker;
+
+        public void SetFramerBroker(FrameBrokerBase framerBroker)
+        {
+            //if(_frameBroker != null)
+            {
+                _frameBroker = framerBroker;
+            }
+        }
 
         private bool IsSupportedMultiWindow()
         {
@@ -55,6 +65,12 @@ namespace Tizen.NUI
                 localController = new LayoutController(this);
                 NUILog.Debug("layoutController id:" + localController.GetId());
             }
+            //_frameBroker = new DefaultAnimationBroker(this);
+        }
+
+        public void SendLaunchRequest(AppControl appControl, bool toProvider)
+        {
+            _frameBroker.SendLaunchRequest(appControl, toProvider);
         }
 
         /// <summary>

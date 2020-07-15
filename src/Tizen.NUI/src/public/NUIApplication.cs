@@ -39,6 +39,7 @@ namespace Tizen.NUI
         private static System.Resources.ResourceManager resourceManager = null;
         private Size2D _windowSize2D = null;
         private Position2D _windowPosition2D = null;
+        public FrameProvider frameProvider;
 
         /// <summary>
         /// The default constructor.
@@ -373,6 +374,23 @@ namespace Tizen.NUI
         protected override void OnCreate()
         {
             base.OnCreate();
+            frameProvider = new FrameProvider(GetDefaultWindow());
+            frameProvider.Shown += FrameProvider_Shown;
+            frameProvider.Hidden += FrameProvider_Hidden;
+        }
+
+        private void FrameProvider_Hidden(object sender, EventArgs e)
+        {
+            GetDefaultWindow().Hide();
+            Bundle bundle = new Bundle();
+            frameProvider.NotifyHideStatus(bundle);
+        }
+
+        private void FrameProvider_Shown(object sender, EventArgs e)
+        {
+            GetDefaultWindow().Show();
+            Bundle bundle = new Bundle();
+            frameProvider.NotifyShowStatus(bundle);
         }
 
         /// <summary>

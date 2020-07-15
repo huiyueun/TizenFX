@@ -16,6 +16,7 @@ namespace Tizen.NUI
     public class NUIFrameComponent : FrameComponent
     {
         private bool defaultWindowSet = false;
+        private FrameProvider frameProvider;
         internal NUIWindowInfo NUIWindowInfo
         {
             get;
@@ -61,7 +62,24 @@ namespace Tizen.NUI
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool OnCreate()
         {
+            frameProvider = new FrameProvider(Window);
+            frameProvider.Shown += FrameProvider_Shown;
+            frameProvider.Hidden += FrameProvider_Hidden;
             return true;
+        }
+
+        private void FrameProvider_Hidden(object sender, EventArgs e)
+        {
+            Window.Hide();
+            Bundle bundle = new Bundle();
+            frameProvider.NotifyHideStatus(bundle);
+        }
+
+        private void FrameProvider_Shown(object sender, EventArgs e)
+        {
+            Window.Show();
+            Bundle bundle = new Bundle();
+            frameProvider.NotifyShowStatus(bundle);
         }
 
         /// <summary>
