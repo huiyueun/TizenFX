@@ -676,19 +676,8 @@ namespace Tizen.NUI.BaseComponents
         /// <param name="tbmSurface">The TbmSurface to the image resource to display.</param>
         internal void SetTbmSurface(IntPtr tbmSurface)
         {
-            Tizen.Log.Error("MYLOG", "interop start - : ");
             Interop.ImageView.ImageView_SetTbmSurface(swigCPtr, tbmSurface);
-            Tizen.Log.Error("MYLOG", "interop start - 2");
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-        }
-
-        internal void SetTbmSurfaceClass(TBMSurface tbmSurfaceClass)
-        {
-            Tizen.Log.Error("MYLOG", "interop start claass- : ");
-            Interop.ImageView.ImageView_SetTbmSurfaceClass(swigCPtr, tbmSurfaceClass.getCPtr());
-            Tizen.Log.Error("MYLOG", "interop start claass - 2");
-            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
-
         }
 
         /// <summary>

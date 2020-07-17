@@ -23,6 +23,10 @@
     <ProjectReference Include="..\Tizen.System.SystemSettings\Tizen.System.SystemSettings.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="src\public\FrameProvider\" />
+  </ItemGroup>
+
   <Target Name="ChangeAliasesOfStrongNameAssemblies" BeforeTargets="FindReferenceAssembliesForReferences;ResolveReferences">
     <ItemGroup>
       <ReferencePath Condition="'%(FileName)' == 'Tizen.System.SystemSettings'">

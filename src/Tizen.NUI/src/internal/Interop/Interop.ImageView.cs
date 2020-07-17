@@ -53,9 +53,6 @@ namespace Tizen.NUI
             [global::System.Runtime.InteropServices.DllImport(NDalicPINVOKE.Lib, EntryPoint = "CSharp_Dali_ImageView_SetTbmSurface")]
             public static extern void ImageView_SetTbmSurface(global::System.Runtime.InteropServices.HandleRef jarg1, IntPtr jarg2);
 
-            [global::System.Runtime.InteropServices.DllImport(NDalicPINVOKE.Lib, EntryPoint = "CSharp_Dali_ImageView_SetTbmSurfaceClass")]
-            public static extern void ImageView_SetTbmSurfaceClass(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
             [global::System.Runtime.InteropServices.DllImport(NDalicPINVOKE.Lib, EntryPoint = "CSharp_Dali_ImageView_SetImage__SWIG_0")]
             public static extern void ImageView_SetImage__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
