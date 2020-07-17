@@ -1272,6 +1272,11 @@ namespace Tizen.NUI
             // Setting Position of the window should request a relayout of the tree.
         }
 
+        public void AddFrameCallback(FrameCallbackInterface frameCallback)
+        {
+            frameCallback.AddFrameCallback(stageCPtr, Layer.getCPtr(GetRootLayer()));
+        }
+
         /// <summary>
         /// Dispose for Window
         /// </summary>
