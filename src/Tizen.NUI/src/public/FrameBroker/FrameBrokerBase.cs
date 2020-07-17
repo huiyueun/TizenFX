@@ -50,18 +50,13 @@ namespace Tizen.NUI
         [EditorBrowsable(EditorBrowsableState.Never)]
         public FrameBrokerBase(Window window)
         {
-            Tizen.Log.Error("MYLOG", "window is 1");
             Interop.FrameBroker.ErrorCode err;
 
-            Tizen.Log.Error("MYLOG", "window is 2");
             if (window == null)
             {
-                Tizen.Log.Error("MYLOG", "window is null");
                 throw FrameBrokerBaseErrorFactory.GetException(Interop.FrameBroker.ErrorCode.InvalidParameter, "Invalid parameter");
             }
 
-
-            Tizen.Log.Error("MYLOG", "window is 3");
             _callbacks.OnCreate = new Interop.FrameBroker.FrameContextCreateCallback(OnCreateNative);
             _callbacks.OnResume = new Interop.FrameBroker.FrameContextResumeCallback(OnResumeNavie);
             _callbacks.OnPause = new Interop.FrameBroker.FrameContextPauseCallback(OnPauseNative);

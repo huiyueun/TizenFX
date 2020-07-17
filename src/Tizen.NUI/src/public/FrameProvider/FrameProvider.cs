@@ -116,18 +116,6 @@ namespace Tizen.NUI
         [EditorBrowsable(EditorBrowsableState.Never)]
         public void NotifyHideStatus(Bundle extraData)
         {
-            Tizen.Log.Error("MYLOG", "NUI Bundle check");
-            if(extraData == null)
-            {
-                Tizen.Log.Error("MYLOG", "extraData is null");
-                return;
-            }
-            else if(extraData.SafeBundleHandle == null)
-            {
-                Tizen.Log.Error("MYLOG", "extraData safebundle is null");
-                return;
-            }
-
             Interop.FrameProvider.ErrorCode err = Interop.FrameProvider.NotifyHideStatus(_handle, extraData.SafeBundleHandle);
             if (err != Interop.FrameProvider.ErrorCode.None)
             {
