@@ -22,7 +22,7 @@ namespace NUIProviderSample
             {
                 Size = new Size(360, 360),
                 BackgroundColor = new Color(0.0f, 0.54f, 0.93f, 1.0f),
-                CornerRadius = 180.0f
+                CornerRadius = 90.0f,
             };
 
             view.TouchEvent += View_TouchEvent;
@@ -39,7 +39,6 @@ namespace NUIProviderSample
             testButton1.SetImage(GetResourcePath() + "NUIProviderSample.png");
             Window.Instance.GetDefaultLayer().Add(testButton1);
 
-            /*
             TextLabel text = new TextLabel("Provider");
             text.HorizontalAlignment = HorizontalAlignment.Center;
             text.VerticalAlignment = VerticalAlignment.Center;
@@ -48,7 +47,11 @@ namespace NUIProviderSample
             text.HeightResizePolicy = ResizePolicyType.FillToParent;
             text.WidthResizePolicy = ResizePolicyType.FillToParent;
             Window.Instance.GetDefaultLayer().Add(text);
-            */
+
+            Animation ani = new Animation(300);
+            ani.Looping = true;
+            ani.AnimateTo(text, "Position", new Position(3, 4, 0));
+            ani.Play();
 
         }
 

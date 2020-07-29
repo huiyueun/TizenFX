@@ -19,9 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tizen.System.Information", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NUIComponentApplication", "C:\Users\huiyu.eun\Downloads\ComponentApplicationSample-master\ComponentApplicationSample-master\NUIComponentApplication\NUIComponentApplication.csproj", "{9EA2F516-3051-4D82-AB59-43FE693C88F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUIProviderSample", "..\NUIProviderSample\NUIProviderSample.csproj", "{F2339827-D3A5-4BBF-BD81-CDA7723C4AD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NUIProviderSample", "..\NUIProviderSample\NUIProviderSample.csproj", "{F2339827-D3A5-4BBF-BD81-CDA7723C4AD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUIBrokerSample", "..\NUIBrokerSample\NUIBrokerSample.csproj", "{84966B67-3918-4BE3-8DC1-B93D533393B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NUIBrokerSample", "..\NUIBrokerSample\NUIBrokerSample.csproj", "{84966B67-3918-4BE3-8DC1-B93D533393B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUIMusicPlayer", "..\NUIMusicPlayer\NUIMusicPlayer.csproj", "{2D58DC76-991C-4442-A2A9-455BF8317A9D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{84966B67-3918-4BE3-8DC1-B93D533393B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84966B67-3918-4BE3-8DC1-B93D533393B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84966B67-3918-4BE3-8DC1-B93D533393B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D58DC76-991C-4442-A2A9-455BF8317A9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D58DC76-991C-4442-A2A9-455BF8317A9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D58DC76-991C-4442-A2A9-455BF8317A9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D58DC76-991C-4442-A2A9-455BF8317A9D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
