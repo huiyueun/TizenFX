@@ -36,9 +36,11 @@ namespace NUIBrokerSample
         void Initialize()
         {
 
-            lauchBroker = new PositionBroker(Window.Instance);
             Window.Instance.KeyEvent += OnKeyEvent;
-            Window.Instance.BackgroundColor = new Color(0.9f, 0.9f, 0.9f, 1.0f);
+            Window.Instance.BackgroundColor = Color.Black;// new Color(0.9f, 0.9f, 0.9f, 1.0f);
+
+            lauchBroker = new PositionBroker(Window.Instance);
+
             ImageView bgView = new ImageView()
             {
                 ResourceUrl = Tizen.Applications.Application.Current.DirectoryInfo.Resource + "images/familyboard_setting_bg1.png",
@@ -48,7 +50,8 @@ namespace NUIBrokerSample
             mainView = new View()
             {
                 Size = new Size(470, 600),
-                BackgroundColor = Color.Black,
+                //Size = new Size(50, 50),
+                BackgroundColor = Color.Red,
                 CornerRadius = 50.0f,
                 ParentOrigin = ParentOrigin.TopCenter,
                 PivotPoint = PivotPoint.TopCenter,
@@ -56,13 +59,14 @@ namespace NUIBrokerSample
                 PositionUsesPivotPoint = true,
             };
             lauchBroker.MainView = mainView;
-            
+
 
 
             View view = mainView;
             Window.Instance.Add(view);
-            view.TouchEvent += View_TouchEvent;
+            view.TouchEvent += View_TouchEvent; ;
 
+            /*
             ImageView imgView = new ImageView()
             {
                 ParentOrigin = ParentOrigin.BottomCenter,
@@ -111,7 +115,6 @@ namespace NUIBrokerSample
 
             CreateInfo(view);
 
-
             View play_btn = new View()
             {
                 ParentOrigin = ParentOrigin.BottomCenter,
@@ -135,11 +138,22 @@ namespace NUIBrokerSample
             };
             play_btn.Add(play_icon);
             view.Add(play_btn);
-
             lauchBroker.IconView = profileContainer;
             lauchBroker.AddView = add_container;
+            
+            */
             Window.Instance.SetFramerBroker(lauchBroker);
         }
+
+        private bool View_TouchEvent2(object source, View.TouchEventArgs e)
+        {
+            if (e.Touch.GetState(0) == PointStateType.Up)
+            {
+                launchApplication();
+            }
+            return false;
+        }
+
 
         protected override void OnPause()
         {
@@ -329,6 +343,7 @@ namespace NUIBrokerSample
 
             return true;
         }
+
         public static string GetResourcePath()
         {
             return Tizen.Applications.Application.Current.DirectoryInfo.Resource;
@@ -336,7 +351,7 @@ namespace NUIBrokerSample
         private void launchApplication()
         {
             AppControl appControl = new AppControl();
-            appControl.ApplicationId = "org.tizen.example.NUIMusicPlayer";
+            appControl.ApplicationId = "org.tizen.example.NUIProviderSample";
             Window.Instance.SendLaunchRequest(appControl, true);
         }
 

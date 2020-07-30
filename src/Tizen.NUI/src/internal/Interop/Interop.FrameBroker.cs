@@ -107,7 +107,7 @@ namespace Tizen.NUI
             }
 
             [DllImport(Libraries.FrameBroker, EntryPoint = "frame_get_tbm_surface")]
-            internal static extern IntPtr GetTbmSurface(IntPtr handle, out IntPtr tbmSurface);
+            internal static extern ErrorCode GetTbmSurface(IntPtr handle, out IntPtr tbmSurface);
 
             [DllImport(Libraries.FrameBroker, EntryPoint = "frame_get_image_file")]
             internal static extern ErrorCode GetImageFile(IntPtr handle, out Int32 fd, out UInt32 size);

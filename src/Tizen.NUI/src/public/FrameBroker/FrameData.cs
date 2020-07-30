@@ -181,18 +181,13 @@ namespace Tizen.NUI
             get
             {
                 IntPtr tbmSurface = IntPtr.Zero;
-                IntPtr tbmSurface2 = Interop.FrameBroker.GetTbmSurface(_frame, out tbmSurface);
-                /*
+                Interop.FrameBroker.ErrorCode err = Interop.FrameBroker.GetTbmSurface(_frame, out tbmSurface);
+                
                 if (err != Interop.FrameBroker.ErrorCode.None)
                 {
                     Log.Error(LogTag, "Failed to get tbm surface");
-                }*/
-
-                Tizen.Log.Error("MYLOG", $"_frame=0x{_frame.ToInt64():X}");
-                Tizen.Log.Error("MYLOG", $"tbmSurface=0x{tbmSurface.ToInt64():X}");
-                Tizen.Log.Error("MYLOG", $"tbmSurface2=0x{tbmSurface2.ToInt64():X}");
-                tbmSurfaceClass = new TBMSurface(tbmSurface2);
-                return tbmSurface2;
+                }
+                return tbmSurface;
             }
         }
 

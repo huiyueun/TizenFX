@@ -15,8 +15,8 @@ namespace NUIProviderSample
         void Initialize()
         {
             Window.Instance.KeyEvent += OnKeyEvent;
-            Window.Instance.BackgroundColor = new Color(0, 0, 0, 0);
-            Window.Instance.SetTransparency(true);
+            //Window.Instance.BackgroundColor = new Color(0, 0, 0, 0);
+            //Window.Instance.SetTransparency(true);
             
             View view = new View()
             {
@@ -57,8 +57,8 @@ namespace NUIProviderSample
 
         private bool View_TouchEvent(object source, View.TouchEventArgs e)
         {
-            Window.Instance.Hide();
-            //Exit();
+            //Window.Instance.Hide();
+            Exit();
             return true;
         }
 
