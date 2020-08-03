@@ -11,6 +11,7 @@ namespace NUIBrokerSample
         private Window window;
         public View IconView;
         public View AddView;
+        public TextLabel MainText;
         public TextLabel MainProfileText;
         public TextLabel SubProfileText;
         public TextLabel Contents;
@@ -32,15 +33,12 @@ namespace NUIBrokerSample
             base.OnFrameDestroyed();
         }
 
-        protected override void OnFramePaused()
-        {
-            base.OnFramePaused();
-        }
         private Position DefaultIconPos;
         private Position DefaultAddIconPos;
 
         private Position DefaultMainPos;
         private Position DefaultSubPos;
+        private Position DefaultMainViewPos;
 
         private ImageView imgView;
         protected override void OnFrameResumed(FrameData frame)
@@ -48,118 +46,121 @@ namespace NUIBrokerSample
             Tizen.Log.Error("MYLOG", "OnFrameResumed :" + frame.DirectionForward);
             base.OnFrameResumed(frame);
             imgView = frame.Image;
-            /*
-            imgView = new ImageView()
-            {
-                BackgroundColor = Color.Red,
 
-            };*/
-            window.Add(imgView);
             StartAnimation();
-            Animation ani = new Animation(3300);
+            Animation ani = new Animation(300);
             ani.DefaultAlphaFunction = GetSineInOut80();
 
-            /*DefaultIconPos = IconView.Position;
+            DefaultIconPos = IconView.Position;
             DefaultAddIconPos = AddView.Position;
             DefaultMainPos = MainProfileText.Position;
-            DefaultSubPos = SubProfileText.Position;*/
-            imgView.Size = new Size(600, 300);
-            imgView.Position = new Position(500, 0);
+            DefaultSubPos = SubProfileText.Position;
+            DefaultMainViewPos = MainView.Position;
+            //imgView.Size = new Size(600, 300);
+
+
+            imgView.Size = new Size(470, 700);
+            //imgView.SizeHeight = imgView.SizeHeight + 300;
+            //imgView.SizeWidth = imgView.SizeWidth + 200;
+
+            //imgView.Position = MainView.Position;
+            imgView.ParentOrigin = ParentOrigin.TopCenter;
+            imgView.PivotPoint = PivotPoint.TopCenter;
+            imgView.PositionUsesPivotPoint = true;
+            imgView.CornerRadius = 50.0f;
             if (frame.DirectionForward == true)
             {
 
-                //Animation ani = new Animation(5000);
-                ani.DefaultAlphaFunction = GetSineInOut80();
-                //ani.AnimateTo(imgView, "Size", new Size(Window.Instance.WindowSize.Width, Window.Instance.WindowSize.Height));
-                ani.AnimateTo(imgView, "Position", new Position(0, 0));
+                Tizen.Log.Error("MYLOG", "***Forward animation");
+
+                ani.AnimateTo(IconView, "Position", new Position(0, 10), 0, 300);
+                ani.AnimateTo(AddView, "Position", new Position(30, 40), 0, 300);
+                ani.AnimateTo(AddView, "Scale", new Vector3(0.5f, 0.5f, 1.0f), 0, 300);
+
+                ani.AnimateTo(MainProfileText, "Position", new Position(180, 60), 0, 300);
+                ani.AnimateTo(SubProfileText, "Position", new Position(210, 90), 0, 300);
+
+                ani.AnimateTo(MainView, "Scale", new Vector3(1.0f, 1.0f, 1.0f), 0, 300);
+                ani.AnimateTo(MainView, "Size", new Size(470, 700), 0, 300);
+
+                ani.AnimateTo(Contents, "Opacity", 1.0f, 0, 300);
+
+
+
+                Tizen.Log.Error("MYLOG", "Finish Animation");
                 ani.Finished += Ani_Finished1;
+
+
                 ani.Play();
 
-                Tizen.Log.Error("MYLOG", "***Forward animation");
-                /*
-                ani.AnimateTo(IconView, "Position", new Position(0, 10));
-
-                ani.AnimateTo(IconView, "Position", new Position(0, 10));
-                ani.AnimateTo(AddView, "Position", new Position(30, 40));
-                ani.AnimateTo(AddView, "Scale", new Vector3(0.5f, 0.5f, 1.0f));
-
-                ani.AnimateTo(MainProfileText, "Position", new Position(180, 60));
-                ani.AnimateTo(SubProfileText, "Position", new Position(210, 90));
-
-                ani.AnimateTo(MainView, "Scale", new Vector3(1.0f, 1.0f, 1.0f));
-                ani.AnimateTo(MainView, "Size", new Size(470, 700));
-
-                ani.AnimateTo(Contents, "Opacity", 1.0f);*/
 
             }
-            else 
+            else
             {
                 Tizen.Log.Error("MYLOG", "***Backward animation");
-
-                //ani.AnimateTo(imgView, "Position", new Position(0, -600));
-                //ani.AnimateTo(imgView, "Size", new Size(0, 0));
             }
 
-            //ani.Finished += Ani_Finished;
-            ani.Play();
             StartAnimation();
         }
+
 
         protected override void OnFrameUpdated(FrameData frame)
         {
             Tizen.Log.Error("MYLOG", "OnFrameUpdated");
             base.OnFrameUpdated(frame);
-
             //imgView.BackgroundColor = Color.White;
+        }
 
-            Tizen.Log.Error("MYLOG", "Start Animation");
+        protected override void OnFramePaused()
+        {
+            base.OnFramePaused();
+            //Finish();
+        }
+        private void Ani_Finished1(object sender, EventArgs e)
+        {
+            MainView.Add(imgView);
+            IconView.RaiseToTop();
+            AddView.RaiseToTop();
+
+            Animation ani = new Animation(600);
+            ani.DefaultAlphaFunction = GetSineInOut80();
+            ani.AnimateTo(IconView, "Position", new Position(0, 150), 0, 300);
+            ani.AnimateTo(AddView, "Position", new Position(30, 180), 0, 300);
+            ani.AnimateTo(IconView, "Scale", new Vector3(1.2f, 1.2f, 1.0f), 0, 300);
+
+            ani.AnimateTo(imgView, "Size", new Size(Window.Instance.WindowSize.Width, Window.Instance.WindowSize.Height), 0, 600);
+            ani.AnimateTo(MainView, "Size", new Size(Window.Instance.WindowSize.Width, Window.Instance.WindowSize.Height), 0, 600);
+            ani.AnimateTo(MainView, "Position", new Position(0, 0), 0, 600);
+            ani.Finished += Ani_Finished;
+            ani.Play();
+
+            MainText.Hide();
+            Contents.Opacity = 0.0f;
         }
 
         private void Ani_Finished(object sender, EventArgs e)
-        {
-            Tizen.Log.Error("MYLOG", "Finish Animation");
-            Animation ani = new Animation(5000);
-            ani.DefaultAlphaFunction = GetSineInOut80();
-            ani.AnimateTo(imgView, "Size", new Size(Window.Instance.WindowSize.Width, Window.Instance.WindowSize.Height));
-            ani.AnimateTo(imgView, "Position", new Position(0, 0));
-            ani.Finished += Ani_Finished1;
-            ani.Play();
-
-            //finish();
-            /*
-            Timer timer = new Timer(500);
-            timer.Tick += Timer_Tick;
-            timer.Start();*/
-
-            //            imgView.Unparent();
-            //imgView.Dispose();
-            //imgView = null;
-        }
-
-        private void Ani_Finished1(object sender, EventArgs e)
         {
             FinishAnimation();
         }
 
         public void Finish()
         {
+            MainText.Show();
+            Tizen.Log.Error("MYLOG", "init ui objects");
             IconView.Position = DefaultIconPos;
+            IconView.Scale = new Vector3(1.0f, 1.0f, 1.0f);
+            AddView.Scale = new Vector3(1.0f, 1.0f, 1.0f);
             AddView.Position = DefaultAddIconPos;
+
 
             MainProfileText.Position = DefaultMainPos;
             SubProfileText.Position = DefaultSubPos;
+            MainView.Position = DefaultMainViewPos;
 
             MainView.Size = new Size(470, 600);
 
-            AddView.Scale = new Vector3(1.0f, 1.0f, 1.0f);
 
-            Contents.Opacity = 0.0f;
-        }
-
-        private bool Timer_Tick(object source, Timer.TickEventArgs e)
-        {
-            Finish();
-            return false;
+            imgView.Unparent();
         }
 
 

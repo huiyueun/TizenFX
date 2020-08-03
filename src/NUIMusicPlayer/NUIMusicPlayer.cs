@@ -23,18 +23,20 @@ namespace NUIMusicPlayer
             base.OnCreate();
             Initialize();
         }
+        private View profileContainer;
+        private View add_container;
 
         void Initialize()
         {
             Window.Instance.KeyEvent += OnKeyEvent;
-
+            
             View view = new View()
             {
-                Size = new Size(Window.Instance.WindowSize.Width, Window.Instance.WindowSize.Height * 0.85f, 0),
+                Size = new Size(Window.Instance.WindowSize.Width, Window.Instance.WindowSize.Height, 0),
                 BackgroundColor = Color.Black,
             };
             Window.Instance.GetDefaultLayer().Add(view);
-
+            /*
             View view_bottom = new View()
             {
                 Position = new Position(0, Window.Instance.WindowSize.Height * 0.85f, 0),
@@ -43,8 +45,9 @@ namespace NUIMusicPlayer
             };
             view_bottom.TouchEvent += View_bottom_TouchEvent;
             Window.Instance.GetDefaultLayer().Add(view_bottom);
+            */
 
-            View profileContainer = new View()
+            profileContainer = new View()
             {
                 ParentOrigin = ParentOrigin.TopCenter,
                 PivotPoint = PivotPoint.Center,
@@ -78,7 +81,7 @@ namespace NUIMusicPlayer
             profileContainer_inner.Add(profileImage);
             view.Add(profileContainer);
 
-            View add_container = new View()
+            add_container = new View()
             {
                 ParentOrigin = ParentOrigin.TopCenter,
                 PivotPoint = PivotPoint.Center,
@@ -99,6 +102,9 @@ namespace NUIMusicPlayer
             add_container.Add(add_icon);
             view.Add(add_container);
 
+            profileContainer.Hide();
+            add_container.Hide();
+            
             ImageView back_btn = new ImageView()
             {
                 ParentOrigin = ParentOrigin.BottomLeft,
@@ -133,23 +139,6 @@ namespace NUIMusicPlayer
                 WidthResizePolicy = ResizePolicyType.FillToParent,
             };
             view.Add(profile_text2);
-
-
-            PropertyMap map = new PropertyMap();
-            map.Insert("weight", new PropertyValue("bold"));
-
-            TextLabel text = new TextLabel("Cinematic Piano")
-            {
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Top,
-                TextColor = MAIN_TEXT_COLOR,
-                PointSize = MAIN_TEXT_POINT_SIZE,
-                Position = new Position(0, 280, 0),
-                HeightResizePolicy = ResizePolicyType.FillToParent,
-                WidthResizePolicy = ResizePolicyType.FillToParent,
-                FontStyle = map,
-            };
-            view.Add(text);
 
 
             TextLabel info1 = new TextLabel()
@@ -198,6 +187,24 @@ namespace NUIMusicPlayer
             };
             view.Add(info2_icon);
 
+
+
+            PropertyMap map = new PropertyMap();
+            map.Insert("weight", new PropertyValue("bold"));
+
+            TextLabel text = new TextLabel("Cinematic Piano")
+            {
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Top,
+                TextColor = MAIN_TEXT_COLOR,
+                PointSize = MAIN_TEXT_POINT_SIZE,
+                Position = new Position(0, 280, 0),
+                HeightResizePolicy = ResizePolicyType.FillToParent,
+                WidthResizePolicy = ResizePolicyType.FillToParent,
+                FontStyle = map,
+            };
+            view.Add(text);
+            
             ImageView imgView = new ImageView()
             {
                 ParentOrigin = ParentOrigin.BottomCenter,
@@ -209,6 +216,7 @@ namespace NUIMusicPlayer
             };
             view.Add(imgView);
 
+            
             TextLabel contents = new TextLabel()
             {
                 Text = "Beautiful, dreamy and dramtic\n instrumental neo classical piano scores\n from movies and tv series.\n",
@@ -247,6 +255,13 @@ namespace NUIMusicPlayer
             };
             play_btn.Add(play_icon);
             view.Add(play_btn);
+            frameProvider.Shown += FrameProvider_Shown;
+        }
+
+        private void FrameProvider_Shown(object sender, EventArgs e)
+        {
+            profileContainer.Show();
+            add_container.Show();
         }
 
         private bool View_bottom_TouchEvent(object source, View.TouchEventArgs e)

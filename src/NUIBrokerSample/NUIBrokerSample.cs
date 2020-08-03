@@ -37,7 +37,7 @@ namespace NUIBrokerSample
         {
 
             Window.Instance.KeyEvent += OnKeyEvent;
-            Window.Instance.BackgroundColor = Color.Black;// new Color(0.9f, 0.9f, 0.9f, 1.0f);
+            Window.Instance.BackgroundColor = new Color(0.9f, 0.9f, 0.9f, 1.0f);
 
             lauchBroker = new PositionBroker(Window.Instance);
 
@@ -51,11 +51,11 @@ namespace NUIBrokerSample
             {
                 Size = new Size(470, 600),
                 //Size = new Size(50, 50),
-                BackgroundColor = Color.Red,
-                CornerRadius = 50.0f,
+                BackgroundColor = Color.Black,
+                CornerRadius = 10.0f,
                 ParentOrigin = ParentOrigin.TopCenter,
                 PivotPoint = PivotPoint.TopCenter,
-                Position = new Position(0, 100),
+                Position = new Position(-50, 500),
                 PositionUsesPivotPoint = true,
             };
             lauchBroker.MainView = mainView;
@@ -66,7 +66,7 @@ namespace NUIBrokerSample
             Window.Instance.Add(view);
             view.TouchEvent += View_TouchEvent; ;
 
-            /*
+            
             ImageView imgView = new ImageView()
             {
                 ParentOrigin = ParentOrigin.BottomCenter,
@@ -111,7 +111,7 @@ namespace NUIBrokerSample
                 FontStyle = map,
             };
             view.Add(text);
-
+            lauchBroker.MainText = text;
 
             CreateInfo(view);
 
@@ -141,7 +141,7 @@ namespace NUIBrokerSample
             lauchBroker.IconView = profileContainer;
             lauchBroker.AddView = add_container;
             
-            */
+            
             Window.Instance.SetFramerBroker(lauchBroker);
         }
 
@@ -297,20 +297,19 @@ namespace NUIBrokerSample
                 Position = new Position(10, posY, 0),
                 Size = new Size(15, 15),
             };
-            view.Add(info2_icon);
+            //view.Add(info2_icon);
 
         }
 
         private Vector2 prePos = new Vector2(0, 0);
+        private Vector2 firstPos = new Vector2(0, 0);
         private bool isMoving = false;
         private bool View_TouchEvent(object source, View.TouchEventArgs e)
         {
             if (e.Touch.GetState(0) == PointStateType.Down)
             {
                 prePos = e.Touch.GetScreenPosition(0);
-                Animation ani = new Animation(200);
-                ani.AnimateTo(mainView, "Scale", new Vector3(0.8f, 0.8f, 0.8f));
-                ani.Play();
+                firstPos = prePos;
             }
             else if (e.Touch.GetState(0) == PointStateType.Motion)
             {
@@ -326,22 +325,28 @@ namespace NUIBrokerSample
             else if (e.Touch.GetState(0) == PointStateType.Up)
             {
                 Vector2 curPos = e.Touch.GetScreenPosition(0);
-                float moveX = curPos.X - prePos.X;
-                float moveY = curPos.Y - prePos.Y;
+                float moveX = Math.Abs(curPos.X - firstPos.X);
+                float moveY = Math.Abs(curPos.Y - firstPos.Y);
 
-                if (moveX < 2 && moveY < 2)
+                if (moveX < 5 && moveY < 5)
                 {
                     Tizen.Log.Error("MYLOG", "launch app"); ;
 
-                    Animation ani = new Animation(200);
-                    ani.AnimateTo(mainView, "Scale", new Vector3(1.0f, 1.0f, 1.0f));
+                    Animation ani = new Animation(150);
+                    ani.AnimateTo(mainView, "Scale", new Vector3(0.9f, 0.9f, 1.0f));
                     ani.Play();
-                    launchApplication();
+                    ani.Finished += Ani_Finished;
                 }
                 isMoving = false;
             }
 
             return true;
+        }
+
+        private void Ani_Finished(object sender, EventArgs e)
+        {
+            mainView.Scale = new Vector3(1.0f, 1.0f, 1.0f);
+            launchApplication();
         }
 
         public static string GetResourcePath()
@@ -351,7 +356,7 @@ namespace NUIBrokerSample
         private void launchApplication()
         {
             AppControl appControl = new AppControl();
-            appControl.ApplicationId = "org.tizen.example.NUIProviderSample";
+            appControl.ApplicationId = "org.tizen.example.NUIMusicPlayer";
             Window.Instance.SendLaunchRequest(appControl, true);
         }
 
