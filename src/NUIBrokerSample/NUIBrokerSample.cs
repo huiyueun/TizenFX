@@ -33,6 +33,7 @@ namespace NUIBrokerSample
             Initialize();
         }
 
+
         void Initialize()
         {
 
@@ -142,7 +143,7 @@ namespace NUIBrokerSample
             lauchBroker.AddView = add_container;
             
             
-            Window.Instance.SetFramerBroker(lauchBroker);
+            SetFramerBroker(lauchBroker);
         }
 
         private bool View_TouchEvent2(object source, View.TouchEventArgs e)
@@ -158,7 +159,7 @@ namespace NUIBrokerSample
         protected override void OnPause()
         {
             base.OnPause();
-            lauchBroker.Finish();
+            //lauchBroker.DeleteImage();
         }
 
         public void CreateTopProfile(View view)
@@ -304,12 +305,18 @@ namespace NUIBrokerSample
         private Vector2 prePos = new Vector2(0, 0);
         private Vector2 firstPos = new Vector2(0, 0);
         private bool isMoving = false;
+        private Animation startAni;
         private bool View_TouchEvent(object source, View.TouchEventArgs e)
         {
+
             if (e.Touch.GetState(0) == PointStateType.Down)
             {
                 prePos = e.Touch.GetScreenPosition(0);
                 firstPos = prePos;
+
+                startAni = new Animation(150);
+                startAni.AnimateTo(mainView, "Scale", new Vector3(0.9f, 0.9f, 1.0f));
+                startAni.Play();
             }
             else if (e.Touch.GetState(0) == PointStateType.Motion)
             {
@@ -330,34 +337,33 @@ namespace NUIBrokerSample
 
                 if (moveX < 5 && moveY < 5)
                 {
-                    Tizen.Log.Error("MYLOG", "launch app"); ;
-
-                    Animation ani = new Animation(150);
-                    ani.AnimateTo(mainView, "Scale", new Vector3(0.9f, 0.9f, 1.0f));
-                    ani.Play();
-                    ani.Finished += Ani_Finished;
+                    Tizen.Log.Error("MYLOG", "launch app");
+                    launchApplication();
                 }
+                if (startAni != null)
+                {
+                    startAni.Clear();
+                    startAni.Dispose();
+                    startAni = null;
+                }
+                startAni = new Animation(150);
+                startAni.AnimateTo(mainView, "Scale", new Vector3(1.0f, 1.0f, 1.0f));
+                startAni.Play();
                 isMoving = false;
             }
 
             return true;
         }
-
-        private void Ani_Finished(object sender, EventArgs e)
-        {
-            mainView.Scale = new Vector3(1.0f, 1.0f, 1.0f);
-            launchApplication();
-        }
-
         public static string GetResourcePath()
         {
             return Tizen.Applications.Application.Current.DirectoryInfo.Resource;
         }
+
         private void launchApplication()
         {
             AppControl appControl = new AppControl();
             appControl.ApplicationId = "org.tizen.example.NUIMusicPlayer";
-            Window.Instance.SendLaunchRequest(appControl, true);
+            SendLaunchRequest(appControl, true);
         }
 
 

@@ -1,0 +1,4 @@
+---- Application_PreInitialize Matches (3 in 2 files) ----
+Interop.Application.cs (src\internal\interop):            [global::System.Runtime.InteropServices.DllImport(NDalicPINVOKE.Lib, EntryPoint = "CSharp_Dali_Application_PreInitialize")]
+Interop.Application.cs (src\internal\interop):            public static extern void Application_PreInitialize();
+NUIApplication.cs (src\public):            Interop.Application.Application_PreInitialize();

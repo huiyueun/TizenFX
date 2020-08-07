@@ -25,7 +25,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NUIBrokerSample", "..\NUIBr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NUIMusicPlayer", "..\NUIMusicPlayer\NUIMusicPlayer.csproj", "{2D58DC76-991C-4442-A2A9-455BF8317A9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUIWearableBroker", "..\NUIWearableBroker\NUIWearableBroker.csproj", "{F8557F6D-6287-4148-9137-90EE733D3563}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NUIWearableBroker", "..\NUIWearableBroker\NUIWearableBroker.csproj", "{F8557F6D-6287-4148-9137-90EE733D3563}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tizen.FH.NUI", "..\..\..\..\..\fhub-nui\Tizen.FH.NUI\Tizen.FH.NUI.csproj", "{19281884-D001-41BE-8C55-D984B949F004}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tizen.NUI.Components", "..\Tizen.NUI.Components\Tizen.NUI.Components.csproj", "{B0C6AD47-3199-4D02-9B5D-2E86BC024976}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NUIFrameComponentBroker", "..\NUIFrameComponentBroker\NUIFrameComponentBroker.csproj", "{816229EC-1F20-4BDA-89DB-91F9B42BCBD5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUISimpleBroker", "..\NUISimpleBroker\NUISimpleBroker.csproj", "{D9FA6054-A3E5-4796-A5A0-9356B3F233D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUISimpleProviderSample", "..\NUISimpleProviderSample\NUISimpleProviderSample.csproj", "{65A6DCF2-E7EE-46AE-872D-32C56E24BA07}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +91,26 @@ Global
 		{F8557F6D-6287-4148-9137-90EE733D3563}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8557F6D-6287-4148-9137-90EE733D3563}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8557F6D-6287-4148-9137-90EE733D3563}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19281884-D001-41BE-8C55-D984B949F004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19281884-D001-41BE-8C55-D984B949F004}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19281884-D001-41BE-8C55-D984B949F004}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19281884-D001-41BE-8C55-D984B949F004}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0C6AD47-3199-4D02-9B5D-2E86BC024976}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0C6AD47-3199-4D02-9B5D-2E86BC024976}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0C6AD47-3199-4D02-9B5D-2E86BC024976}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0C6AD47-3199-4D02-9B5D-2E86BC024976}.Release|Any CPU.Build.0 = Release|Any CPU
+		{816229EC-1F20-4BDA-89DB-91F9B42BCBD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{816229EC-1F20-4BDA-89DB-91F9B42BCBD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{816229EC-1F20-4BDA-89DB-91F9B42BCBD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{816229EC-1F20-4BDA-89DB-91F9B42BCBD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9FA6054-A3E5-4796-A5A0-9356B3F233D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9FA6054-A3E5-4796-A5A0-9356B3F233D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9FA6054-A3E5-4796-A5A0-9356B3F233D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9FA6054-A3E5-4796-A5A0-9356B3F233D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65A6DCF2-E7EE-46AE-872D-32C56E24BA07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65A6DCF2-E7EE-46AE-872D-32C56E24BA07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65A6DCF2-E7EE-46AE-872D-32C56E24BA07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65A6DCF2-E7EE-46AE-872D-32C56E24BA07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -77,6 +77,7 @@ namespace NUIProviderSample
 
         static void Main(string[] args)
         {
+            PreLoad();
             var app = new Program();
             app.Run(args);
         }

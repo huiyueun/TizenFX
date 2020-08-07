@@ -40,6 +40,26 @@ namespace Tizen.NUI
         private Size2D _windowSize2D = null;
         private Position2D _windowPosition2D = null;
         public FrameProvider frameProvider;
+        private FrameBrokerBase _frameBroker;
+
+
+        public void SetFrameProvider()
+        {
+            frameProvider = new FrameProvider(GetDefaultWindow());
+        }
+
+        public void SetFramerBroker(FrameBrokerBase framerBroker)
+        {
+            //if(_frameBroker != null)
+            {
+                _frameBroker = framerBroker;
+            }
+        }
+
+        public void SendLaunchRequest(AppControl appControl, bool toProvider)
+        {
+            _frameBroker.SendLaunchRequest(appControl, toProvider);
+        }
 
         /// <summary>
         /// The default constructor.
@@ -374,34 +394,20 @@ namespace Tizen.NUI
         protected override void OnCreate()
         {
             base.OnCreate();
-            frameProvider = new FrameProvider(GetDefaultWindow());
-            frameProvider.Shown += FrameProvider_Shown;
-            frameProvider.Hidden += FrameProvider_Hidden;
         }
-
-        private void FrameProvider_Hidden(object sender, EventArgs e)
-        {
-            GetDefaultWindow().Hide();
-            Bundle bundle = new Bundle();
-            frameProvider.NotifyHideStatus(bundle);
-        }
-
-        private void FrameProvider_Shown(object sender, EventArgs e)
-        {
-            GetDefaultWindow().Show();
-            Bundle bundle = new Bundle();
-            frameProvider.NotifyShowStatus(bundle);
-        }
-
         /// <summary>
         /// This is used to improve application launch performance.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         static public void PreLoad()
         {
-            Interop.Application.Application_PreInitialize();
-            Application.NewApplication("", Application.WindowMode.Opaque);
-            NUIApplication.GetDefaultWindow();
+            Tizen.Log.Error("MYLOG", "Preload 1");
+//            Interop.Application.Application_PreInitialize();
+            Tizen.Log.Error("MYLOG", "Preload 2");
+//            Application.NewApplication("", Application.WindowMode.Opaque);
+            Tizen.Log.Error("MYLOG", "Preload 3");
+//            NUIApplication.GetDefaultWindow();
+            Tizen.Log.Error("MYLOG", "Preload 4");
         }
     }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using Tizen.Applications;
 using Tizen.NUI;
 using Tizen.NUI.BaseComponents;
 
@@ -18,13 +19,14 @@ namespace NUIMusicPlayer
         private Color SUB_TEXT_COLOR = new Color(0.70f, 0.70f, 0.70f, 1.0f);
         private float SUB_TEXT_POINT_SIZE = 13.0f;
 
+        private View profileContainer;
+        private View add_container;
+
         protected override void OnCreate()
         {
             base.OnCreate();
             Initialize();
         }
-        private View profileContainer;
-        private View add_container;
 
         void Initialize()
         {
@@ -36,16 +38,6 @@ namespace NUIMusicPlayer
                 BackgroundColor = Color.Black,
             };
             Window.Instance.GetDefaultLayer().Add(view);
-            /*
-            View view_bottom = new View()
-            {
-                Position = new Position(0, Window.Instance.WindowSize.Height * 0.85f, 0),
-                Size = new Size(Window.Instance.WindowSize.Width, Window.Instance.WindowSize.Height * 0.15f, 0),
-                BackgroundColor = Color.White,
-            };
-            view_bottom.TouchEvent += View_bottom_TouchEvent;
-            Window.Instance.GetDefaultLayer().Add(view_bottom);
-            */
 
             profileContainer = new View()
             {
@@ -101,9 +93,6 @@ namespace NUIMusicPlayer
             };
             add_container.Add(add_icon);
             view.Add(add_container);
-
-            profileContainer.Hide();
-            add_container.Hide();
             
             ImageView back_btn = new ImageView()
             {
@@ -253,28 +242,43 @@ namespace NUIMusicPlayer
                 Color = Color.Black,
                 Size = new Size(26, 26),
             };
+
             play_btn.Add(play_icon);
             view.Add(play_btn);
+            SetFrameProvider();
             frameProvider.Shown += FrameProvider_Shown;
+            frameProvider.Hidden += FrameProvider_Hidden;
+
         }
 
-        private void FrameProvider_Shown(object sender, EventArgs e)
+        protected void OnResumed()
         {
+            base.OnResume();
             profileContainer.Show();
             add_container.Show();
         }
 
-        private bool View_bottom_TouchEvent(object source, View.TouchEventArgs e)
+        private void FrameProvider_Hidden(object sender, EventArgs e)
         {
-
-            return true;
+            Tizen.Log.Error("MYLOG", "provider - hide");
+            Bundle bundle = new Bundle();
+            frameProvider.NotifyHideStatus(bundle);
         }
+
+        private void FrameProvider_Shown(object sender, EventArgs e)
+        {
+            Tizen.Log.Error("MYLOG", "provider - show");
+            Bundle bundle = new Bundle();
+            frameProvider.NotifyShowStatus(bundle);
+    }
 
         public void OnKeyEvent(object sender, Window.KeyEventArgs e)
         {
             if (e.Key.State == Key.StateType.Down && (e.Key.KeyPressedName == "XF86Back" || e.Key.KeyPressedName == "Escape"))
             {
-                Exit();
+                profileContainer.Hide();
+                add_container.Hide();
+                Window.Instance.SetIconified(true);
             }
         }
 
