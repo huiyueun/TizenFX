@@ -33,9 +33,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tizen.NUI.Components", "..\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NUIFrameComponentBroker", "..\NUIFrameComponentBroker\NUIFrameComponentBroker.csproj", "{816229EC-1F20-4BDA-89DB-91F9B42BCBD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUISimpleBroker", "..\NUISimpleBroker\NUISimpleBroker.csproj", "{D9FA6054-A3E5-4796-A5A0-9356B3F233D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NUISimpleBroker", "..\NUISimpleBroker\NUISimpleBroker.csproj", "{D9FA6054-A3E5-4796-A5A0-9356B3F233D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUISimpleProviderSample", "..\NUISimpleProviderSample\NUISimpleProviderSample.csproj", "{65A6DCF2-E7EE-46AE-872D-32C56E24BA07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NUISimpleProviderSample", "..\NUISimpleProviderSample\NUISimpleProviderSample.csproj", "{65A6DCF2-E7EE-46AE-872D-32C56E24BA07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUITemplate1", "..\NUITemplate1\NUITemplate1.csproj", "{CD1DC6BD-CA99-40CE-A479-039ED5C80AF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,6 +113,10 @@ Global
 		{65A6DCF2-E7EE-46AE-872D-32C56E24BA07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65A6DCF2-E7EE-46AE-872D-32C56E24BA07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65A6DCF2-E7EE-46AE-872D-32C56E24BA07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD1DC6BD-CA99-40CE-A479-039ED5C80AF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD1DC6BD-CA99-40CE-A479-039ED5C80AF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD1DC6BD-CA99-40CE-A479-039ED5C80AF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD1DC6BD-CA99-40CE-A479-039ED5C80AF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
