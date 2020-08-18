@@ -1435,5 +1435,17 @@ namespace Tizen.NUI
 
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }
+
+        /// <summary>
+        /// Iconify a window
+        /// </summary>
+        /// <param name="iconified">The new iconified state to set</param>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void SetIconified(bool iconified)
+        {
+            Interop.Window.SetIconified(swigCPtr, iconified);
+            if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
+        }
+
     }
 }
