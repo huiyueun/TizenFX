@@ -62,7 +62,7 @@ namespace NUISimpleBroker
         protected override void OnFrameResumed(FrameData frame)
         {
             base.OnFrameResumed(frame);
-            Animation ani = new Animation(5000);
+            Animation ani = new Animation(700);
 
             Tizen.Log.Error("MYLOG", "Start Animation :" + frame.DirectionForward);
 

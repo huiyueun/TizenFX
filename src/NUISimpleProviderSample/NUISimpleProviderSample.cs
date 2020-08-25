@@ -41,6 +41,7 @@ namespace NUISimpleProviderSample
 
         private void Instance_TouchEvent(object sender, Window.TouchEventArgs e)
         {
+            //Window.Instance.Hide();
             Window.Instance.SetIconified(true);
         }
 
