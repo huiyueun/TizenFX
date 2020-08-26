@@ -27,12 +27,12 @@ namespace Tizen.NUI
         global::System.Runtime.InteropServices.HandleRef swigCPtr;
         public TBMSurface(IntPtr cPtr)
         {
-             swigCPtr = new global::System.Runtime.InteropServices.HandleRef(this, cPtr);
+            swigCPtr = new global::System.Runtime.InteropServices.HandleRef(this, cPtr);
         }
         internal global::System.Runtime.InteropServices.HandleRef getCPtr()
         {
             return swigCPtr;
-        }        
+        }
     }
 
     /// <summary>
@@ -53,9 +53,9 @@ namespace Tizen.NUI
             _frame = frame;
         }
 
-		
-	private Shader CreateShader()
-	{
+
+        private Shader CreateShader()
+        {
             string vertex_shader =
                 "attribute mediump vec2 aPosition;\n" +
                 "varying mediump vec2 vTexCoord;\n" +
@@ -74,21 +74,15 @@ namespace Tizen.NUI
                 "varying mediump vec2 vTexCoord;\n" +
                 "uniform samplerExternalOES sTexture;\n" +
                 "void main()\n" +
-                "{\n" + 
+                "{\n" +
                 "gl_FragColor = texture2D(sTexture, vTexCoord) * uColor;\n" +
                 "}\n";
 
-            return new Shader(vertex_shader, fragment_shader );
-	}
-
-        private PropertyBuffer CreatePropertyBuffer()
-        {
-            PropertyMap vertexFormat = new PropertyMap();
-            vertexFormat.Add("aPosition", new PropertyValue((int)PropertyType.Vector2));
-            PropertyBuffer vertexBuffer = new PropertyBuffer(vertexFormat);
-            return vertexBuffer;
+            return new Shader(vertex_shader, fragment_shader);
         }
-        private struct Vec2
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct Vec2
         {
             float x;
             float y;
@@ -98,15 +92,13 @@ namespace Tizen.NUI
                 y = yIn;
             }
         }
-
-        private struct TexturedQuadVertex
+        public struct TexturedQuadVertex
         {
             public Vec2 position;
+            // public Vec2 textureCoordinates;
         };
-        private Geometry CreateQuadGeometry()
+        private IntPtr RectangleDataPtr()
         {
-            PropertyBuffer vertexData = CreatePropertyBuffer();
-
             TexturedQuadVertex vertex1 = new TexturedQuadVertex();
             TexturedQuadVertex vertex2 = new TexturedQuadVertex();
             TexturedQuadVertex vertex3 = new TexturedQuadVertex();
@@ -115,7 +107,6 @@ namespace Tizen.NUI
             vertex2.position = new Vec2(-0.5f, 0.5f);
             vertex3.position = new Vec2(0.5f, -0.5f);
             vertex4.position = new Vec2(0.5f, 0.5f);
-
 
             TexturedQuadVertex[] texturedQuadVertexData = new TexturedQuadVertex[4] { vertex1, vertex2, vertex3, vertex4 };
 
@@ -126,16 +117,31 @@ namespace Tizen.NUI
             {
                 Marshal.StructureToPtr(texturedQuadVertexData[i], pA + i * lenght, true);
             }
-            vertexData.SetData(pA, 4);
+
+            return pA;
+        }
+
+        private Geometry CreateQuadGeometry()
+        {
+
+            /* Create Property buffer */
+            PropertyMap vertexFormat = new PropertyMap();
+            vertexFormat.Add("aPosition", new PropertyValue((int)PropertyType.Vector2));
+
+            PropertyBuffer vertexBuffer = new PropertyBuffer(vertexFormat);
+            vertexBuffer.SetData(RectangleDataPtr(), 4);
+
 
             Geometry geometry = new Geometry();
-            geometry.AddVertexBuffer(vertexData);
+            geometry.AddVertexBuffer(vertexBuffer);
             geometry.SetType(Geometry.Type.TRIANGLE_STRIP);
+
             return geometry;
         }
 
 
         private Renderer renderer;
+        private TextureSet textureSet;
         /// <summary>
         /// Gets the image view.
         /// </summary>
@@ -148,24 +154,23 @@ namespace Tizen.NUI
             }
             get
             {
-                if(_image == null)
+                if (_image == null)
                 {
                     _image = new ImageView();
                     Shader shader = CreateShader();
                     Geometry geometry = CreateQuadGeometry();
                     renderer = new Renderer(geometry, shader);
+                    textureSet = new TextureSet();
                 }
                 Tizen.Log.Error("MYLOG", "Type : " + Type);
                 switch (Type)
                 {
                     case FrameType.RemoteSurfaceTbmSurface:
-                        if(TbmSurface == null)
+                        if (TbmSurface == null)
                         {
                             Tizen.Log.Error("MYLOG", "tbm surface is null");
                         }
-                        TextureSet textureSet = new TextureSet();
-                        Texture texture = new Texture(TbmSurface);
-                        textureSet.SetTexture(0, texture);
+                        textureSet.SetTexture(0, new Texture(TbmSurface));
                         renderer.SetTextures(textureSet);
                         _image.AddRenderer(renderer);
                         //_image.SetTbmSurface(TbmSurface);
@@ -272,7 +277,7 @@ namespace Tizen.NUI
             {
                 IntPtr tbmSurface = IntPtr.Zero;
                 Interop.FrameBroker.ErrorCode err = Interop.FrameBroker.GetTbmSurface(_frame, out tbmSurface);
-                
+
                 if (err != Interop.FrameBroker.ErrorCode.None)
                 {
                     Log.Error(LogTag, "Failed to get tbm surface");
