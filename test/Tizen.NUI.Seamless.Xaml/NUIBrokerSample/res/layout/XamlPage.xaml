@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<View x:Class="NUIBrokerSample.XamlPage"
+  xmlns="http://tizen.org/Tizen.NUI/2018/XAML"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <ImageView x:Name="bgView" ResourceUrl="*Resource*/familyboard_setting_bg1.png" WidthResizePolicy="FillToParent" HeightResizePolicy="FillToParent"/>
+
+    <View x:Name="MainView" PositionUsesPivotPoint="True" ParentOrigin="TopCenter" PivotPoint="TopCenter" BackgroundColor="Black" Position2D="-50,500" Size2D="470,600" CornerRadius="10" TouchEvent="OnViewTouchEvent">
+        <ImageView x:Name="imgView" PositionUsesPivotPoint="True" ParentOrigin="BottomCenter" PivotPoint="BottomCenter" ResourceUrl="*Resource*/pic_1.jpg" Size2D="360,360"/>
+        <TextLabel x:Name="contents" PositionUsesPivotPoint="True" ParentOrigin="TopCenter" PivotPoint="Center" Text="Beautiful, dreamy and dramtic&#x0a; instrumental neo classical piano scores&#x0a; from movies and tv series.&#x0a;" MultiLine="True" HorizontalAlignment="Center"
+               VerticalAlignment="Top" TextColor="0.6, 0.6, 0.6, 1.0" PointSize="12" Position2D="0,250" WidthResizePolicy="FillToParent"/>
+        <TextLabel  x:Name="cinematicText" PositionUsesPivotPoint="True" ParentOrigin="TopCenter" PivotPoint="Center" Text="Cinematic Piano" HorizontalAlignment="Center" VerticalAlignment="Top" TextColor="0.95, 0.95, 0.95, 1.0" PointSize="32" Position2D="0,150" WidthResizePolicy="FillToParent">
+            <TextLabel.FontStyle>
+                <PropertyMap>
+                    <KeyValue Key="weight" Value="bold" />
+                </PropertyMap>
+            </TextLabel.FontStyle>
+        </TextLabel>
+
+        <TextLabel x:Name="info1" PositionUsesPivotPoint="True" ParentOrigin="TopCenter" PivotPoint="Center" Text="9,465&#x0a;" HorizontalAlignment="Center" VerticalAlignment="Top" TextColor="0.3, 0.3, 0.3, 1.0" PointSize="13" Position2D="-35,198" WidthResizePolicy="FillToParent"/>
+        <ImageView x:Name="info1Icon" ParentOrigin="TopCenter" ResourceUrl="*Resource*/bar-chart-5-128.png" Color="0.3, 0.3, 0.3, 1.0" Position2D="-85,190" Size2D="15,15"/>
+
+        <TextLabel x:Name="info2" PositionUsesPivotPoint="True" ParentOrigin="TopCenter" PivotPoint="Center" Text="5h 35m&#x0a;" HorizontalAlignment="Center" VerticalAlignment="Top" TextColor="0.3, 0.3, 0.3, 1.0" PointSize="13" Position2D="65,198" WidthResizePolicy="FillToParent"/>
+        <ImageView x:Name="info2Icon" ParentOrigin="TopCenter" ResourceUrl="*Resource*/clock-128.png" Color="0.3, 0.3, 0.3, 1.0" Position2D="10,190" Size2D="15,15"/>
+
+        <View x:Name="playBtn" PositionUsesPivotPoint="True" ParentOrigin="BottomCenter" PivotPoint="Center" BackgroundColor="White" Position2D="0,-40" Size2D="52,52" CornerRadius="26">
+            <ImageView x:Name="playIcon" PositionUsesPivotPoint="True" ParentOrigin="Center" PivotPoint="Center" ResourceUrl="*Resource*/play-128.png" Color="Black" Size2D="20,20"/>
+        </View>
+    </View>
+
+    <View x:Name="AnimationView" PositionUsesPivotPoint="True" ParentOrigin="TopCenter" PivotPoint="TopCenter" Position2D="-50,500" Size2D="470,600">
+        <View x:Name="IconView" PositionUsesPivotPoint="True" ParentOrigin="TopCenter" PivotPoint="Center" BackgroundColor="White" Position2D="-160,80" Size2D="76,76" CornerRadius="38">
+            <View x:Name="profileContainer_inner" PositionUsesPivotPoint="True" ParentOrigin="Center" PivotPoint="Center" BackgroundColor="Black" Size2D="76,76" CornerRadius="37">
+                <ImageView x:Name="profileImage" PositionUsesPivotPoint="True" ParentOrigin="Center" PivotPoint="Center" ResourceUrl="*Resource*/profile.jpg" Size2D="62,62" CornerRadius="31"/>
+            </View>
+        </View>
+
+        <TextLabel x:Name="MainProfileText" Text="PIANO DAILY" PositionUsesPivotPoint="True" ParentOrigin="TopCenter" PivotPoint="Center" HorizontalAlignment="Center" VerticalAlignment="Top" TextColor="0.95,0.95,0.95,1.0" PointSize="14" Position2D="0,60" WidthResizePolicy="FillToParent">
+            <TextLabel.FontStyle>
+                <PropertyMap>
+                    <KeyValue Key="weight" Value="bold" />
+                </PropertyMap>
+            </TextLabel.FontStyle>
+        </TextLabel>
+        <TextLabel x:Name="SubProfileText" Text="July 2020" PositionUsesPivotPoint="True" ParentOrigin="TopCenter" PivotPoint="Center" HorizontalAlignment="Center" VerticalAlignment="Top" TextColor="0.70,0.70,0.70,1.0" PointSize="11" Position2D="0,90" WidthResizePolicy="FillToParent"/>
+        <View x:Name="AddView" PositionUsesPivotPoint="True" ParentOrigin="TopCenter" PivotPoint="Center" BackgroundColor="White" Position2D="160,80" Size2D="60,60" CornerRadius="30">
+            <ImageView x:Name="add_icon" PositionUsesPivotPoint="True" ParentOrigin="Center" PivotPoint="Center" ResourceUrl="*Resource*/add.png" Size2D="15,15"/>
+        </View>
+    </View>
+
+</View>
