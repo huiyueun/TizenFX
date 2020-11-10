@@ -1,9 +1,10 @@
-﻿<Project Sdk="Tizen.NET.Sdk/1.1.5">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>tizen80</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
       <AssemblyName>NUIBrokerSample</AssemblyName>
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -26,10 +27,11 @@
 
   <ItemGroup>
     <PackageReference Include="Tizen.NUI.XamlBuild" Version="1.0.10" />
+    <PackageReference Include="Tizen.NET.Sdk" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\workspace\TizenFX\src\Tizen.NUI\Tizen.NUI.csproj" />
+    <ProjectReference Include="..\..\..\src\Tizen.NUI\Tizen.NUI.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
