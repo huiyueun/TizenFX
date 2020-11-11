@@ -1,4 +1,5 @@
 ﻿using System;
+using Tizen.Applications;
 using Tizen.NUI;
 using Tizen.NUI.BaseComponents;
 
@@ -12,14 +13,21 @@ namespace NUIBrokerSample
             Window window = Window.Instance;
             window.KeyEvent += OnKeyEvent;
 
-            XamlPage page = new XamlPage();
+            XamlPage page = new XamlPage(this);
             page.PositionUsesPivotPoint = true;
             page.ParentOrigin = ParentOrigin.TopLeft;
             page.PivotPoint = PivotPoint.TopLeft;
             page.BackgroundColor = Color.Black;
             page.Size = new Size(window.WindowSize.Width, window.WindowSize.Height, 0);
             window.Add(page);
+
+            TransitionOptions = new TransitionOptions(window);
+            TransitionOptions.EnableTransition = true;
+
+            TransitionOptions.ForwardAnimation = new SlideIn(1000);
+            TransitionOptions.BackwardAnimation = new SlideOut(1000);
         }
+
 
         public void OnKeyEvent(object sender, Window.KeyEventArgs e)
         {
