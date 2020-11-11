@@ -1,4 +1,5 @@
 ﻿using System;
+using Tizen.Applications;
 using Tizen.NUI;
 using Tizen.NUI.BaseComponents;
 
@@ -10,9 +11,11 @@ namespace NUIBrokerSample
         private Vector2 prePos = new Vector2(0, 0);
         private Vector2 firstPos = new Vector2(0, 0);
         private Animation startAni;
+        private NUIApplication application;
 
-        public XamlPage()
+        public XamlPage(NUIApplication application)
         {
+            this.application = application;
             InitializeComponent();
         }
 
@@ -48,7 +51,7 @@ namespace NUIBrokerSample
                 if (moveX < 5 && moveY < 5 && !isStartingProcess)
                 {
                     Tizen.Log.Error("MYLOG", "launch app");
-                    //launchApplication();
+                    LaunchApplication();
                 }
                 if (startAni != null)
                 {
@@ -62,6 +65,14 @@ namespace NUIBrokerSample
                 startAni.Play();
             }
             return true;
+        }
+
+        private void LaunchApplication()
+        {
+            AppControl appControl = new AppControl();
+            appControl.ApplicationId = "org.tizen.example.NUIMusicPlayer";
+            application.SendLaunchRequest(appControl);
+
         }
     }
 }

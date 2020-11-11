@@ -15,9 +15,7 @@ namespace NUIMusicPlayer
         {
             if (e.Touch.GetState(0) == PointStateType.Up)
             {
-                //HideObjects();
-                //Window.Instance.SetIconified(true);
-                //Exit();
+                Window.Instance.Hide();
             }
             return false;
         }

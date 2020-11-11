@@ -20,13 +20,23 @@ namespace NUIMusicPlayer
             page.Size = new Size(window.WindowSize.Width, window.WindowSize.Height, 0);
             window.Add(page);
 
+            TransitionOptions = new TransitionOptions(window);
+            TransitionOptions.EnableTransition = true;
+
+        }
+
+        protected override void OnAppControlReceived(AppControlReceivedEventArgs e)
+        {
+            base.OnAppControlReceived(e);
+
+            Window.Instance.Show();
         }
 
         public void OnKeyEvent(object sender, Window.KeyEventArgs e)
         {
             if (e.Key.State == Key.StateType.Down && (e.Key.KeyPressedName == "XF86Back" || e.Key.KeyPressedName == "Escape"))
             {
-                Exit();
+                Window.Instance.Hide();
             }
         }
 
