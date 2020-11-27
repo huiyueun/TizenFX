@@ -2,32 +2,72 @@
 using Tizen.Applications;
 using Tizen.NUI;
 using Tizen.NUI.BaseComponents;
+using Tizen.NUI.Components;
 
 namespace NUIBrokerSample
 {
     public class Program : NUIApplication
     {
+        private Window window;
+        private View animationView;
+        private ObjectAnimationManager objectAnimationManager;
+
         protected override void OnCreate()
         {
             base.OnCreate();
-            Window window = Window.Instance;
+            window = GetDefaultWindow();
             window.KeyEvent += OnKeyEvent;
 
-            XamlPage page = new XamlPage(this);
+            var xamlPage = CreateXamlPage();
+            animationView = xamlPage.AnimationView;
+            window.Add(xamlPage);
+
+            EnableAppTransition();
+
+            objectAnimationManager = new ObjectAnimationManager(xamlPage);
+        }
+
+        private XamlPage CreateXamlPage()
+        {
+            var page = new XamlPage(this);
             page.PositionUsesPivotPoint = true;
             page.ParentOrigin = ParentOrigin.TopLeft;
             page.PivotPoint = PivotPoint.TopLeft;
             page.BackgroundColor = Color.Black;
             page.Size = new Size(window.WindowSize.Width, window.WindowSize.Height, 0);
-            window.Add(page);
 
-            TransitionOptions = new TransitionOptions(window);
-            TransitionOptions.EnableTransition = true;
-
-            TransitionOptions.ForwardAnimation = new SlideIn(1000);
-            TransitionOptions.BackwardAnimation = new SlideOut(1000);
+            return page;
         }
 
+        private void EnableAppTransition(bool isCustomAnimation = true)
+        {
+            TransitionOptions = new TransitionOptions(window);
+            TransitionOptions.MainAnimatedView = animationView;
+            TransitionOptions.EnableTransition = true;
+
+            if (isCustomAnimation)
+            {
+                //Set Custom Animation
+                TransitionOptions.ForwardAnimation = new SeamlessForward(400);
+                TransitionOptions.BackwardAnimation = new SeamlessBackward(600);
+                TransitionOptions.AnimationInitialized += TransitionOptions_AnimationInitialized;
+            }
+            else
+            {
+                //Set Default Animation
+                TransitionOptions.ForwardAnimation = new SlideIn(600);
+                TransitionOptions.BackwardAnimation = new SlideOut(600);
+            }
+
+        }
+
+        private void TransitionOptions_AnimationInitialized(bool direction)
+        {
+            //Temporary Code for testing
+            TransitionOptions.SetRemoveTime(direction ? (uint)500 : 0);
+
+            objectAnimationManager.StartIconAnimationByDirection(direction);
+        }
 
         public void OnKeyEvent(object sender, Window.KeyEventArgs e)
         {

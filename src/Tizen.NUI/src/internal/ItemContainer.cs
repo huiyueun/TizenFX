@@ -188,7 +188,7 @@ namespace Tizen.NUI
             private ItemContainer collectionRef;
             private int currentIndex;
             private object currentObject;
-            private int currentSize;
+            private int? currentSize;
 
             /// This will be public opened in next tizen after ACR done. Before ACR, need to be hidden as inhouse API.
             [EditorBrowsable(EditorBrowsableState.Never)]
@@ -197,7 +197,7 @@ namespace Tizen.NUI
                 collectionRef = collection;
                 currentIndex = -1;
                 currentObject = null;
-                currentSize = collectionRef.Count;
+                currentSize = collectionRef?.Count;
             }
 
             // Type-safe iterator Current
