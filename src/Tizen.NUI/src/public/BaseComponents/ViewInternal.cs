@@ -1079,6 +1079,28 @@ namespace Tizen.NUI.BaseComponents
             if (newStyle != null && (viewStyle == null || viewStyle.GetType() == newStyle.GetType())) ApplyStyle(newStyle);
         }
 
+        internal LayoutLength SuggestedMinimumWidth
+        {
+            get
+            {
+                float result = Interop.Actor.GetSuggestedMinimumWidth(SwigCPtr);
+                if (NDalicPINVOKE.SWIGPendingException.Pending)
+                    throw NDalicPINVOKE.SWIGPendingException.Retrieve();
+                return new LayoutLength(result);
+            }
+        }
+
+        internal LayoutLength SuggestedMinimumHeight
+        {
+            get
+            {
+                float result = Interop.Actor.GetSuggestedMinimumHeight(SwigCPtr);
+                if (NDalicPINVOKE.SWIGPendingException.Pending)
+                    throw NDalicPINVOKE.SWIGPendingException.Retrieve();
+                return new LayoutLength(result);
+            }
+        }
+
         /// <summary>
         /// you can override it to clean-up your own resources.
         /// </summary>
