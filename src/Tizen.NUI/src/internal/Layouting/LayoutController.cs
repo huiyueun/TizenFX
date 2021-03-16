@@ -163,47 +163,49 @@ namespace Tizen.NUI
 
         // Traverse the tree looking for a root node that is a layout.
         // Once found, it's children can be assigned Layouts and the Measure process started.
-        private void FindRootLayouts(View rootNode)
+        private void FindRootLayouts(View rootNode, Size parentSize)
         {
             if (rootNode.Layout != null)
             {
                 Debug.WriteLineIf(LayoutDebugController, "LayoutController Root found:" + rootNode.Name);
                 // rootNode has a layout, start measuring and layouting from here.
-                MeasureAndLayout(rootNode);
+                MeasureAndLayout(rootNode, parentSize);
             }
             else
             {
-                // Search children of supplied node for a layout.
-                for (uint i = 0; i < rootNode.ChildCount; i++)
+                foreach (View view in rootNode.Children)
                 {
-                    View view = rootNode.GetChildAt(i);
-                    FindRootLayouts(view);
+                    FindRootLayouts(view, rootNode.Size);
                 }
             }
         }
 
         // Starts of the actual measuring and layouting from the given root node.
         // Can be called from multiple starting roots but in series.
-        void MeasureAndLayout(View root)
+        void MeasureAndLayout(View root, Size parentSize)
         {
-            if (root != null)
+            if (parentSize == null)
             {
-                // Get parent MeasureSpecification, this could be the Window or View with an exact size.
-                Container parentNode = root.GetParent();
+                return;
+            }
+
+            // Get parent MeasureSpecification, this could be the Window or View with an exact size.
+            // Get parent View's Size.  If using Legacy size negotiation then should have been set already.
+            // Parent not a View so assume it's a Layer which is the size of the window.
+            // Determine measure specification for root.
+            // The root layout policy could be an exact size, be match parent or wrap children.
+            // If wrap children then at most it can be the root parent size.
+            // If match parent then should be root parent size.
+            // If exact then should be that size limited by the root parent size.
+            MeasureSpecification.ModeType widthMode = GetMode(root.WidthSpecification);
+            MeasureSpecification.ModeType heightMode = GetMode(root.HeightSpecification);
+
+            if (root.Layout.LayoutRequested || root.Layout.IsLayoutChanged(parentSize.Width, parentSize.Height, widthMode, heightMode))
+            {
                 Position rootPosition = root.Position2D;
 
-                // Get parent View's Size.  If using Legacy size negotiation then should have been set already.
-                // Parent not a View so assume it's a Layer which is the size of the window.
-                View parentView = parentNode as View;
-                Size rootSize = parentView ? new Size(parentView.Size2D) : new Size(window.Size);
-
-                // Determine measure specification for root.
-                // The root layout policy could be an exact size, be match parent or wrap children.
-                // If wrap children then at most it can be the root parent size.
-                // If match parent then should be root parent size.
-                // If exact then should be that size limited by the root parent size.
-                MeasureSpecification parentWidthSpecification = CreateMeasureSpecification(rootSize.Width, root.WidthSpecification);
-                MeasureSpecification parentHeightSpecification = CreateMeasureSpecification(rootSize.Height, root.HeightSpecification);
+                MeasureSpecification parentWidthSpecification = CreateMeasureSpecification(parentSize.Width, root.WidthSpecification, widthMode);
+                MeasureSpecification parentHeightSpecification = CreateMeasureSpecification(parentSize.Height, root.HeightSpecification, heightMode);
 
                 // Start at root with it's parent's widthSpecification and heightSpecification
                 MeasureHierarchy(root, parentWidthSpecification, parentHeightSpecification);
@@ -213,30 +215,27 @@ namespace Tizen.NUI
                                      new LayoutLength(rootPosition.Y),
                                      new LayoutLength(rootPosition.X) + root.Layout.MeasuredWidth.Size,
                                      new LayoutLength(rootPosition.Y) + root.Layout.MeasuredHeight.Size);
+            }
 
-                if (SetupCoreAnimation() && OverrideCoreAnimation == false)
-                {
-                    PlayAnimation();
-                }
+            if (SetupCoreAnimation() && OverrideCoreAnimation == false)
+            {
+                PlayAnimation();
             }
         }
-
-        private MeasureSpecification CreateMeasureSpecification(float size, int specification)
+        private MeasureSpecification.ModeType GetMode(int specification)
         {
-            LayoutLength length = new LayoutLength(size);
             MeasureSpecification.ModeType mode = MeasureSpecification.ModeType.Unspecified;
 
-            if (specification >= 0)
-            {
-                // exact size provided so match width exactly
-                length = new LayoutLength(specification);
-                mode = MeasureSpecification.ModeType.Exactly;
-            }
-            else if (specification == LayoutParamPolicies.MatchParent)
+            if (specification >= 0 || specification == LayoutParamPolicies.MatchParent)
             {
                 mode = MeasureSpecification.ModeType.Exactly;
             }
-            return new MeasureSpecification(length, mode);
+            return mode;
+        }
+
+        private MeasureSpecification CreateMeasureSpecification(float size, int specificiation, MeasureSpecification.ModeType mode)
+        {
+            return new MeasureSpecification(new LayoutLength(specificiation >= 0 ? specificiation : size), mode);
         }
 
         /// <summary>
@@ -245,20 +244,13 @@ namespace Tizen.NUI
         private void Process(int id)
         {
             // First layer in the Window should be the default layer (index 0 )
-            uint numberOfLayers = window.LayerCount;
-            for (uint layerIndex = 0; layerIndex < numberOfLayers; layerIndex++)
+            foreach (Layer layer in window.LayersChildren)
             {
-                Layer layer = window.GetLayer(layerIndex);
-                if (layer != null)
+                foreach (View view in layer.Children)
                 {
-                    for (uint i = 0; i < layer.ChildCount; i++)
-                    {
-                        View view = layer.GetChildAt(i);
-                        FindRootLayouts(view);
-                    }
+                    FindRootLayouts(view, window.Size);
                 }
             }
-
         }
 
         /// <summary>
@@ -271,11 +263,7 @@ namespace Tizen.NUI
             // No -  reached leaf or no layouts set
             //
             // If in a leaf View with no layout, it's natural size is bubbled back up.
-
-            if (root.Layout != null)
-            {
-                root.Layout.Measure(widthSpec, heightSpec);
-            }
+            root.Layout?.Measure(widthSpec, heightSpec);
         }
 
         /// <summary>
@@ -283,10 +271,7 @@ namespace Tizen.NUI
         /// </summary>
         private void PerformLayout(View root, LayoutLength left, LayoutLength top, LayoutLength right, LayoutLength bottom)
         {
-            if (root.Layout != null)
-            {
-                root.Layout.Layout(left, top, right, bottom);
-            }
+            root.Layout?.Layout(left, top, right, bottom);
         }
 
         /// <summary>
@@ -302,32 +287,25 @@ namespace Tizen.NUI
         {
             // Iterate list of LayoutItem that were set for removal.
             // Now the core animation has finished their Views can be removed.
-            if (itemRemovalQueue != null)
+            foreach (LayoutItem item in itemRemovalQueue)
             {
-                foreach (LayoutItem item in itemRemovalQueue)
+                // Check incase the parent was already removed and the Owner was
+                // removed already.
+                if (item.Owner)
                 {
-                    // Check incase the parent was already removed and the Owner was
-                    // removed already.
-                    if (item.Owner)
-                    {
-                        // Check again incase the parent has already been removed.
-                        ILayoutParent layoutParent = item.GetParent();
-                        LayoutGroup layoutGroup = layoutParent as LayoutGroup;
-                        if (layoutGroup != null)
-                        {
-                            layoutGroup.Owner?.RemoveChild(item.Owner);
-                        }
-
-                    }
+                    // Check again incase the parent has already been removed.
+                    ILayoutParent layoutParent = item.GetParent();
+                    LayoutGroup layoutGroup = layoutParent as LayoutGroup;
+                    layoutGroup?.Owner?.RemoveChild(item.Owner);
                 }
-                itemRemovalQueue.Clear();
-                // If LayoutItems added to stack whilst the core animation is playing
-                // they would have been cleared here.
-                // Could have another stack to be added to whilst the animation is running.
-                // After the running stack is cleared it can be populated with the content
-                // of the other stack.  Then the main removal stack iterated when AnimationFinished
-                // occurs again.
             }
+            itemRemovalQueue?.Clear();
+            // If LayoutItems added to stack whilst the core animation is playing
+            // they would have been cleared here.
+            // Could have another stack to be added to whilst the animation is running.
+            // After the running stack is cleared it can be populated with the content
+            // of the other stack.  Then the main removal stack iterated when AnimationFinished
+            // occurs again.
             Debug.WriteLineIf(LayoutDebugController, "LayoutController AnimationFinished");
             coreAnimation?.Clear();
         }
@@ -338,14 +316,9 @@ namespace Tizen.NUI
         /// </summary>
         private bool SetupCoreAnimation()
         {
-            // Initialize animation for this layout run.
-            bool animationPending = false;
-
-            Debug.WriteLineIf(LayoutDebugController,
-                               "LayoutController SetupCoreAnimation for:" + layoutTransitionDataQueue.Count);
-
             if (layoutTransitionDataQueue.Count > 0) // Something to animate
             {
+                Debug.WriteLineIf(LayoutDebugController, "LayoutController SetupCoreAnimation for:" + layoutTransitionDataQueue.Count);
                 if (!coreAnimation)
                 {
                     coreAnimation = new Animation();
@@ -359,13 +332,12 @@ namespace Tizen.NUI
                     AddAnimatorsToAnimation(layoutPositionData);
                 }
 
-                animationPending = true;
-
                 // transitions have now been applied, clear stack, ready for new transitions on
                 // next layout traversal.
                 layoutTransitionDataQueue.Clear();
+                return true;
             }
-            return animationPending;
+            return false;
         }
 
         private void SetupAnimationForPosition(LayoutData layoutPositionData, TransitionComponents positionTransitionComponents)

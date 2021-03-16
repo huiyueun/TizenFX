@@ -205,30 +205,42 @@ namespace Tizen.NUI
         /// <since_tizen> 6 </since_tizen>
         public void Measure(MeasureSpecification widthMeasureSpec, MeasureSpecification heightMeasureSpec)
         {
-            // Check if relayouting is required.
-            bool specChanged = (widthMeasureSpec.Size != oldWidthMeasureSpec.Size) ||
-                (heightMeasureSpec.Size != oldHeightMeasureSpec.Size) ||
-                (widthMeasureSpec.Mode != oldWidthMeasureSpec.Mode) ||
-                (heightMeasureSpec.Mode != oldHeightMeasureSpec.Mode);
 
-            bool isSpecExactly = (widthMeasureSpec.Mode == MeasureSpecification.ModeType.Exactly) &&
-                (heightMeasureSpec.Mode == MeasureSpecification.ModeType.Exactly);
-
-            bool matchesSpecSize = (MeasuredWidth.Size == widthMeasureSpec.Size) &&
-                (MeasuredHeight.Size == heightMeasureSpec.Size);
-
-            bool needsLayout = specChanged && (!isSpecExactly || !matchesSpecSize);
-            needsLayout = needsLayout || ((flags & LayoutFlags.ForceLayout) == LayoutFlags.ForceLayout);
-
-            if (needsLayout)
+            if (isLayoutPrivate(widthMeasureSpec, heightMeasureSpec) || LayoutRequested)
             {
                 OnMeasure(widthMeasureSpec, heightMeasureSpec);
                 OnMeasureIndependentChildren(widthMeasureSpec, heightMeasureSpec);
                 flags = flags | LayoutFlags.LayoutRequired;
                 flags &= ~LayoutFlags.ForceLayout;
+                oldWidthMeasureSpec = widthMeasureSpec;
+                oldHeightMeasureSpec = heightMeasureSpec;
             }
-            oldWidthMeasureSpec = widthMeasureSpec;
-            oldHeightMeasureSpec = heightMeasureSpec;
+        }
+
+        internal bool IsLayoutChanged(float sizeWidth, float sizeHeight, MeasureSpecification.ModeType modeWidth, MeasureSpecification.ModeType modeHeight)
+        {
+            // Check if relayouting is required.
+            bool specChanged = (sizeWidth != oldWidthMeasureSpec.Size.AsDecimal()) || (modeWidth != oldWidthMeasureSpec.Mode) 
+                            || (sizeHeight != oldHeightMeasureSpec.Size.AsDecimal()) || (modeHeight != oldHeightMeasureSpec.Mode);
+            bool isSpecExactly = (modeWidth == MeasureSpecification.ModeType.Exactly) && (modeHeight == MeasureSpecification.ModeType.Exactly);
+            bool matchesSpecSize = (MeasuredWidth.Size.AsDecimal() == sizeWidth) && (MeasuredHeight.Size.AsDecimal() == sizeHeight);
+
+            return (specChanged && (!isSpecExactly || !matchesSpecSize));
+        }
+
+        private bool isLayoutPrivate(MeasureSpecification widthMeasureSpec, MeasureSpecification heightMeasureSpec)
+        {
+            // Check if relayouting is required.
+            bool specChanged = (widthMeasureSpec.Size != oldWidthMeasureSpec.Size) || (heightMeasureSpec.Size != oldHeightMeasureSpec.Size) ||
+                               (widthMeasureSpec.Mode != oldWidthMeasureSpec.Mode) || (heightMeasureSpec.Mode != oldHeightMeasureSpec.Mode);
+
+            bool isSpecExactly = (widthMeasureSpec.Mode == MeasureSpecification.ModeType.Exactly) && (heightMeasureSpec.Mode == MeasureSpecification.ModeType.Exactly);
+
+            bool matchesSpecSize = (MeasuredWidth.Size == widthMeasureSpec.Size) && (MeasuredHeight.Size == heightMeasureSpec.Size);
+
+            bool needsLayout = specChanged && (!isSpecExactly || !matchesSpecSize);
+
+            return needsLayout;
         }
 
         /// <summary>
@@ -562,12 +574,6 @@ namespace Tizen.NUI
                 // Store new layout position data
                 layoutPositionData = new LayoutData(this, ConditionForAnimation, left, top, right, bottom);
 
-                Debug.WriteLineIf(LayoutDebugFrameData, "LayoutItem FramePositionData View:" + layoutPositionData.Item.Owner.Name +
-                                                         " left:" + layoutPositionData.Left +
-                                                         " top:" + layoutPositionData.Top +
-                                                         " right:" + layoutPositionData.Right +
-                                                         " bottom:" + layoutPositionData.Bottom);
-
                 View ownerView = Owner.GetParent() as View;
 
                 if (ownerView?.Layout?.LayoutWithTransition ?? false)
@@ -594,6 +600,12 @@ namespace Tizen.NUI
 
                 // Reset condition for animation ready for next transition when required.
                 ConditionForAnimation = TransitionCondition.Unspecified;
+
+                Debug.WriteLineIf(LayoutDebugFrameData, "LayoutItem FramePositionData View:" + layoutPositionData.Item.Owner.Name +
+                                                         " left:" + layoutPositionData.Left +
+                                                         " top:" + layoutPositionData.Top +
+                                                         " right:" + layoutPositionData.Right +
+                                                         " bottom:" + layoutPositionData.Bottom);
             }
 
             return changed;
