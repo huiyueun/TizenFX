@@ -24,10 +24,25 @@ namespace ProviderSample
     class Program : NUIApplication
     {
         private View layoutView;
+        private ImageView imageView;
         protected override void OnCreate()
         {
             base.OnCreate();
+            ApplicationTransitionManager.Instance.ApplicationFrameType = FrameType.FrameProvider;
+            ApplicationTransitionManager.Instance.FrameProviderShown += Instance_FrameProviderShown;
+            ApplicationTransitionManager.Instance.FrameProviderHidden += Instance_FrameProviderHidden;
             Initialize();
+        }
+
+
+        private void Instance_FrameProviderHidden(object sender, System.EventArgs e)
+        {
+            Tizen.Log.Error("NUI", "OnAppControlReceived - Provider Shown");
+        }
+
+        private void Instance_FrameProviderShown(object sender, System.EventArgs e)
+        {
+            Tizen.Log.Error("NUI", "OnAppControlReceived - Provider Hidden");
         }
 
         protected override void OnAppControlReceived(AppControlReceivedEventArgs e)
@@ -35,12 +50,13 @@ namespace ProviderSample
             Tizen.Log.Error("NUI", "OnAppControlReceived - Provider");
             string message;
             ReceivedAppControl receivedAppControl = e.ReceivedAppControl;
-
             /// Get ExtraData coming from caller application
             message = receivedAppControl.ExtraData.Get<string>("Color");
 
-            Color[] colors = { Color.Red, Color.Blue, Color.Cyan, Color.Yellow };
-            layoutView.BackgroundColor = colors[int.Parse(message)];
+            //Color[] colors = { Color.Red, Color.Blue, Color.Cyan, Color.Yellow };
+            //layoutView.BackgroundColor = colors[int.Parse(message)];
+
+            imageView.ResourceUrl = Application.Current.DirectoryInfo.Resource + "/icon/" + message;
 
             if (receivedAppControl.IsReplyRequest)
             {
@@ -56,6 +72,9 @@ namespace ProviderSample
 
         void Initialize()
         {
+            GetDefaultWindow().AddAvailableOrientation(Window.WindowOrientation.Portrait);
+            GetDefaultWindow().SetPreferredOrientation(Window.WindowOrientation.Portrait);
+
             Window.Instance.KeyEvent += OnKeyEvent;
 
             CreateUI();
@@ -69,11 +88,23 @@ namespace ProviderSample
             {
                 WidthSpecification = LayoutParamPolicies.MatchParent,
                 HeightSpecification = LayoutParamPolicies.MatchParent,
-                BackgroundColor = Color.White,
+                BackgroundColor = Color.Transparent,
                 Layout = new AbsoluteLayout(),
             };
             layoutView.TouchEvent += ContentPage_TouchEvent;
+
+            
             Window.Instance.Add(layoutView);
+            imageView = new ImageView()
+            {
+                WidthSpecification = 600,
+                HeightSpecification = 600,
+                PivotPoint = PivotPoint.Center,
+                ParentOrigin = ParentOrigin.Center,
+                PositionUsesPivotPoint = true,
+            };
+            layoutView.Add(imageView);
+
         }
 
         private bool ContentPage_TouchEvent(object source, View.TouchEventArgs e)

@@ -1,0 +1,63 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+      <AssemblyName>NUIAllAppsSample</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>None</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="lib\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Tizen.NET.Sdk" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Tizen.Applications.Common">
+      <HintPath>res\dlls\Tizen.Applications.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Tizen.Applications.ComponentBased">
+      <HintPath>res\dlls\Tizen.Applications.ComponentBased.dll</HintPath>
+    </Reference>
+    <Reference Include="Tizen.Applications.ThemeManager">
+      <HintPath>res\dlls\Tizen.Applications.ThemeManager.dll</HintPath>
+    </Reference>
+    <Reference Include="Tizen.Log">
+      <HintPath>res\dlls\Tizen.Log.dll</HintPath>
+    </Reference>
+    <Reference Include="Tizen.NUI">
+      <HintPath>res\dlls\Tizen.NUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Tizen.NUI.Components">
+      <HintPath>res\dlls\Tizen.NUI.Components.dll</HintPath>
+    </Reference>
+    <Reference Include="Tizen.System.Feedback">
+      <HintPath>res\dlls\Tizen.System.Feedback.dll</HintPath>
+    </Reference>
+    <Reference Include="Tizen.System.Information">
+      <HintPath>res\dlls\Tizen.System.Information.dll</HintPath>
+    </Reference>
+    <Reference Include="Tizen.System.SystemSettings">
+      <HintPath>res\dlls\Tizen.System.SystemSettings.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <AuthorPath>$(MSBuildThisFileDirectory)\certificate\service-enabler.p12</AuthorPath>
+    <AuthorPass>service-enabler</AuthorPass>
+    <DistributorPath>$(MSBuildThisFileDirectory)\certificate\tizen-distributor-partner-manufacturer-signer.p12</DistributorPath>
+    <DistributorPass>tizenpkcs12passfordsigner</DistributorPass>
+  </PropertyGroup>
+
+
+</Project>
+

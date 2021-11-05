@@ -30,6 +30,9 @@ namespace BrokerSample
 
         void Initialize()
         {
+            GetDefaultWindow().AddAvailableOrientation(Window.WindowOrientation.Portrait);
+            GetDefaultWindow().SetPreferredOrientation(Window.WindowOrientation.Portrait);
+
             ApplicationTransitionManager.Instance.ApplicationFrameType = FrameType.FrameBroker;
             window = GetDefaultWindow();
             window.KeyEvent += OnKeyEvent;

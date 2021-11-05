@@ -36,7 +36,7 @@ namespace Tizen.NUI
         private Transition defaultTransition = new Transition()
         {
             TimePeriod = new TimePeriod(DefaultTransitionDuration),
-            AlphaFunction = new AlphaFunction(AlphaFunction.BuiltinFunctions.Default),
+            AlphaFunction = new AlphaFunction(AlphaFunction.BuiltinFunctions.EaseOut),
         };
 
         internal DefaultFrameBroker(Window window) : base(window)
