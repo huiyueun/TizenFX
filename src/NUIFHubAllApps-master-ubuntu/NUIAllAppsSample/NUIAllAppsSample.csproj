@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="Tizen.NET.Sdk" Version="1.0.8" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <DefineConstants>DOT_NET_CORE</DefineConstants>
+    <TargetFramework>netcoreapp5.0</TargetFramework>
+    <AssemblyName>NUIAllAppsSample</AssemblyName>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="/home/huiyu/SharedDirectory/Workspace/nui/tizenfx/github/TizenFX/src/Tizen.NUI/Tizen.NUI.csproj" />
+    <ProjectReference Include="/home/huiyu/SharedDirectory/Workspace/nui/tizenfx/github/TizenFX/src/Tizen.NUI.Components/Tizen.NUI.Components.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <AuthorPath>$(MSBuildThisFileDirectory)\certificate\service-enabler.p12</AuthorPath>
+    <AuthorPass>service-enabler</AuthorPass>
+    <DistributorPath>$(MSBuildThisFileDirectory)\certificate\tizen-distributor-partner-manufacturer-signer.p12</DistributorPath>
+    <DistributorPass>tizenpkcs12passfordsigner</DistributorPass>
+  </PropertyGroup>
+
+
+</Project>
+
