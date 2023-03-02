@@ -1,6 +1,5 @@
 ﻿using Space.BuildingTool.ProceduralMesh;
 using System.Collections.Generic;
-using Tizen.NUI.BaseComponents;
 using ViewModel;
 
 namespace Tizen.NUI.Samples
@@ -40,7 +39,7 @@ namespace Tizen.NUI.Samples
                 Tizen.Log.Error("MYLOG", $"1 vertex :{vertex.X} {vertex.Y} {vertex.Z} \n");
             }
             //TODO : Window & Door is nUll
-            var meshDraft =  MVMeshCreator.Instance.CreateWallMeshInfo(wall.Coordinates[0], wall.Coordinates[1], null, null);
+            var meshDraft =  MVMeshCreator.Instance.CreateWallMeshInfo(wall.Coordinates[0], wall.Coordinates[1], doors, windows);
 
             Tizen.Log.Error("MYLOG", $"vertex Count : {meshDraft.vertices.Count}\n");
             foreach (var vertex in meshDraft.vertices)
@@ -49,7 +48,7 @@ namespace Tizen.NUI.Samples
             }
 
             meshRenderer = new ModelRenderer();
-            AddRenderer(meshRenderer.CreateMeshRenderer(meshDraft, "/images/PaletteTest/rock.jpg", new Color(0.7f, 0.7f, 0.7f, 1.0f)));
+            AddRenderer(meshRenderer.CreateMeshRenderer(meshDraft, "/images/PaletteTest/rock.jpg", new Color(0.7f, 0.0f, 0.3f, 1.0f)));
         }
     }
 }

@@ -15,7 +15,13 @@ namespace Space.BuildingTool.ProceduralMesh
                 return new MeshDraft();
             }
 
-            //Vector3 normal = new Plane(vertices[0], vertices[1], vertices[2]).normal;
+            System.Numerics.Vector3 v1 = new System.Numerics.Vector3(vertices[0].X, vertices[0].Y, vertices[0].Z);
+            System.Numerics.Vector3 v2 = new System.Numerics.Vector3(vertices[1].X, vertices[1].Y, vertices[1].Z);
+            System.Numerics.Vector3 v3 = new System.Numerics.Vector3(vertices[2].X, vertices[2].Y, vertices[2].Z);
+
+            var plane = System.Numerics.Plane.CreateFromVertices(v1, v2, v3);
+            Vector3 normal = new Vector3(plane.Normal.X, plane.Normal.Y, plane.Normal.Z);
+
             List<Vector3> verticesWithHoles = new List<Vector3>(vertices);
 
             if (holeVertices != null)
@@ -26,7 +32,7 @@ namespace Space.BuildingTool.ProceduralMesh
                 }
             }
 
-            (List<Vector3> rightVertices, List<int> rightTriangles) = GetMeshInfoForPlane(verticesWithHoles, Vector3.One);
+            (List<Vector3> rightVertices, List<int> rightTriangles) = GetMeshInfoForPlane(verticesWithHoles, normal);
 
             return new MeshDraft(rightVertices, rightTriangles);
         }
@@ -43,8 +49,8 @@ namespace Space.BuildingTool.ProceduralMesh
             {
                 for (int k = 0; k < copy.Count - 2; k++)
                 {
-                    bool isClockWise = true;// Geometry3D.IsClockwise(copy[k], copy[k + 1], copy[k + 2], normal);
-                    bool isDotsInTriangle = false;// Geometry3D.CheckDotsInTriangle(copy, k);
+                    bool isClockWise = Geometry3D.IsClockwise(copy[k], copy[k + 1], copy[k + 2], normal);
+                    bool isDotsInTriangle = Geometry3D.CheckDotsInTriangle(copy, k);
 
                     if (isClockWise == true && isDotsInTriangle == false)
                     {
@@ -109,13 +115,13 @@ namespace Space.BuildingTool.ProceduralMesh
 
             foreach (Vector3 v in list) tmpDouble.Add(v);
 
-            /*
+            
             int index;
             for (index = 0; index < list.Count; index++)
                 if (list[index] == start) break;
 
             for (int i = index; i < index + count; i++) sortList.Add(tmpDouble[i]);
-            */
+            
             return sortList;
         }
 
@@ -133,7 +139,7 @@ namespace Space.BuildingTool.ProceduralMesh
                     if (exception != null
                         && (IsDuplicated(exception, v0) || IsDuplicated(exception, v1))) continue;
 
-                    float distance = 0;// Vector3.Distance(v0, v1);
+                    float distance = DistanceOfVector(v0, v1);
                     if (distance < minValue)
                     {
                         minValue = distance;
@@ -144,6 +150,14 @@ namespace Space.BuildingTool.ProceduralMesh
             }
 
             return (dot0, dot1);
+        }
+
+        public static float DistanceOfVector(Vector3 v1, Vector3 v2)
+        {
+            var cVec1 = new System.Numerics.Vector3(v1.X, v1.Y, v1.Z);
+            var cVec2 = new System.Numerics.Vector3(v2.X, v2.Y, v2.Z);
+
+            return System.Numerics.Vector3.Distance(cVec1, cVec2);
         }
 
         private Dictionary<Vector3, int> GetValueCounter(List<Vector3> vertices)

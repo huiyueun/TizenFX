@@ -35,7 +35,7 @@ namespace Tizen.NUI.Samples
             "varying mediump vec4 vColor;\n" +
             "mediump vec3 uLightDir = vec3(2.0, 0.5, 1.0);\n" + // constant light dir
             "mediump vec3 uViewDir  = vec3(0.0, 0.0, 1.0);\n" + // constant view dir.
-            "mediump vec3 uAmbientColor = vec3(0.20, 0.20, 0.20);\n" +
+            "mediump vec3 uAmbientColor = vec3(0.60, 0.60, 0.60);\n" +
             "mediump vec3 uDiffuseColor = vec3(0.8, 0.8, 0.8);\n" +
             "mediump vec3 uSpecularColor = vec3(0.5, 0.5, 0.5);\n" +
             "void main()\n" +
@@ -90,7 +90,7 @@ namespace Tizen.NUI.Samples
             vertexFormat.Add("aColor", new PropertyValue((int)PropertyType.Vector4));
 
             var vertexBuffer = new PropertyBuffer(vertexFormat);
-            vertexBuffer.SetData(geometryCreator.MeshVertexDataPtr(md.vertices), (uint)md.vertices.Count);
+            vertexBuffer.SetData(geometryCreator.MeshVertexDataPtr(md.vertices, md.normal), (uint)md.vertices.Count);
 
             var indexBuffer = geometryCreator.MeshIndexData(md.triangles);
 

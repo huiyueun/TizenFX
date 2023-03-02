@@ -9,6 +9,8 @@ namespace Space.BuildingTool.ProceduralMesh
         public List<Vector3> vertices;
         public List<int> triangles;
 
+        //public Vector3 normal;
+
         public MeshDraft()
         {
             vertices = new List<Vector3>();
@@ -115,6 +117,7 @@ namespace Space.BuildingTool.ProceduralMesh
                 triangles.AddRange(new List<int> { vertices.Count - 4, vertices.Count - 2, vertices.Count - 1 });
             }
 
+            //this.normal = normal;
             return this;
         }
 
