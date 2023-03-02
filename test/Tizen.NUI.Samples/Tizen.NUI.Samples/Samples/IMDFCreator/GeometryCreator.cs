@@ -19,7 +19,7 @@ namespace Tizen.NUI.Samples
             foreach (var vertex in vertexList)
             {
                 vertices[idx].vertColor = new Vec4(color.R, color.G, color.B, color.A);
-                //vertices[idx].normal = new Vec3(normal.X, normal.Y, normal.Z);
+                vertices[idx].normal = new Vec3(normal.X, normal.Y, normal.Z);
                 vertices[idx++].position = new Vec3(vertex.X / 400, vertex.Z / 400, vertex.Y / 400);
             }
 
