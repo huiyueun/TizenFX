@@ -90,7 +90,7 @@ namespace Tizen.NUI.Samples
             vertexFormat.Add("aColor", new PropertyValue((int)PropertyType.Vector4));
 
             var vertexBuffer = new PropertyBuffer(vertexFormat);
-            vertexBuffer.SetData(geometryCreator.MeshVertexDataPtr(md.vertices, md.normal), (uint)md.vertices.Count);
+            vertexBuffer.SetData(geometryCreator.MeshVertexDataPtr(md.vertices, md.normals), (uint)md.vertices.Count);
 
             var indexBuffer = geometryCreator.MeshIndexData(md.triangles);
 

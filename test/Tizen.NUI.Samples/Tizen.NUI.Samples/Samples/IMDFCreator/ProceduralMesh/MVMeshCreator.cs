@@ -10,7 +10,7 @@ namespace Space.BuildingTool.ProceduralMesh
     {
         public class MeshCreateOption
         {
-            public float thicknessFactor = 2.0f;
+            public float thicknessFactor = 5.0f;
             public float thicknessPercentage = 1.0f;
             public float openingThicknessPercentage = 0.99f;
             public float doorHeightPercentage = 1.0f;
