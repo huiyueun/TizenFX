@@ -24,7 +24,7 @@ namespace Space.BuildingTool.ProceduralMesh
                 }
             }
             tess.Tessellate();
-            return new MeshDraft(tess.Vertices.ToVector3(), tess.Elements);
+            return new MeshDraft(tess.Vertices.ToVector3(), tess.Elements, tess.UVs.ToVector2());
         }
     }
 }

@@ -18,10 +18,12 @@ namespace Tizen.NUI.Samples
 
         private void CreateMesh(RoomPlane planeData)
         {
+            /*
             foreach (var vertex in planeData.Coordinates)
             {
                 Tizen.Log.Error("MYLOG", $"plane vertex :{vertex.X} {vertex.Y} {vertex.Z} \n");
             }
+            */
             var meshDraft = MVMeshCreator.Instance.CreatePlaneMeshInfo(planeData.Coordinates);
             meshRenderer = new ModelRenderer();
 
@@ -31,7 +33,7 @@ namespace Tizen.NUI.Samples
                 Tizen.Log.Error("MYLOG", $"Plane vertex : {vertex.X}, {vertex.Y}, {vertex.Z}\n");
             }
 
-            AddRenderer(meshRenderer.CreateMeshRenderer(meshDraft, "/images/IMDFTextures/s_baseColor.jpeg", new Color(0.5f, 0.6f, 0.75f, 1.0f)));
+            AddRenderer(meshRenderer.CreateMeshRenderer(meshDraft, "/images/IMDFTextures/s_baseColor.jpeg", new Color(1.0f, 1.0f, 1.0f, 1.0f)));
         }
     }
 }

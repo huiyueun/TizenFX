@@ -9,6 +9,7 @@ namespace Space.BuildingTool.ProceduralMesh
         public List<Vector3> vertices;
         public List<int> triangles;
         public List<Vector3> normals;
+        public List<Vector2> uvs = null;
 
         public Vector3 normal;
 
@@ -18,11 +19,15 @@ namespace Space.BuildingTool.ProceduralMesh
             triangles = new List<int>();
         }
 
-        public MeshDraft(IList<Vector3> vertices, IList<int> triangles)
+        public MeshDraft(IList<Vector3> vertices, IList<int> triangles, IList<Vector2> uvs = null)
         {
             this.vertices = new List<Vector3>(vertices);
             this.normals = new List<Vector3>(vertices);
             this.triangles = new List<int>(triangles);
+            if (uvs !=null)
+            {
+                this.uvs = new List<Vector2>(uvs);
+            }
         }
 
         public MeshDraft ReverseTriangles(int startIndex, int count)
@@ -90,8 +95,8 @@ namespace Space.BuildingTool.ProceduralMesh
             // // Last nOriginalVertices are left plane of wall.
             vertices.AddRange(vertices.GetRange(0, nOriginalVertices));
             normals.AddRange(normals.GetRange(0, nOriginalVertices));
+            uvs.AddRange(uvs.GetRange(0, nOriginalVertices));
             triangles.AddRange(triangles.GetRange(0, nOriginalTriangles));
-
 
             Tizen.Log.Error("MYLOG", "Step1. Vertices Count : " + vertices.Count + "\n");
             Vector3 moveVector = normal * thickness;
@@ -147,6 +152,7 @@ namespace Space.BuildingTool.ProceduralMesh
                 normals.Add(sideNormal);
                 normals.Add(sideNormal);
                 Tizen.Log.Error("MYLOG", $"SideNormal :{sideNormal.X }, {sideNormal.Y},{sideNormal.Z} " + "\n");
+                uvs.AddRange(uvs.GetRange(0, nOriginalVertices));
 
                 triangles.AddRange(new List<int> { vertices.Count - 3, vertices.Count - 4, vertices.Count - 1 });
                 triangles.AddRange(new List<int> { vertices.Count - 4, vertices.Count - 2, vertices.Count - 1 });

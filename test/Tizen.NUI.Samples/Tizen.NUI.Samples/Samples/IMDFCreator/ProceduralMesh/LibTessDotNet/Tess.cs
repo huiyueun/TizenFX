@@ -145,6 +145,7 @@ namespace LibTessDotNet
         private CombineCallback _combineCallback;
 
         private ContourVertex[] _vertices;
+        private Vec3[] _uvs;
         private int _vertexCount;
         private int[] _elements;
         private int _elementCount;
@@ -177,6 +178,12 @@ namespace LibTessDotNet
         /// Vertices of the tessellated mesh.
         /// </summary>
         public ContourVertex[] Vertices { get { return _vertices; } }
+
+        /// <summary>
+        /// UVs of the tessellated mesh.
+        /// </summary>
+        public Vec3[] UVs { get { return _uvs; } }
+
         /// <summary>
         /// Number of vertices in the tessellated mesh.
         /// </summary>
@@ -327,6 +334,7 @@ namespace LibTessDotNet
             {
                 Vec3.Dot(ref v._coords, ref _sUnit, out v._s);
                 Vec3.Dot(ref v._coords, ref _tUnit, out v._t);
+                Tizen.Log.Error("********************MYLOG", $"[{i}] S:{v._s},T:{v._t}\n");
             }
             if (computedNormal)
             {
@@ -350,6 +358,19 @@ namespace LibTessDotNet
                     if (v._t < _bminY) _bminY = v._t;
                     if (v._t > _bmaxY) _bmaxY = v._t;
                 }
+            }
+            Tizen.Log.Error("********************MYLOG", $"--min x:{_bminX},y:{_bminY}\n");
+            Tizen.Log.Error("********************MYLOG", $"--max x:{_bmaxX},y:{_bmaxY}\n");
+
+
+            for (var v = _mesh._vHead._next; v != _mesh._vHead; v = v._next)
+            {
+                var xLen = _bmaxX - _bminX;
+                var yLen = _bmaxY - _bminY;
+
+                v._u = (v._s - _bminX) / xLen;
+                v._v = (v._t - _bminY) / yLen;
+                Tizen.Log.Error("********************MYLOG", $"[uv] S:{v._u},T:{v._v}\n");
             }
         }
 
@@ -583,6 +604,7 @@ namespace LibTessDotNet
 
             _vertexCount = maxVertexCount;
             _vertices = new ContourVertex[_vertexCount];
+            _uvs = new Vec3[_vertexCount];
 
             // Output vertices.
             for (v = _mesh._vHead._next; v != _mesh._vHead; v = v._next)
@@ -592,6 +614,8 @@ namespace LibTessDotNet
                     // Store coordinate
                     _vertices[v._n].Position = v._coords;
                     _vertices[v._n].Data = v._data;
+                    _uvs[v._n].X = v._u;
+                    _uvs[v._n].Y = v._v;
                 }
             }
 

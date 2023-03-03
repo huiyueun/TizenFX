@@ -16,10 +16,12 @@ namespace Tizen.NUI.Samples
         public void CreateRooms(Building data)
         {
             Tizen.Log.Info("MYLOG", "Room Count : " + data.Rooms.Count +"\n");
+            int idx = 0;
             foreach (var room in  data.Rooms)
             {
                 var roomView = new RoomView(room);
                 Add(roomView);
+                idx++;
             }
         }
     }

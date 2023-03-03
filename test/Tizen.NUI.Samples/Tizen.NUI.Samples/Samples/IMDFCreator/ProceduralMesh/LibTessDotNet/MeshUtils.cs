@@ -255,6 +255,7 @@ namespace LibTessDotNet
 
             internal Vec3 _coords;
             internal Real _s, _t;
+            internal Real _u, _v;
             internal PQHandle _pqHandle;
             internal int _n;
             internal object _data;

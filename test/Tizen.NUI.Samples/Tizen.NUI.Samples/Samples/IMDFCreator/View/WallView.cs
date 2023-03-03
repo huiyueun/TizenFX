@@ -17,12 +17,13 @@ namespace Tizen.NUI.Samples
             Position = new Position(0, 0, 0);
 
             CreateMesh(wallData);
+            CreateOpening(wallData.Openings);
         }
 
         private void CreateMesh(RoomWall wall)
         {
-            List<Vector3> doors = new List<Vector3>();
-            List<Vector3> windows = new List<Vector3>();
+            var doors = new List<Vector3>();
+            var windows = new List<Vector3>();
             foreach (var opening in wall.Openings)
             {
                 if (opening.Category == OpeningCategory.DOOR)
@@ -48,7 +49,17 @@ namespace Tizen.NUI.Samples
             }
 
             meshRenderer = new ModelRenderer();
-            AddRenderer(meshRenderer.CreateMeshRenderer(meshDraft, "/images/PaletteTest/rock.jpg", new Color(0.7f, 0.0f, 0.3f, 1.0f)));
+            AddRenderer(meshRenderer.CreateMeshRenderer(meshDraft, "/images/IMDFTextures/s_baseColor.jpeg", new Color(1.0f, 1.0f, 1.0f, 1.0f)));
+        }
+
+        private void CreateOpening(List<Opening> openings)
+        {
+            Tizen.Log.Error("MYLOG", "openings : " + openings.Count + "\n");
+            foreach (var opening in openings)
+            {
+                var openingView = new OpeningView(opening);
+                Add(openingView);
+            }
         }
     }
 }

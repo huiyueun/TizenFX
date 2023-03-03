@@ -15,14 +15,14 @@ namespace Space.BuildingTool.ProceduralMesh
                 return new MeshDraft();
             }
 
-            System.Numerics.Vector3 v1 = new System.Numerics.Vector3(vertices[0].X, vertices[0].Y, vertices[0].Z);
-            System.Numerics.Vector3 v2 = new System.Numerics.Vector3(vertices[1].X, vertices[1].Y, vertices[1].Z);
-            System.Numerics.Vector3 v3 = new System.Numerics.Vector3(vertices[2].X, vertices[2].Y, vertices[2].Z);
+            var v1 = new System.Numerics.Vector3(vertices[0].X, vertices[0].Y, vertices[0].Z);
+            var v2 = new System.Numerics.Vector3(vertices[1].X, vertices[1].Y, vertices[1].Z);
+            var v3 = new System.Numerics.Vector3(vertices[2].X, vertices[2].Y, vertices[2].Z);
 
             var plane = System.Numerics.Plane.CreateFromVertices(v1, v2, v3);
-            Vector3 normal = new Vector3(plane.Normal.X, plane.Normal.Y, plane.Normal.Z);
+            var normal = new Vector3(plane.Normal.X, plane.Normal.Y, plane.Normal.Z);
 
-            List<Vector3> verticesWithHoles = new List<Vector3>(vertices);
+            var verticesWithHoles = new List<Vector3>(vertices);
 
             if (holeVertices != null)
             {

@@ -21,7 +21,7 @@ namespace Space.BuildingTool.ProceduralMesh
         {
             MeshDraft md = _tessellator.CreatePolygon(vertices, holeVertices);
 
-            if (md.vertices.Count >= 3)
+            if (md.vertices.Count >= 3 && thickness > 0)
             {
                 System.Numerics.Vector3 v1 = new System.Numerics.Vector3(vertices[0].X, vertices[0].Y, vertices[0].Z);
                 System.Numerics.Vector3 v2 = new System.Numerics.Vector3(vertices[1].X, vertices[1].Y, vertices[1].Z);

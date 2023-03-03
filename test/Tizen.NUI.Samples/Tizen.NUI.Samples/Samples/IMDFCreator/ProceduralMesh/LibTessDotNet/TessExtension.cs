@@ -6,6 +6,17 @@ namespace Space.BuildingTool.ProceduralMesh
 {
     internal static class TessExtension
     {
+        public static List<Vector2> ToVector2(this IList<Vec3> vecs)
+        {
+            List<Vector2> result = new List<Vector2>();
+            foreach (var vec in vecs)
+            {
+                result.Add(new Vector2(vec.X, vec.Y));
+            }
+
+            return result;
+        }
+
         public static List<Vector3> ToVector3(this IList<ContourVertex> vecs)
         {
             List<Vector3> result = new List<Vector3>();

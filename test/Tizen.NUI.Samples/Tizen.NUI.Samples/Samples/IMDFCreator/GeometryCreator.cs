@@ -11,15 +11,25 @@ namespace Tizen.NUI.Samples
             this.color = color;
         }
 
-        public global::System.IntPtr MeshVertexDataPtr(List<Vector3> vertexList, List<Vector3> normalList)
+        public global::System.IntPtr MeshVertexDataPtr(List<Vector3> vertexList, List<Vector3> normalList, List<Vector2> uvs)
         {
             var vertices = new TexturedQuadVertex[vertexList.Count];
             var idx = 0;
+            List<Vec2> vec2s = new List<Vec2>();
+            vec2s.Add(new Vec2(0, 0));
+            vec2s.Add(new Vec2(1, 1));
+            vec2s.Add(new Vec2(0, 1));
+            vec2s.Add(new Vec2(1, 0));
 
             foreach (var vertex in vertexList)
             {
                 vertices[idx].vertColor = new Vec4(color.R, color.G, color.B, color.A);
                 vertices[idx].normal = new Vec3(normalList[idx].X, normalList[idx].Y, normalList[idx].Z);
+
+                if(uvs != null)
+                {
+                    vertices[idx].texcoord = new Vec2(uvs[idx].X, uvs[idx].Y);
+                }
                 vertices[idx++].position = new Vec3(vertex.X / 400, vertex.Z / 400, vertex.Y / 400);
             }
 

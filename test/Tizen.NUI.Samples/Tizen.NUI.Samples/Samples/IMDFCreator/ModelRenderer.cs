@@ -42,7 +42,7 @@ namespace Tizen.NUI.Samples
             "{\n" +
             "    mediump vec3 lightdir = normalize(uLightDir);\n" +
             "    mediump vec3 eyedir   = normalize(uViewDir);\n" +
-            "    mediump vec4 texColor = uColor * vColor;\n" +//texture2D( sTexture, vTexCoord ) * uColor * vColor;\n" +
+            "    mediump vec4 texColor = texture2D( sTexture, vTexCoord ) * uColor * vColor;\n" +
             "    mediump float diffuse = min(max(-dot(vNormal, lightdir) + 0.1, 0.0), 1.0);\n" +
             "    mediump vec3 reflectdir = reflect(-lightdir, vNormal);\n" +
             "    mediump float specular = pow(max(0.0, dot(reflectdir, eyedir)), 50.0);\n" +
@@ -53,8 +53,7 @@ namespace Tizen.NUI.Samples
         public Renderer CreateMeshRenderer(MeshDraft md, string texture, Color color)
         {
             var renderer = new Renderer(GenerateGeometry(md, color), new Shader(VERTEX_SHADER, FRAGMENT_SHADER));
-//            renderer.SetTextures(CreateTexture(texture));
-
+            renderer.SetTextures(CreateTexture(texture));
             return renderer;
         }
 
@@ -90,7 +89,7 @@ namespace Tizen.NUI.Samples
             vertexFormat.Add("aColor", new PropertyValue((int)PropertyType.Vector4));
 
             var vertexBuffer = new PropertyBuffer(vertexFormat);
-            vertexBuffer.SetData(geometryCreator.MeshVertexDataPtr(md.vertices, md.normals), (uint)md.vertices.Count);
+            vertexBuffer.SetData(geometryCreator.MeshVertexDataPtr(md.vertices, md.normals, md.uvs), (uint)md.vertices.Count);
 
             var indexBuffer = geometryCreator.MeshIndexData(md.triangles);
 
