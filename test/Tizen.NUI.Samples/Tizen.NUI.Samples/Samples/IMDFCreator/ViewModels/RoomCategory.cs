@@ -11,6 +11,7 @@
         KITCHEN,
         TERASS,
         BALCONY,
-        ENTRANCE
+        ENTRANCE,
+        LIVINGROOM,
     }
 }

@@ -368,8 +368,8 @@ namespace LibTessDotNet
                 var xLen = _bmaxX - _bminX;
                 var yLen = _bmaxY - _bminY;
 
-                v._u = (v._s - _bminX) / xLen;
-                v._v = (v._t - _bminY) / yLen;
+                v._u = (v._s - _bminX) / xLen * (xLen / 70);
+                v._v = (v._t - _bminY) / yLen * (yLen / 70);
                 Tizen.Log.Error("********************MYLOG", $"[uv] S:{v._u},T:{v._v}\n");
             }
         }

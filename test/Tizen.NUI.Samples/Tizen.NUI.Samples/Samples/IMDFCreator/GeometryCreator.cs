@@ -15,22 +15,24 @@ namespace Tizen.NUI.Samples
         {
             var vertices = new TexturedQuadVertex[vertexList.Count];
             var idx = 0;
-            List<Vec2> vec2s = new List<Vec2>();
-            vec2s.Add(new Vec2(0, 0));
-            vec2s.Add(new Vec2(1, 1));
-            vec2s.Add(new Vec2(0, 1));
-            vec2s.Add(new Vec2(1, 0));
 
             foreach (var vertex in vertexList)
             {
-                vertices[idx].vertColor = new Vec4(color.R, color.G, color.B, color.A);
                 vertices[idx].normal = new Vec3(normalList[idx].X, normalList[idx].Y, normalList[idx].Z);
 
-                if(uvs != null)
+                if(normalList[idx].X == 0 && normalList[idx].Y != 0 && normalList[idx].Z == 0)
+                {
+                    vertices[idx].vertColor = new Vec4(0.0f, 0.0f, 0.0f, 1.0f);
+                }
+                else
+                {
+                    vertices[idx].vertColor = new Vec4(color.R, color.G, color.B, color.A);
+                }
+                if (uvs != null)
                 {
                     vertices[idx].texcoord = new Vec2(uvs[idx].X, uvs[idx].Y);
                 }
-                vertices[idx++].position = new Vec3(vertex.X / 400, vertex.Z / 400, vertex.Y / 400);
+                vertices[idx++].position = new Vec3(vertex.X / 300-1.5f, vertex.Z / 300-1.0f, vertex.Y / 300 - 0.0f);
             }
 
             int length = Marshal.SizeOf(vertices[0]);

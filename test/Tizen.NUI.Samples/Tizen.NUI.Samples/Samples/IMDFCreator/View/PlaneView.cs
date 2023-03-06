@@ -6,9 +6,11 @@ namespace Tizen.NUI.Samples
     public class PlaneView : IMDF3DView
     {
         private ModelRenderer meshRenderer;
+        private RoomCategory category;
 
-        public PlaneView(RoomPlane planeData)
+        public PlaneView(RoomCategory category, RoomPlane planeData)
         {
+            this.category = category;
             Size = new Size(300, 300, 300);
 
             //Position = planeData.Coordinates.GetAverage();
@@ -33,7 +35,18 @@ namespace Tizen.NUI.Samples
                 Tizen.Log.Error("MYLOG", $"Plane vertex : {vertex.X}, {vertex.Y}, {vertex.Z}\n");
             }
 
-            AddRenderer(meshRenderer.CreateMeshRenderer(meshDraft, "/images/IMDFTextures/s_baseColor.jpeg", new Color(1.0f, 1.0f, 1.0f, 1.0f)));
+            Tizen.Log.Error("MYLOG", "category : " + category + "\n");
+
+            var planeTexture = "/images/IMDFTextures/s_baseColor.jpeg";
+            switch (category)
+            {
+                //case RoomCategory.LIVINGROOM:
+                    //planeTexture = null;
+                    //break;
+                default:
+                    break;
+            }
+            AddRenderer(meshRenderer.CreateMeshRenderer(meshDraft, planeTexture, new Color(0.3f, 0.3f, 0.3f, 1.0f)));
         }
     }
 }

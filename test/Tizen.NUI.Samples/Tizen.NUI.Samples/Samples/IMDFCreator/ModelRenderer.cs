@@ -43,6 +43,32 @@ namespace Tizen.NUI.Samples
             "    mediump vec3 lightdir = normalize(uLightDir);\n" +
             "    mediump vec3 eyedir   = normalize(uViewDir);\n" +
             "    mediump vec4 texColor = texture2D( sTexture, vTexCoord ) * uColor * vColor;\n" +
+            "    mediump vec3 normal = normalize(vNormal);\n" +
+            "    mediump float diffuse = min(max(-dot(normal, lightdir) + 0.1, 0.0), 1.0);\n" +
+            "    mediump vec3 reflectdir = reflect(-lightdir, normal);\n" +
+            "    mediump float specular = pow(max(0.0, dot(reflectdir, eyedir)), 50.0);\n" +
+            "    mediump vec4 color = texColor * vec4(uAmbientColor + uDiffuseColor * diffuse, 1.0) + vec4(uSpecularColor, 0.0) * specular;\n" +
+            "    gl_FragColor = color;\n" +
+            //"    gl_FragColor = gl_FragColor * 0.01 + vec4(normal,1.0);" +
+            "}\n";
+
+        static readonly string FRAGMENT_SHADER_NOTEXTURE =
+            "uniform lowp vec4 uColor;\n" +
+            "uniform sampler2D sTexture;\n" +
+            "varying mediump vec3 vNormal;\n" +
+            "varying mediump vec2 vTexCoord;\n" +
+            "varying mediump vec3 vPosition;\n" +
+            "varying mediump vec4 vColor;\n" +
+            "mediump vec3 uLightDir = vec3(2.0, 0.5, 1.0);\n" + // constant light dir
+            "mediump vec3 uViewDir  = vec3(0.0, 0.0, 1.0);\n" + // constant view dir.
+            "mediump vec3 uAmbientColor = vec3(0.60, 0.60, 0.60);\n" +
+            "mediump vec3 uDiffuseColor = vec3(0.8, 0.8, 0.8);\n" +
+            "mediump vec3 uSpecularColor = vec3(0.5, 0.5, 0.5);\n" +
+            "void main()\n" +
+            "{\n" +
+            "    mediump vec3 lightdir = normalize(uLightDir);\n" +
+            "    mediump vec3 eyedir   = normalize(uViewDir);\n" +
+            "    mediump vec4 texColor = uColor * vColor;\n" +
             "    mediump float diffuse = min(max(-dot(vNormal, lightdir) + 0.1, 0.0), 1.0);\n" +
             "    mediump vec3 reflectdir = reflect(-lightdir, vNormal);\n" +
             "    mediump float specular = pow(max(0.0, dot(reflectdir, eyedir)), 50.0);\n" +
@@ -52,8 +78,16 @@ namespace Tizen.NUI.Samples
 
         public Renderer CreateMeshRenderer(MeshDraft md, string texture, Color color)
         {
-            var renderer = new Renderer(GenerateGeometry(md, color), new Shader(VERTEX_SHADER, FRAGMENT_SHADER));
-            renderer.SetTextures(CreateTexture(texture));
+            Renderer renderer = null;
+            if(texture == null)
+            {
+                renderer = new Renderer(GenerateGeometry(md, color), new Shader(VERTEX_SHADER, FRAGMENT_SHADER_NOTEXTURE));
+            }
+            else
+            {
+                renderer = new Renderer(GenerateGeometry(md, Color.White), new Shader(VERTEX_SHADER, FRAGMENT_SHADER));
+                renderer.SetTextures(CreateTexture(texture));
+            }
             return renderer;
         }
 
@@ -64,6 +98,7 @@ namespace Tizen.NUI.Samples
                 new Size2D(),
                 FittingModeType.ScaleToFill
             ));
+            
 
             var texture = new Texture(
                 TextureType.TEXTURE_2D,
@@ -73,7 +108,11 @@ namespace Tizen.NUI.Samples
             );
             texture.Upload(pixelData);
 
+            var sampler = new Sampler();
+            sampler.SetWrapMode(WrapModeType.Repeat, WrapModeType.Repeat);
+
             var textureSet = new TextureSet();
+            textureSet.SetSampler(0u, sampler);
             textureSet.SetTexture(0u, texture);
             return textureSet;
         }

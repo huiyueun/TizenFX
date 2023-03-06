@@ -17,7 +17,7 @@ namespace Tizen.NUI.Samples
             Position = new Position(0, 0, 0);
 
             CreateMesh(wallData);
-            CreateOpening(wallData.Openings);
+            //CreateOpening(wallData.Openings);
         }
 
         private void CreateMesh(RoomWall wall)
@@ -49,7 +49,7 @@ namespace Tizen.NUI.Samples
             }
 
             meshRenderer = new ModelRenderer();
-            AddRenderer(meshRenderer.CreateMeshRenderer(meshDraft, "/images/IMDFTextures/s_baseColor.jpeg", new Color(1.0f, 1.0f, 1.0f, 1.0f)));
+            AddRenderer(meshRenderer.CreateMeshRenderer(meshDraft, null, new Color(0.6f, 0.6f, 0.6f, 1.0f)));
         }
 
         private void CreateOpening(List<Opening> openings)

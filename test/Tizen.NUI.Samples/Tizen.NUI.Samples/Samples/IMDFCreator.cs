@@ -22,6 +22,7 @@ namespace Tizen.NUI.Samples
             root = new View()
             {
                 Name = "root",
+                BackgroundColor = new Color(0.2f, 0.2f, 0.2f, 1.0f),
                 WidthResizePolicy = ResizePolicyType.FillToParent,
                 HeightResizePolicy = ResizePolicyType.FillToParent,
             };
@@ -63,7 +64,7 @@ namespace Tizen.NUI.Samples
             var spaceView = new SpaceView(houseData);
             root.Add(spaceView);
 
-            PlayRotateAnimation(8000, spaceView);
+            PlayRotateAnimation(20000, spaceView);
         }
 
         private void FlipZCoodinate(ref Building building)
@@ -113,14 +114,15 @@ namespace Tizen.NUI.Samples
 
         private void PlayRotateAnimation(int millsec, View view)
         {
-            view.Position = new Position(-200, -150, 0);
-            view.RotateBy(new Radian(new Degree(40.0f)), Vector3.XAxis);
+            view.Position = new Position(0, 0, 500);
+            view.RotateBy(new Radian(new Degree(50.0f)), Vector3.XAxis);
             view.RotateBy(new Radian(new Degree(20.0f)), Vector3.ZAxis);
-            /*
+
+            //view.PivotPoint = new Position(0.5f, 0.5f, 1.0f);
             rotateAnimation = new Animation(millsec); //1.5s
-            rotateAnimation.AnimateBy(view, "Orientation", new Rotation(new Radian(new Degree(360.0f)), Vector3.XAxis));
+            rotateAnimation.AnimateBy(view, "Orientation", new Rotation(new Radian(new Degree(360.0f)), Vector3.ZAxis));
             rotateAnimation.Looping = true;
-            rotateAnimation.Play();*/
+            rotateAnimation.Play();
         }
 
         private void RemoveAllViews()

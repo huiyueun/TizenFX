@@ -15,7 +15,7 @@ namespace Tizen.NUI.Samples
 
         private void CreateWallAndPlane(Room roomData)
         {
-            CreatePlane(roomData.Plane);
+            CreatePlane(roomData.Category, roomData.Plane);
             CreateWall(roomData.Walls);
         }
 
@@ -29,9 +29,9 @@ namespace Tizen.NUI.Samples
             }
         }
 
-        private void CreatePlane(RoomPlane data)
+        private void CreatePlane(RoomCategory category, RoomPlane data)
         {
-            var planeView = new PlaneView(data);
+            var planeView = new PlaneView(category, data);
             Add(planeView);
         }
     }
