@@ -250,7 +250,7 @@ namespace Tizen.NUI.BaseComponents
         [EditorBrowsable(EditorBrowsableState.Never)]
         public AccessibilityStates GetAccessibilityStates()
         {
-            var result = new AccessibilityStates {BitMask = Interop.ControlDevel.DaliToolkitDevelControlGetAccessibilityStates(SwigCPtr)};
+            var result = new AccessibilityStates { BitMask = Interop.ControlDevel.DaliToolkitDevelControlGetAccessibilityStates(SwigCPtr) };
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
             return result;
         }
@@ -347,7 +347,7 @@ namespace Tizen.NUI.BaseComponents
         {
             get
             {
-                return new AccessibilityEvents {Owner = this};
+                return new AccessibilityEvents { Owner = this };
             }
         }
 

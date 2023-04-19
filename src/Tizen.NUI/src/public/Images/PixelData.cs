@@ -54,7 +54,7 @@ namespace Tizen.NUI
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
 
         }
-        
+
         /// <summary>
         /// Creates a PixelData object.
         /// </summary>

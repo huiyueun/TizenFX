@@ -719,7 +719,7 @@ namespace Tizen.NUI
             }
             passwordDataList = new WebPasswordDataList(alist, true);
             List<WebPasswordData> pList = new List<WebPasswordData>();
-            for(uint i = 0; i < passwordDataList.ItemCount; i++)
+            for (uint i = 0; i < passwordDataList.ItemCount; i++)
             {
                 pList.Add(passwordDataList.GetItemAtIndex(i));
             }

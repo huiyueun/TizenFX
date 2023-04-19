@@ -150,16 +150,16 @@ namespace Tizen.NUI
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static PixelBuffer LoadImageFromBuffer(System.IO.Stream stream, Size2D size, FittingModeType fittingMode, SamplingModeType samplingMode, bool orientationCorrection)
         {
-            if(stream == null)
+            if (stream == null)
             {
                 throw new ArgumentNullException(nameof(stream));
             }
-            if(size == null)
+            if (size == null)
             {
                 throw new ArgumentNullException(nameof(size));
             }
             long streamLength = stream.Length - stream.Position;
-            if(streamLength <= 0)
+            if (streamLength <= 0)
             {
                 throw new InvalidOperationException("stream lenght is <= 0");
             }
@@ -200,16 +200,16 @@ namespace Tizen.NUI
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static PixelBuffer LoadImageFromBuffer(System.IO.Stream stream, Size2D size, FittingModeType fittingMode, SamplingModeType samplingMode)
         {
-            if(stream == null)
+            if (stream == null)
             {
                 throw new ArgumentNullException(nameof(stream));
             }
-            if(size == null)
+            if (size == null)
             {
                 throw new ArgumentNullException(nameof(size));
             }
             long streamLength = stream.Length - stream.Position;
-            if(streamLength <= 0)
+            if (streamLength <= 0)
             {
                 throw new InvalidOperationException("stream lenght is <= 0");
             }
@@ -249,16 +249,16 @@ namespace Tizen.NUI
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static PixelBuffer LoadImageFromBuffer(System.IO.Stream stream, Size2D size, FittingModeType fittingMode)
         {
-            if(stream == null)
+            if (stream == null)
             {
                 throw new ArgumentNullException(nameof(stream));
             }
-            if(size == null)
+            if (size == null)
             {
                 throw new ArgumentNullException(nameof(size));
             }
             long streamLength = stream.Length - stream.Position;
-            if(streamLength <= 0)
+            if (streamLength <= 0)
             {
                 throw new InvalidOperationException("stream lenght is <= 0");
             }
@@ -297,16 +297,16 @@ namespace Tizen.NUI
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static PixelBuffer LoadImageFromBuffer(System.IO.Stream stream, Size2D size)
         {
-            if(stream == null)
+            if (stream == null)
             {
                 throw new ArgumentNullException(nameof(stream));
             }
-            if(size == null)
+            if (size == null)
             {
                 throw new ArgumentNullException(nameof(size));
             }
             long streamLength = stream.Length - stream.Position;
-            if(streamLength <= 0)
+            if (streamLength <= 0)
             {
                 throw new InvalidOperationException("stream lenght is <= 0");
             }
@@ -344,12 +344,12 @@ namespace Tizen.NUI
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static PixelBuffer LoadImageFromBuffer(System.IO.Stream stream)
         {
-            if(stream == null)
+            if (stream == null)
             {
                 throw new ArgumentNullException(nameof(stream));
             }
             long streamLength = stream.Length - stream.Position;
-            if(streamLength <= 0)
+            if (streamLength <= 0)
             {
                 throw new InvalidOperationException("stream lenght is <= 0");
             }

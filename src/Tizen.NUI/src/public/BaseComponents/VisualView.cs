@@ -217,7 +217,7 @@ namespace Tizen.NUI.BaseComponents
         {
             foreach (var item in visualDictionary)
             {
-                if(item.Value != null)
+                if (item.Value != null)
                 {
                     item.Value.SetTransformAndSize(tranformDictionary[item.Key], size);
                     EnableVisual(item.Key, true);
@@ -443,7 +443,7 @@ namespace Tizen.NUI.BaseComponents
             visualDictionary[visualIndex] = visual;
             tranformDictionary[visualIndex] = visualMap.OutputTransformMap;
 
-            if(visual != null)
+            if (visual != null)
             {
                 visual.Name = visualName;
                 visual.DepthIndex = visualMap.DepthIndex;

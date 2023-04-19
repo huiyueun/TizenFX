@@ -1629,7 +1629,7 @@ namespace Tizen.NUI
             {
                 if (arg2 is null)
                     return true;
-                
+
                 return false;
             }
 

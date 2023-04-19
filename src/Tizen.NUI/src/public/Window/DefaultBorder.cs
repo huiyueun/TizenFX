@@ -87,10 +87,10 @@ namespace Tizen.NUI
         #region Enums
         private enum CurrentGesture
         {
-          None = 0,
-          TapGesture = 1,
-          PanGesture = 2,
-          PinchGesture = 3,
+            None = 0,
+            TapGesture = 1,
+            PanGesture = 2,
+            PinchGesture = 3,
         }
         #endregion //Enums
 
@@ -159,13 +159,13 @@ namespace Tizen.NUI
             var instance = (DefaultBorder)bindable;
             return instance.resizePolicy;
         });
-        
+
 
         /// <summary>
         /// The thickness of the border.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public uint BorderLineThickness 
+        public uint BorderLineThickness
         {
             get
             {
@@ -181,14 +181,14 @@ namespace Tizen.NUI
         /// The thickness of the border's touch area.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public uint TouchThickness {get; set;}
+        public uint TouchThickness { get; set; }
 
         /// <summary>
         /// The height of the border.
         /// This value is the initial value used when creating borders.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float BorderHeight {get; set;}
+        public float BorderHeight { get; set; }
 
         /// <summary>
         /// The minimum size by which the window will small.
@@ -226,7 +226,7 @@ namespace Tizen.NUI
         /// The window with borders added.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public Window BorderWindow {get; set;}
+        public Window BorderWindow { get; set; }
 
         /// <summary>
         /// Whether overlay mode.
@@ -235,7 +235,7 @@ namespace Tizen.NUI
         /// Default value is false;
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool OverlayMode {get; set;}
+        public bool OverlayMode { get; set; }
 
         /// <summary>
         /// Set the window resizing policy.
@@ -529,11 +529,11 @@ namespace Tizen.NUI
             SetDispatchParentGestureEvents(sender as View, false);
             if (e != null && e.Touch.GetState(0) == PointStateType.Down)
             {
-              if (ResizePolicy != Window.BorderResizePolicyType.Fixed)
-              {
-                OnRequestResize();
-                BorderWindow.RequestResizeToServer(Window.ResizeDirection.TopLeft);
-              }
+                if (ResizePolicy != Window.BorderResizePolicyType.Fixed)
+                {
+                    OnRequestResize();
+                    BorderWindow.RequestResizeToServer(Window.ResizeDirection.TopLeft);
+                }
             }
             return true;
         }
@@ -547,11 +547,11 @@ namespace Tizen.NUI
             SetDispatchParentGestureEvents(sender as View, false);
             if (e != null && e.Touch.GetState(0) == PointStateType.Down)
             {
-              if (ResizePolicy != Window.BorderResizePolicyType.Fixed)
-              {
-                OnRequestResize();
-                BorderWindow.RequestResizeToServer(Window.ResizeDirection.TopRight);
-              }
+                if (ResizePolicy != Window.BorderResizePolicyType.Fixed)
+                {
+                    OnRequestResize();
+                    BorderWindow.RequestResizeToServer(Window.ResizeDirection.TopRight);
+                }
             }
             return true;
         }
@@ -566,11 +566,11 @@ namespace Tizen.NUI
             SetDispatchParentGestureEvents(sender as View, false);
             if (e != null && e.Touch.GetState(0) == PointStateType.Down)
             {
-              if (ResizePolicy != Window.BorderResizePolicyType.Fixed)
-              {
-                OnRequestResize();
-                BorderWindow.RequestResizeToServer(Window.ResizeDirection.BottomLeft);
-              }
+                if (ResizePolicy != Window.BorderResizePolicyType.Fixed)
+                {
+                    OnRequestResize();
+                    BorderWindow.RequestResizeToServer(Window.ResizeDirection.BottomLeft);
+                }
             }
             return true;
         }
@@ -584,11 +584,11 @@ namespace Tizen.NUI
             SetDispatchParentGestureEvents(sender as View, false);
             if (e != null && e.Touch.GetState(0) == PointStateType.Down)
             {
-              if (ResizePolicy != Window.BorderResizePolicyType.Fixed)
-              {
-                OnRequestResize();
-                BorderWindow.RequestResizeToServer(Window.ResizeDirection.BottomRight);
-              }
+                if (ResizePolicy != Window.BorderResizePolicyType.Fixed)
+                {
+                    OnRequestResize();
+                    BorderWindow.RequestResizeToServer(Window.ResizeDirection.BottomRight);
+                }
             }
             return true;
         }
@@ -626,11 +626,11 @@ namespace Tizen.NUI
         {
             if (BorderWindow.IsMaximized())
             {
-              BorderWindow.Maximize(false);
+                BorderWindow.Maximize(false);
             }
             else
             {
-              BorderWindow.Maximize(true);
+                BorderWindow.Maximize(true);
             }
         }
 
@@ -766,7 +766,7 @@ namespace Tizen.NUI
         /// Called when requesting a resize
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public virtual void OnRequestResize() {}
+        public virtual void OnRequestResize() { }
 
         /// <summary>
         /// Called when the window is resized.
@@ -789,7 +789,7 @@ namespace Tizen.NUI
         /// Called when requesting a move
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public virtual void OnRequestMove() {}
+        public virtual void OnRequestMove() { }
 
         /// <summary>
         /// Called when the window is moved.
@@ -797,7 +797,7 @@ namespace Tizen.NUI
         /// <param name="x">The x of the moved window</param>
         /// <param name="y">The y of the moved window</param>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public virtual void OnMoved(int x, int y) {}
+        public virtual void OnMoved(int x, int y) { }
 
         /// <summary>
         /// Called when the window is maximized.

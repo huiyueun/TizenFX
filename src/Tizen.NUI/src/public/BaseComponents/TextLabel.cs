@@ -1683,7 +1683,7 @@ namespace Tizen.NUI.BaseComponents
                 }
             }
         }
-        
+
         private void RemoveSystemSettingsFontTypeChanged()
         {
             if (hasSystemFontTypeChanged)

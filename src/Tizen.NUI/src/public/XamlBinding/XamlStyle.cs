@@ -13,8 +13,8 @@ namespace Tizen.NUI.Binding
     {
         internal const string StyleClassPrefix = "Tizen.NUI.Binding.StyleClass.";
 
-		const int CleanupTrigger = 128;
-		int cleanupThreshold = CleanupTrigger;
+        const int CleanupTrigger = 128;
+        int cleanupThreshold = CleanupTrigger;
 
         readonly BindableProperty basedOnResourceProperty = BindableProperty.CreateAttached("BasedOnResource", typeof(XamlStyle), typeof(XamlStyle), default(XamlStyle),
             propertyChanged: OnBasedOnResourceChanged);
@@ -198,15 +198,15 @@ namespace Tizen.NUI.Binding
             return value.TargetType.IsAssignableFrom(TargetType);
         }
 
-		void CleanUpWeakReferences()
-		{
-			if (targets.Count < cleanupThreshold)
-			{
-				return;
-			}
+        void CleanUpWeakReferences()
+        {
+            if (targets.Count < cleanupThreshold)
+            {
+                return;
+            }
 
-			targets.RemoveAll(t => !t.TryGetTarget(out _));
-			cleanupThreshold = targets.Count + CleanupTrigger;
-		}
-	}
+            targets.RemoveAll(t => !t.TryGetTarget(out _));
+            cleanupThreshold = targets.Count + CleanupTrigger;
+        }
+    }
 }

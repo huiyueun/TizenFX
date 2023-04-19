@@ -143,14 +143,14 @@ namespace Tizen.NUI.BaseComponents
             switch (accessibilityMode)
             {
                 case ViewAccessibilityMode.Custom:
-                {
-                    return Interop.View.NewCustom();
-                }
+                    {
+                        return Interop.View.NewCustom();
+                    }
                 case ViewAccessibilityMode.Default:
                 default:
-                {
-                    return Interop.View.New();
-                }
+                    {
+                        return Interop.View.New();
+                    }
             }
         }
 
@@ -415,7 +415,7 @@ namespace Tizen.NUI.BaseComponents
                             }
 
                             if (child.ControlState != newControlState)
-                            child.ControlState = newControlState;
+                                child.ControlState = newControlState;
                         }
                     }
                 }

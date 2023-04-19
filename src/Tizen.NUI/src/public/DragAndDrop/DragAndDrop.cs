@@ -56,17 +56,17 @@ namespace Tizen.NUI
         private void ReleaseDragWindow()
         {
             if (mDragWindow)
-            {                        
+            {
                 if (mShadowView)
                 {
                     //Application has Shadow View ownership, so DnD doesn't dispose Shadow View
                     mDragWindow.Remove(mShadowView);
                     mShadowView = null;
                 }
-            
+
                 mDragWindow.Dispose();
-                mDragWindow = null;                      
-            }         
+                mDragWindow = null;
+            }
         }
 
         /// <summary>
@@ -84,11 +84,11 @@ namespace Tizen.NUI
         /// <param name="callback">The source event callback</param>
         /// <since_tizen> 10 </since_tizen>
         public void StartDragAndDrop(View sourceView, View shadowView, DragData dragData, SourceEventHandler callback)
-        {            
+        {
             if (initDrag)
             {
-                 Tizen.Log.Fatal("NUI", "Start Drag And Drop Initializing...");
-                 return;
+                Tizen.Log.Fatal("NUI", "Start Drag And Drop Initializing...");
+                return;
             }
             initDrag = true;
 
@@ -131,16 +131,16 @@ namespace Tizen.NUI
 
                 //Make Position 0, 0 for Moving into Drag Window
                 shadowView.Position = new Position(0, 0);
-            
+
                 mShadowView = shadowView;
                 mDragWindow.Add(mShadowView);
-           
+
                 sourceEventCb = (sourceEventType) =>
-                {   
+                {
                     if ((DragSourceEventType)sourceEventType != DragSourceEventType.Start)
-                    {     
-                        Tizen.Log.Fatal("NUI", "DnD Source Event is Called");  
-                        ReleaseDragWindow();                
+                    {
+                        Tizen.Log.Fatal("NUI", "DnD Source Event is Called");
+                        ReleaseDragWindow();
                     }
 
                     callback((DragSourceEventType)sourceEventType);
@@ -155,8 +155,8 @@ namespace Tizen.NUI
                     throw new InvalidOperationException("Fail to StartDragAndDrop");
                 }
 
-            }         
-            
+            }
+
             initDrag = false;
         }
 
@@ -204,7 +204,7 @@ namespace Tizen.NUI
             if (!Interop.DragAndDrop.AddListener(SwigCPtr, View.getCPtr(targetView),
                                                  new global::System.Runtime.InteropServices.HandleRef(this, Marshal.GetFunctionPointerForDelegate<Delegate>(cb))))
             {
-                 throw new InvalidOperationException("Fail to AddListener");
+                throw new InvalidOperationException("Fail to AddListener");
             }
         }
 
@@ -218,7 +218,7 @@ namespace Tizen.NUI
         {
             if (!targetEventDictionary.ContainsKey(targetView))
             {
-                 throw new InvalidOperationException("Fail to RemoveListener");
+                throw new InvalidOperationException("Fail to RemoveListener");
             }
 
             InternalDragAndDropEventHandler cb = targetEventDictionary[targetView];
@@ -226,7 +226,7 @@ namespace Tizen.NUI
             if (!Interop.DragAndDrop.RemoveListener(SwigCPtr, View.getCPtr(targetView),
                                                     new global::System.Runtime.InteropServices.HandleRef(this, Marshal.GetFunctionPointerForDelegate<Delegate>(cb))))
             {
-                 throw new InvalidOperationException("Fail to RemoveListener");
+                throw new InvalidOperationException("Fail to RemoveListener");
             }
         }
     }

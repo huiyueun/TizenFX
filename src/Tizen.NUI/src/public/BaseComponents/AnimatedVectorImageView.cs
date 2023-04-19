@@ -483,7 +483,7 @@ namespace Tizen.NUI.BaseComponents
             switch (isMinMaxFrameSet)
             {
                 case minMaxSetTypes.NotSetByUser:
-                    switch(endAction)
+                    switch (endAction)
                     {
                         case EndActions.Cancel:
                             innerCurrentFrame = base.CurrentFrame;
@@ -492,7 +492,7 @@ namespace Tizen.NUI.BaseComponents
                             base.CurrentFrame = innerCurrentFrame = 0;
                             break;
                         case EndActions.StopFinal:
-                            base.CurrentFrame = innerCurrentFrame= totalFrameNum - 1;
+                            base.CurrentFrame = innerCurrentFrame = totalFrameNum - 1;
                             break;
                     }
                     break;

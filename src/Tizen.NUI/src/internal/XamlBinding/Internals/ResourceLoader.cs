@@ -23,7 +23,8 @@ namespace Tizen.NUI.Binding.Internals
 {
     internal static class ResourceLoader
     {
-        static Func<ResourceLoadingQuery, ResourceLoadingResponse> _resourceProvider = (resourceLoadingQuery) => {
+        static Func<ResourceLoadingQuery, ResourceLoadingResponse> _resourceProvider = (resourceLoadingQuery) =>
+        {
             if (typeof(Theme).Assembly.GetName().FullName != resourceLoadingQuery.AssemblyName.FullName)
             {
                 string resource = Tizen.Applications.Application.Current.DirectoryInfo.Resource;

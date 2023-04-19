@@ -38,13 +38,13 @@ namespace Tizen.NUI.BaseComponents
 
         private static List<Size2D> GetSizeListFromNativeVector(System.IntPtr ptr)
         {
-            using (VectorVector2 sizeVector = new VectorVector2 (ptr, true))
+            using (VectorVector2 sizeVector = new VectorVector2(ptr, true))
             {
                 int count = sizeVector.Size();
                 List<Size2D> list = new List<Size2D>();
 
-                for(int i = 0; i < count; i++)
-                    list.Add(sizeVector.ValueOfIndex( (uint)i ));
+                for (int i = 0; i < count; i++)
+                    list.Add(sizeVector.ValueOfIndex((uint)i));
 
                 return list;
             }
@@ -52,13 +52,13 @@ namespace Tizen.NUI.BaseComponents
 
         private static List<Position2D> GetPositionListFromNativeVector(System.IntPtr ptr)
         {
-            using (VectorVector2 positionVector = new VectorVector2 (ptr, true))
+            using (VectorVector2 positionVector = new VectorVector2(ptr, true))
             {
                 int count = positionVector.Size();
                 List<Position2D> list = new List<Position2D>();
 
-                for(int i = 0; i < count; i++)
-                    list.Add(positionVector.ValueOfIndex( (uint)i ));
+                for (int i = 0; i < count; i++)
+                    list.Add(positionVector.ValueOfIndex((uint)i));
 
                 return list;
             }

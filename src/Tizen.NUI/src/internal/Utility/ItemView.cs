@@ -457,7 +457,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private bool InternalSnapToItemEnabled
         {
             get
@@ -490,7 +490,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private float InternalRefreshInterval
         {
             get
@@ -523,7 +523,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private float InternalLayoutPosition
         {
             get
@@ -556,7 +556,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private float InternalScrollSpeed
         {
             get
@@ -589,7 +589,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private float InternalOvershoot
         {
             get
@@ -622,7 +622,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private Vector2 InternalScrollDirection
         {
             get
@@ -655,7 +655,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private int InternalLayoutOrientation
         {
             get
@@ -688,7 +688,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private float InternalScrollContentSize
         {
             get

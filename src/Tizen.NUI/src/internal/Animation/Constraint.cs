@@ -72,9 +72,9 @@ namespace Tizen.NUI
         internal RemoveActionType RemoveAction
         {
             set => Interop.Constraint.SetRemoveAction(SwigCPtr, (int)value);
-            get => (RemoveActionType) Interop.Constraint.GetRemoveAction(SwigCPtr);
+            get => (RemoveActionType)Interop.Constraint.GetRemoveAction(SwigCPtr);
         }
-        
+
         /// <summary>
         /// Tag number. It will be useful when you want to seperate constraints
         /// </summary>
@@ -110,11 +110,11 @@ namespace Tizen.NUI
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected override void Dispose(DisposeTypes type)
         {
-            if(disposed)
+            if (disposed)
             {
                 return;
             }
-            if(type == DisposeTypes.Explicit)
+            if (type == DisposeTypes.Explicit)
             {
                 //Called by User
                 //Release your own managed resources here.
@@ -130,7 +130,7 @@ namespace Tizen.NUI
             Interop.Constraint.DeleteConstraint(swigCPtr);
             if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
         }
-        
+
         /// <summary>
         /// Determinate how objects property will be when constraint removed.
         /// Default is Bake.

@@ -18,7 +18,7 @@
 namespace Tizen.NUI
 {
     using global::System.Runtime.InteropServices;
-    
+
     /// <summary>
     /// Specialized Constraint.
     /// Make handle's targetIndex value always equal with handle's parent's parentIndex value

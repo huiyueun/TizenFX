@@ -60,10 +60,12 @@ namespace Tizen.NUI.BaseComponents.VectorGraphics
         /// <since_tizen> 9 </since_tizen>
         public Color Color
         {
-            set {
+            set
+            {
                 this.color = value;
             }
-            get {
+            get
+            {
                 return this.color;
             }
         }

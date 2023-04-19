@@ -102,7 +102,7 @@ namespace Tizen.NUI
         /// <summary>
         /// Factory-method to generate a ColorCutQuantizer from a  PixelBuffer object.
         /// </summary>
-      public static ColorCutQuantizer FromBitmap(PixelBuffer pixelBuffer, Rectangle region, int maxColors)
+        public static ColorCutQuantizer FromBitmap(PixelBuffer pixelBuffer, Rectangle region, int maxColors)
         {
             int width;
             int height;
@@ -128,16 +128,16 @@ namespace Tizen.NUI
 
             unsafe
             {
-                byte *rawdata = (byte *)bufferIntPtr.ToPointer();
+                byte* rawdata = (byte*)bufferIntPtr.ToPointer();
                 int totalLength = width * height * pixelLength;
                 for (i = 0; i < totalLength; i += pixelLength)
                 {
                     //RGB888
                     if (pixelLength == 3)
-                        pixels[index++] = (255 & 0xff) << 24 | (rawdata[i] & 0xff) << 16 | (rawdata[i+1] & 0xff) << 8 | (rawdata[i+2] & 0xff);
+                        pixels[index++] = (255 & 0xff) << 24 | (rawdata[i] & 0xff) << 16 | (rawdata[i + 1] & 0xff) << 8 | (rawdata[i + 2] & 0xff);
                     //RGBA8888
                     else
-                        pixels[index++] = (rawdata[i + 3]  & 0xff) << 24 | (rawdata[i] & 0xff) << 16 | (rawdata[i+1] & 0xff) << 8 | (rawdata[i+2] & 0xff);
+                        pixels[index++] = (rawdata[i + 3] & 0xff) << 24 | (rawdata[i] & 0xff) << 16 | (rawdata[i + 1] & 0xff) << 8 | (rawdata[i + 2] & 0xff);
                 }
             }
 
@@ -193,7 +193,7 @@ namespace Tizen.NUI
                 {
                     // If we get here then there are no more boxes to split, so return
                     return;
-                }   
+                }
             }
         }
 
@@ -442,7 +442,7 @@ namespace Tizen.NUI
                     int red = (colors[i] >> 16) & 0xff;
                     int green = (colors[i] >> 8) & 0xff;
                     int blue = colors[i] & 0xff;
- 
+
                     maxRed = red > maxRed ? red : maxRed;
                     minRed = red < minRed ? red : minRed;
                     maxGreen = green > maxGreen ? green : maxGreen;
@@ -517,7 +517,7 @@ namespace Tizen.NUI
                 ModifySignificantOctet(longestDimension, lowerIndex, upperIndex);
 
                 Array.Sort(colors, lowerIndex, upperIndex + 1 - lowerIndex);
-                
+
                 // Now revert all of the colors so that they are packed as RGB again
                 ModifySignificantOctet(longestDimension, lowerIndex, upperIndex);
 
@@ -539,7 +539,7 @@ namespace Tizen.NUI
                             }
                             break;
                         case componentBlue:
-                            if ((colors[i] &0xff) > dimensionMidPoint)
+                            if ((colors[i] & 0xff) > dimensionMidPoint)
                             {
                                 return i;
                             }
@@ -633,7 +633,7 @@ namespace Tizen.NUI
                             }
                             else
                             {
-                                colors[i] = (color >> 24 & 0xff) << 24  | (color & 0xff) << 16 | (color >> 8 & 0xff) << 8 | (color >> 16 & 0xff);
+                                colors[i] = (color >> 24 & 0xff) << 24 | (color & 0xff) << 16 | (color >> 8 & 0xff) << 8 | (color >> 16 & 0xff);
                             }
                         }
                         break;

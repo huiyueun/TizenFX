@@ -270,7 +270,7 @@ namespace Tizen.NUI
             {
                 isRemoved = Interop.PropertyMap.Remove(SwigCPtr, key.IndexKey);
             }
-            else if(key.Type == PropertyKey.KeyType.String)
+            else if (key.Type == PropertyKey.KeyType.String)
             {
                 isRemoved = Interop.PropertyMap.Remove(SwigCPtr, key.StringKey);
             }

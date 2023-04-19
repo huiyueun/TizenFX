@@ -741,7 +741,7 @@ namespace Tizen.NUI.BaseComponents
                 NUILog.Error("touchData should not be null!");
                 return true;
             }
-            
+
             TouchEventArgs e = new TouchEventArgs();
             e.Touch = Tizen.NUI.Touch.GetTouchFromPtr(touchData);
             return HitTest(e.Touch);
@@ -903,7 +903,7 @@ namespace Tizen.NUI.BaseComponents
 
         private void OnResourcesLoaded(IntPtr view)
         {
-            if(!CheckResourceReady())
+            if (!CheckResourceReady())
             {
                 return;
             }

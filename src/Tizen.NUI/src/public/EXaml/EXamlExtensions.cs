@@ -102,7 +102,7 @@ namespace Tizen.NUI.EXaml
 
                 LoadEXaml.Load(view, xaml);
             }
-                
+
             return view;
         }
 

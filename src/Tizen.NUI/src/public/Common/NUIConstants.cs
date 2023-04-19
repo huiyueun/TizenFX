@@ -783,7 +783,7 @@ namespace Tizen.NUI
         /// This is a desktop type. No other windows can be placed below this type of window.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Desktop        
+        Desktop
     }
 
     /// <summary>
@@ -2075,25 +2075,25 @@ namespace Tizen.NUI
         /// Left
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int Left {get; set;}
+        public int Left { get; set; }
 
         /// <summary>
         /// Right
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int Right {get; set;}
+        public int Right { get; set; }
 
         /// <summary>
         /// Bottom
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int Bottom {get; set;}
+        public int Bottom { get; set; }
 
         /// <summary>
         /// Top
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public int Top {get; set;}
+        public int Top { get; set; }
 
     }
 
@@ -2113,15 +2113,15 @@ namespace Tizen.NUI
     /// <since_tizen> 10 </since_tizen>
     public enum GLESVersion
     {
-      /// <summary>
-      /// GLES version 2.0
-      /// </summary>
-      Version20 = 0,
+        /// <summary>
+        /// GLES version 2.0
+        /// </summary>
+        Version20 = 0,
 
-      /// <summary>
-      /// GLES version 3.0
-      /// </summary>
-      Version30
+        /// <summary>
+        /// GLES version 3.0
+        /// </summary>
+        Version30
     }
 
     /// <summary>
@@ -2132,15 +2132,15 @@ namespace Tizen.NUI
     /// <since_tizen> 10 </since_tizen>
     public enum GLRenderingMode
     {
-      /// <summary>
-      /// The render frame delegate is invoked continuously.
-      /// </summary>
-      Continuous = 0,
+        /// <summary>
+        /// The render frame delegate is invoked continuously.
+        /// </summary>
+        Continuous = 0,
 
-      /// <summary>
-      /// The render frame delegate is invoked by user.
-      /// </summary>
-      OnDemand = 1
+        /// <summary>
+        /// The render frame delegate is invoked by user.
+        /// </summary>
+        OnDemand = 1
     }
 
     /// <summary>

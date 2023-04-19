@@ -35,7 +35,7 @@ namespace Tizen.NUI.Binding
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override object ConvertFromInvariantString(string value)
         {
-            if(!string.IsNullOrEmpty(value))
+            if (!string.IsNullOrEmpty(value))
             {
                 return (float)GraphicsTypeManager.Instance.Point.ConvertScriptToPoint(value.Trim());
             }

@@ -76,7 +76,7 @@ namespace Tizen.NUI
         {
             get
             {
-                if(transitionItemList != null)
+                if (transitionItemList != null)
                 {
                     return transitionItemList.Count;
                 }

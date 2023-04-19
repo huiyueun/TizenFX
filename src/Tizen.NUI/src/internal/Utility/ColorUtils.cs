@@ -302,9 +302,9 @@ namespace Tizen.NUI
             {
                 case PixelFormat.L8:
                 case PixelFormat.A8:
-                {
-                    return 1;
-                }
+                    {
+                        return 1;
+                    }
 
                 case PixelFormat.LA88:
                 case PixelFormat.RGB565:
@@ -313,22 +313,22 @@ namespace Tizen.NUI
                 case PixelFormat.BGR565:
                 case PixelFormat.BGRA4444:
                 case PixelFormat.BGRA5551:
-                {
-                    return 2;
-                }
+                    {
+                        return 2;
+                    }
 
                 case PixelFormat.RGB888:
-                {
-                    return 3;
-                }
+                    {
+                        return 3;
+                    }
 
                 case PixelFormat.RGB8888:
                 case PixelFormat.BGR8888:
                 case PixelFormat.RGBA8888:
                 case PixelFormat.BGRA8888:
-                {
-                    return 4;
-                }
+                    {
+                        return 4;
+                    }
                 default:
                     Tizen.Log.Error("Palette", "Invalided PixelFormat(" + pixelFormat + ") has been given \n");
                     return 0;

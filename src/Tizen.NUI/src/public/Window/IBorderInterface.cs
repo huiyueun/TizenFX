@@ -31,38 +31,38 @@ namespace Tizen.NUI
         /// The thickness of the border.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public uint BorderLineThickness {get;}
+        public uint BorderLineThickness { get; }
 
         /// <summary>
         /// The thickness of the border's touch area.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public uint TouchThickness {get;}
+        public uint TouchThickness { get; }
 
         /// <summary>
         /// The height of the border.
         /// This value is the initial value used when creating borders.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public float BorderHeight {get;}
+        public float BorderHeight { get; }
 
         /// <summary>
         /// The minimum size by which the window will small.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public Size2D MinSize {get;}
+        public Size2D MinSize { get; }
 
         /// <summary>
         /// The maximum size by which the window will big.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public Size2D MaxSize {get;}
+        public Size2D MaxSize { get; }
 
         /// <summary>
         /// The window with borders added.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public Window BorderWindow {get; set;}
+        public Window BorderWindow { get; set; }
 
         /// <summary>
         /// Whether overlay mode.
@@ -71,13 +71,13 @@ namespace Tizen.NUI
         /// Default value is false;
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool OverlayMode {get;}
+        public bool OverlayMode { get; }
 
         /// <summary>
         /// Set the window resizing policy.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public Window.BorderResizePolicyType ResizePolicy {get;}
+        public Window.BorderResizePolicyType ResizePolicy { get; }
 
         /// <summary>
         /// Create top border UI. User can override this method to draw top border UI.

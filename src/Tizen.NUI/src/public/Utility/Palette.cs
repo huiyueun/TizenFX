@@ -182,7 +182,7 @@ namespace Tizen.NUI
                 double scale = pixelBuffer.GetWidth() / (double)pixelBuffer.GetHeight();
                 region.X = (int)Math.Floor(region.X * scale);
                 region.Y = (int)Math.Floor(region.Y * scale);
-                region.Width = Math.Min((int)Math.Ceiling(region.Width * scale), (int)pixelBuffer.GetWidth() );
+                region.Width = Math.Min((int)Math.Ceiling(region.Width * scale), (int)pixelBuffer.GetWidth());
                 region.Height = Math.Min((int)Math.Ceiling(region.Height * scale), (int)pixelBuffer.GetHeight());
             }
 
@@ -549,7 +549,7 @@ namespace Tizen.NUI
                 EnsureTextColorsGenerated();
 
                 return new Color((float)(((bodyTextColor >> 16) & 0xff) / 255.0f), (float)(((bodyTextColor >> 8) & 0xff) / 255.0f), (float)((bodyTextColor & 0xff) / 255.0f), (float)(((bodyTextColor >> 24) & 0xff) / 255.0f));
-    
+
             }
 
             /// <summary>

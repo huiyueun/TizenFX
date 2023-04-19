@@ -48,7 +48,7 @@ namespace Tizen.NUI.Binding
         /// Base constructor with loadTemplate function.
         /// </summary>
         /// <param name="loadTemplate">The function of loading templated object.</param>
-         /// <since_tizen> 9 </since_tizen>
+        /// <since_tizen> 9 </since_tizen>
         public DataTemplate(Func<object> loadTemplate) : base(loadTemplate)
         {
         }

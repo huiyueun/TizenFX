@@ -101,7 +101,7 @@ namespace Tizen.NUI
         /// <summary>
         /// The drag object position in target view
         /// </summary>
-        public Position Position  { get; set; }
+        public Position Position { get; set; }
         /// <summary>
         /// The mime type of drag object
         /// </summary>

@@ -241,7 +241,7 @@ namespace Tizen.NUI
         public void DisposeRecursively()
         {
             // To avoid useless "OnChildRemoved" callback invoke, Dispose itself before children.
-            if(!Disposed && !IsDisposeQueued)
+            if (!Disposed && !IsDisposeQueued)
             {
                 Dispose();
             }

@@ -258,7 +258,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private int InternalValue
         {
             get
@@ -302,7 +302,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private int InternalMinValue
         {
             get
@@ -332,7 +332,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private int InternalMaxValue
         {
             get
@@ -362,7 +362,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private int InternalStep
         {
             get
@@ -392,7 +392,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private bool InternalWrappingEnabled
         {
             get
@@ -422,7 +422,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private int InternalTextPointSize
         {
             get
@@ -453,7 +453,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private Color InternalTextColor
         {
             get
@@ -489,7 +489,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private int InternalMaxTextLength
         {
             get
@@ -519,7 +519,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private TextField InternalSpinText
         {
             get
@@ -548,7 +548,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private string InternalIndicatorImage
         {
             get

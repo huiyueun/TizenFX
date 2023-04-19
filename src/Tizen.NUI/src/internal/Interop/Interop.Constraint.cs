@@ -23,7 +23,7 @@ namespace Tizen.NUI
         {
             [global::System.Runtime.InteropServices.DllImport(NDalicPINVOKE.Lib, EntryPoint = "CSharp_Dali_new_Constraint")]
             public static extern global::System.IntPtr NewConstraint(global::System.Runtime.InteropServices.HandleRef jarg1);
-            
+
             [global::System.Runtime.InteropServices.DllImport(NDalicPINVOKE.Lib, EntryPoint = "CSharp_Dali_delete_Constraint")]
             public static extern global::System.IntPtr DeleteConstraint(global::System.Runtime.InteropServices.HandleRef jarg1);
 

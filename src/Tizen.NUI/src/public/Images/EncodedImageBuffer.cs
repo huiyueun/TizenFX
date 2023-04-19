@@ -132,11 +132,11 @@ namespace Tizen.NUI
         /// This will not be public opened.
         private static VectorUnsignedChar GetRawBuffrFromStreamHelper(System.IO.Stream stream)
         {
-            if(stream == null)
+            if (stream == null)
             {
                 throw new ArgumentNullException(nameof(stream));
             }
-            if(!stream.CanRead)
+            if (!stream.CanRead)
             {
                 throw new InvalidOperationException("stream don't support to read");
             }
@@ -147,7 +147,7 @@ namespace Tizen.NUI
             memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
 
             long streamLength = memoryStream.Length;
-            if(streamLength <= 0)
+            if (streamLength <= 0)
             {
                 throw new InvalidOperationException("stream length is <= 0");
             }

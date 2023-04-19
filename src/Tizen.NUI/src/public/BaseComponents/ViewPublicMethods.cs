@@ -479,7 +479,7 @@ namespace Tizen.NUI.BaseComponents
             //to fix memory leak issue, match the handle count with native side.
             IntPtr cPtr = Interop.Actor.FindChildByName(SwigCPtr, childName);
             Animatable ret = Registry.GetManagedBaseHandleFromNativePtr(cPtr) as Animatable;
-            if(ret == null)
+            if (ret == null)
             {
                 // Register new camera into Registry.
                 ret = new Animatable(cPtr, true);

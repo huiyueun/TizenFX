@@ -815,7 +815,7 @@ namespace Tizen.NUI.BaseComponents
             if (!imagePropertyUpdatedFlag) return;
 
             // Update currentStates properties to cachedImagePropertyMap
-            if(currentStates.changed)
+            if (currentStates.changed)
             {
                 UpdateImage(ImageVisualProperty.LoopCount, new PropertyValue(currentStates.loopCount));
                 UpdateImage(ImageVisualProperty.StopBehavior, new PropertyValue((int)currentStates.stopEndAction));

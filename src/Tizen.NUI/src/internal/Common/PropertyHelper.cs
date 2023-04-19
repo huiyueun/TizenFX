@@ -75,7 +75,7 @@ namespace Tizen.NUI
         {
             var propertyName = LowerFirstLetter(stringProperty);
 
-            if(animatable is View)
+            if (animatable is View)
             {
                 View view = animatable as View;
                 return SearchProperty(view, propertyName) ?? SearchVisualProperty(view, propertyName);

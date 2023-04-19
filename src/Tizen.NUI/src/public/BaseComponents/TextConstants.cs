@@ -261,7 +261,7 @@ namespace Tizen.NUI.Text
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public float? Height { get; set; }
-        
+
         /// <summary>
         /// The width of the dashes of the dashed underline (if null, the default value is 2.0f). <br />
         /// Only valid when "UnderlineType.Dashed" type is used.

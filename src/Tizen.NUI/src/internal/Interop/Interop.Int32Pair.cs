@@ -18,7 +18,7 @@ namespace Tizen.NUI
 {
     internal static partial class Interop
     {
-         internal static partial class Int32Pair
+        internal static partial class Int32Pair
         {
             [global::System.Runtime.InteropServices.DllImport(NDalicPINVOKE.Lib, EntryPoint = "CSharp_Dali_new_Int32Pair__SWIG_0")]
             public static extern global::System.IntPtr NewInt32Pair();
@@ -40,6 +40,6 @@ namespace Tizen.NUI
 
             [global::System.Runtime.InteropServices.DllImport(NDalicPINVOKE.Lib, EntryPoint = "CSharp_Dali_delete_Int32Pair")]
             public static extern void DeleteInt32Pair(global::System.Runtime.InteropServices.HandleRef handle);
-       }
+        }
     }
 }

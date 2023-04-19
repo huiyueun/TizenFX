@@ -37,7 +37,7 @@ namespace Tizen.NUI.Binding
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly BindableProperty BindingContextProperty =
-            BindableProperty.Create(nameof(BindingContext), typeof(object), typeof(BindableObject),  default(object), BindingMode.OneWay, null, BindingContextPropertyChanged,
+            BindableProperty.Create(nameof(BindingContext), typeof(object), typeof(BindableObject), default(object), BindingMode.OneWay, null, BindingContextPropertyChanged,
             null, null, BindingContextPropertyBindingChanging);
 
         readonly Dictionary<BindableProperty, BindablePropertyContext> properties = new Dictionary<BindableProperty, BindablePropertyContext>(4);
@@ -455,7 +455,7 @@ namespace Tizen.NUI.Binding
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected virtual void OnPropertyChanging([CallerMemberName] string propertyName = null)
             => PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(propertyName));
-        
+
         /// <summary>
         /// Method that is called when a bound property is changed.
         /// </summary>

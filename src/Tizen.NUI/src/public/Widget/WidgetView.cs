@@ -491,7 +491,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private bool InternalPreview
         {
             get
@@ -526,7 +526,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private bool InternalLoadingText
         {
             get
@@ -561,7 +561,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private bool InternalWidgetStateFaulted
         {
             get
@@ -596,7 +596,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private bool InternalPermanentDelete
         {
             get
@@ -631,7 +631,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private PropertyMap InternalRetryText
         {
             get
@@ -666,7 +666,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private PropertyMap InternalEffect
         {
             get

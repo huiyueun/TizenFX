@@ -116,11 +116,11 @@ namespace Tizen.NUI
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool CacheBuilderEnabled
         {
-            get 
+            get
             {
                 return cacheBuilderEnabled;
             }
-            set 
+            set
             {
                 Interop.WebSettings.EnableCacheBuilder(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();
@@ -225,7 +225,7 @@ namespace Tizen.NUI
             {
                 return Interop.WebSettings.ArePluginsEnabled(SwigCPtr);
             }
-            set 
+            set
             {
                 Interop.WebSettings.EnablePlugins(SwigCPtr, value);
                 if (NDalicPINVOKE.SWIGPendingException.Pending) throw NDalicPINVOKE.SWIGPendingException.Retrieve();

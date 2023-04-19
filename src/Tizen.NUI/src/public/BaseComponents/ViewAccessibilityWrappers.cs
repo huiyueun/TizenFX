@@ -36,9 +36,9 @@ namespace Tizen.NUI.BaseComponents
             InitializeAccessibilityDelegateValueInterface();
             InitializeAccessibilityDelegateTizenExtensions();
 
-            var ad   = Interop.ControlDevel.AccessibilityDelegate.Instance;
+            var ad = Interop.ControlDevel.AccessibilityDelegate.Instance;
             var size = Marshal.SizeOf<Interop.ControlDevel.AccessibilityDelegate>();
-            var ptr  = Marshal.AllocHGlobal(size);
+            var ptr = Marshal.AllocHGlobal(size);
 
             Marshal.StructureToPtr(ad, ptr, false);
             Interop.ControlDevel.DaliAccessibilitySetAccessibilityDelegate(ptr, Convert.ToUInt32(size));
@@ -87,10 +87,10 @@ namespace Tizen.NUI.BaseComponents
             var ad = Interop.ControlDevel.AccessibilityDelegate.Instance;
 
             ad.CalculateStates = AccessibilityCalculateStatesWrapper;
-            ad.GetAttributes   = AccessibilityGetAttributes; // Not a wrapper, entirely private implementation
-            ad.GetDescription  = AccessibilityGetDescriptionWrapper;
-            ad.GetInterfaces   = AccessibilityGetInterfaces; // Not a wrapper, entirely private implementation
-            ad.GetName         = AccessibilityGetNameWrapper;
+            ad.GetAttributes = AccessibilityGetAttributes; // Not a wrapper, entirely private implementation
+            ad.GetDescription = AccessibilityGetDescriptionWrapper;
+            ad.GetInterfaces = AccessibilityGetInterfaces; // Not a wrapper, entirely private implementation
+            ad.GetName = AccessibilityGetNameWrapper;
         }
 
         private static ulong AccessibilityCalculateStatesWrapper(IntPtr self, ulong initialStates)
@@ -178,9 +178,9 @@ namespace Tizen.NUI.BaseComponents
         {
             var ad = Interop.ControlDevel.AccessibilityDelegate.Instance;
 
-            ad.DoAction       = AccessibilityDoActionWrapper;
+            ad.DoAction = AccessibilityDoActionWrapper;
             ad.GetActionCount = AccessibilityGetActionCountWrapper;
-            ad.GetActionName  = AccessibilityGetActionNameWrapper;
+            ad.GetActionName = AccessibilityGetActionNameWrapper;
         }
 
         private static bool AccessibilityDoActionWrapper(IntPtr self, IntPtr name)
@@ -224,10 +224,10 @@ namespace Tizen.NUI.BaseComponents
         {
             var ad = Interop.ControlDevel.AccessibilityDelegate.Instance;
 
-            ad.CopyText        = AccessibilityCopyTextWrapper;
-            ad.CutText         = AccessibilityCutTextWrapper;
-            ad.DeleteText      = AccessibilityDeleteTextWrapper;
-            ad.InsertText      = AccessibilityInsertTextWrapper;
+            ad.CopyText = AccessibilityCopyTextWrapper;
+            ad.CutText = AccessibilityCutTextWrapper;
+            ad.DeleteText = AccessibilityDeleteTextWrapper;
+            ad.InsertText = AccessibilityInsertTextWrapper;
             ad.SetTextContents = AccessibilitySetTextContentsWrapper;
         }
 
@@ -264,14 +264,14 @@ namespace Tizen.NUI.BaseComponents
         {
             var ad = Interop.ControlDevel.AccessibilityDelegate.Instance;
 
-            ad.ClearSelection           = AccessibilityClearSelectionWrapper;
-            ad.DeselectChild            = AccessibilityDeselectChildWrapper;
-            ad.DeselectSelectedChild    = AccessibilityDeselectSelectedChildWrapper;
-            ad.GetSelectedChild         = AccessibilityGetSelectedChildWrapper;
+            ad.ClearSelection = AccessibilityClearSelectionWrapper;
+            ad.DeselectChild = AccessibilityDeselectChildWrapper;
+            ad.DeselectSelectedChild = AccessibilityDeselectSelectedChildWrapper;
+            ad.GetSelectedChild = AccessibilityGetSelectedChildWrapper;
             ad.GetSelectedChildrenCount = AccessibilityGetSelectedChildrenCountWrapper;
-            ad.IsChildSelected          = AccessibilityIsChildSelectedWrapper;
-            ad.SelectAll                = AccessibilitySelectAllWrapper;
-            ad.SelectChild              = AccessibilitySelectChildWrapper;
+            ad.IsChildSelected = AccessibilityIsChildSelectedWrapper;
+            ad.SelectAll = AccessibilitySelectAllWrapper;
+            ad.SelectChild = AccessibilitySelectChildWrapper;
         }
 
         private static bool AccessibilityClearSelectionWrapper(IntPtr self)
@@ -325,14 +325,14 @@ namespace Tizen.NUI.BaseComponents
             var ad = Interop.ControlDevel.AccessibilityDelegate.Instance;
 
             ad.GetCharacterCount = AccessibilityGetCharacterCountWrapper;
-            ad.GetCursorOffset   = AccessibilityGetCursorOffsetWrapper;
-            ad.GetRangeExtents   = AccessibilityGetRangeExtentsWrapper;
-            ad.GetSelection      = AccessibilityGetSelectionWrapper;
-            ad.GetText           = AccessibilityGetTextWrapper;
-            ad.GetTextAtOffset   = AccessibilityGetTextAtOffsetWrapper;
-            ad.RemoveSelection   = AccessibilityRemoveSelectionWrapper;
-            ad.SetCursorOffset   = AccessibilitySetCursorOffsetWrapper;
-            ad.SetSelection      = AccessibilitySetSelectionWrapper;
+            ad.GetCursorOffset = AccessibilityGetCursorOffsetWrapper;
+            ad.GetRangeExtents = AccessibilityGetRangeExtentsWrapper;
+            ad.GetSelection = AccessibilityGetSelectionWrapper;
+            ad.GetText = AccessibilityGetTextWrapper;
+            ad.GetTextAtOffset = AccessibilityGetTextAtOffsetWrapper;
+            ad.RemoveSelection = AccessibilityRemoveSelectionWrapper;
+            ad.SetCursorOffset = AccessibilitySetCursorOffsetWrapper;
+            ad.SetSelection = AccessibilitySetSelectionWrapper;
         }
 
         private static int AccessibilityGetCharacterCountWrapper(IntPtr self)
@@ -396,11 +396,11 @@ namespace Tizen.NUI.BaseComponents
         {
             var ad = Interop.ControlDevel.AccessibilityDelegate.Instance;
 
-            ad.GetCurrent          = AccessibilityGetCurrentWrapper;
-            ad.GetMaximum          = AccessibilityGetMaximumWrapper;
-            ad.GetMinimum          = AccessibilityGetMinimumWrapper;
+            ad.GetCurrent = AccessibilityGetCurrentWrapper;
+            ad.GetMaximum = AccessibilityGetMaximumWrapper;
+            ad.GetMinimum = AccessibilityGetMinimumWrapper;
             ad.GetMinimumIncrement = AccessibilityGetMinimumIncrementWrapper;
-            ad.SetCurrent          = AccessibilitySetCurrentWrapper;
+            ad.SetCurrent = AccessibilitySetCurrentWrapper;
         }
 
         private static double AccessibilityGetCurrentWrapper(IntPtr self)
@@ -436,7 +436,7 @@ namespace Tizen.NUI.BaseComponents
         {
             var ad = Interop.ControlDevel.AccessibilityDelegate.Instance;
 
-            ad.ScrollToChild            = AccessibilityScrollToChildWrapper;
+            ad.ScrollToChild = AccessibilityScrollToChildWrapper;
         }
 
         private static bool AccessibilityScrollToChildWrapper(IntPtr self, IntPtr child)

@@ -60,7 +60,8 @@ namespace Tizen.NUI.Xaml
 
         public string GetResource(string resourcePath, Assembly assembly, object target, IXmlLineInfo lineInfo)
         {
-            var resourceLoadingResponse = ResourceLoader.ResourceProvider?.Invoke(new ResourceLoader.ResourceLoadingQuery {
+            var resourceLoadingResponse = ResourceLoader.ResourceProvider?.Invoke(new ResourceLoader.ResourceLoadingQuery
+            {
                 AssemblyName = assembly.GetName(),
                 ResourcePath = resourcePath,
                 Instance = target

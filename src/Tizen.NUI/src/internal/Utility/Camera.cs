@@ -355,7 +355,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private float InternalNearPlaneDistance
         {
             get
@@ -386,7 +386,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private float InternalFarPlaneDistance
         {
             get
@@ -417,7 +417,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private float InternalLeftPlaneDistance
         {
             get
@@ -448,7 +448,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private float InternalRightPlaneDistance
         {
             get
@@ -479,7 +479,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private float InternalTopPlaneDistance
         {
             get
@@ -510,7 +510,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private float InternalBottomPlaneDistance
         {
             get
@@ -541,7 +541,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private Vector3 InternalTargetPosition
         {
             get
@@ -594,7 +594,7 @@ namespace Tizen.NUI
                 NotifyPropertyChanged();
             }
         }
-        
+
         private bool InternalInvertYAxis
         {
             get

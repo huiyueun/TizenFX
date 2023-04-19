@@ -99,12 +99,12 @@ namespace Tizen.NUI
         {
             get
             {
-               Vector2 screenDpi = NUIApplication.GetDefaultWindow().Dpi;
+                Vector2 screenDpi = NUIApplication.GetDefaultWindow().Dpi;
 
-               // Currently Dpi.X and Dpi.Y is all same value from ecore_wl2_output_dpi_get
-               // Also Diagonal Dpi should be same as X, Y Dpi in normal rectangle-pixels display
-               // so for the convenience, we use Dpi.X
-               return Convert.ToInt32(Math.Round(screenDpi.X));
+                // Currently Dpi.X and Dpi.Y is all same value from ecore_wl2_output_dpi_get
+                // Also Diagonal Dpi should be same as X, Y Dpi in normal rectangle-pixels display
+                // so for the convenience, we use Dpi.X
+                return Convert.ToInt32(Math.Round(screenDpi.X));
             }
         }
 

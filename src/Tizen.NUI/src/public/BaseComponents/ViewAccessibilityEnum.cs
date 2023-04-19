@@ -340,187 +340,187 @@ namespace Tizen.NUI.BaseComponents
         /// Invalid state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Invalid                = 0,
+        Invalid = 0,
         /// <summary>
         /// Active state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Active                 = 1,
+        Active = 1,
         /// <summary>
         /// Armed state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Armed                  = 2,
+        Armed = 2,
         /// <summary>
         /// Busy state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Busy                   = 3,
+        Busy = 3,
         /// <summary>
         /// Checked state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Checked                = 4,
+        Checked = 4,
         /// <summary>
         /// Collapsed state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Collapsed              = 5,
+        Collapsed = 5,
         /// <summary>
         /// Defunct state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Defunct                = 6,
+        Defunct = 6,
         /// <summary>
         /// Editable state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Editable               = 7,
+        Editable = 7,
         /// <summary>
         /// Enabled state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Enabled                = 8,
+        Enabled = 8,
         /// <summary>
         /// Expandable state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Expandable             = 9,
+        Expandable = 9,
         /// <summary>
         /// Expanded state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Expanded               = 10,
+        Expanded = 10,
         /// <summary>
         /// Focusable state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Focusable              = 11,
+        Focusable = 11,
         /// <summary>
         /// Focused state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Focused                = 12,
+        Focused = 12,
         /// <summary>
         /// Had tooltip state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        HasTooltip             = 13,
+        HasTooltip = 13,
         /// <summary>
         /// Horizontal state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Horizontal             = 14,
+        Horizontal = 14,
         /// <summary>
         /// Iconified state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Iconified              = 15,
+        Iconified = 15,
         /// <summary>
         /// Modal state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Modal                  = 16,
+        Modal = 16,
         /// <summary>
         /// Multi-line state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        MultiLine              = 17,
+        MultiLine = 17,
         /// <summary>
         /// Multi-selectable state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        MultiSelectable        = 18,
+        MultiSelectable = 18,
         /// <summary>
         /// Opaque state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Opaque                 = 19,
+        Opaque = 19,
         /// <summary>
         /// Pressed state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Pressed                = 20,
+        Pressed = 20,
         /// <summary>
         /// Resizeable state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Resizeable             = 21,
+        Resizeable = 21,
         /// <summary>
         /// Selectable state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Selectable             = 22,
+        Selectable = 22,
         /// <summary>
         /// Selected state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Selected               = 23,
+        Selected = 23,
         /// <summary>
         /// Sensitive state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Sensitive              = 24,
+        Sensitive = 24,
         /// <summary>
         /// Showing state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Showing                = 25,
+        Showing = 25,
         /// <summary>
         /// Single line state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        SingleLine             = 26,
+        SingleLine = 26,
         /// <summary>
         /// Stale state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Stale                  = 27,
+        Stale = 27,
         /// <summary>
         /// Transient state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Transient              = 28,
+        Transient = 28,
         /// <summary>
         /// Vertical state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Vertical               = 29,
+        Vertical = 29,
         /// <summary>
         /// Visible state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Visible                = 30,
+        Visible = 30,
         /// <summary>
         /// Managed descendants state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        ManagesDescendants     = 31,
+        ManagesDescendants = 31,
         /// <summary>
         /// Indeterminate state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Indeterminate          = 32,
+        Indeterminate = 32,
         /// <summary>
         /// Required state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Required               = 33,
+        Required = 33,
         /// <summary>
         /// Truncated state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Truncated              = 34,
+        Truncated = 34,
         /// <summary>
         /// Animated state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Animated               = 35,
+        Animated = 35,
         /// <summary>
         /// Invalid entry state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        InvalidEntry           = 36,
+        InvalidEntry = 36,
         /// <summary>
         /// Supported auto completion state.
         /// </summary>
@@ -530,42 +530,42 @@ namespace Tizen.NUI.BaseComponents
         /// Selectable text state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        SelectableText         = 38,
+        SelectableText = 38,
         /// <summary>
         /// Default state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        IsDefault              = 39,
+        IsDefault = 39,
         /// <summary>
         /// Visited state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Visited                = 40,
+        Visited = 40,
         /// <summary>
         /// Checkable state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Checkable              = 41,
+        Checkable = 41,
         /// <summary>
         /// Had popup state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        HasPopup               = 42,
+        HasPopup = 42,
         /// <summary>
         /// Read only state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        ReadOnly               = 43,
+        ReadOnly = 43,
         /// <summary>
         /// Highlighted state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Highlighted            = 44,
+        Highlighted = 44,
         /// <summary>
         /// Highlightable state.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        Highlightable          = 45,
+        Highlightable = 45,
     };
 
     /// <summary>
@@ -624,42 +624,42 @@ namespace Tizen.NUI.BaseComponents
         /// Property changed event.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        PropertyChanged         = 0,
+        PropertyChanged = 0,
         /// <summary>
         /// Bounds changed event.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        BoundsChanged           = 1,
+        BoundsChanged = 1,
         /// <summary>
         /// Link selected event.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        LinkSelected            = 2,
+        LinkSelected = 2,
         /// <summary>
         /// State changed event.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        StateChanged            = 3,
+        StateChanged = 3,
         /// <summary>
         /// Children changed event.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        ChildrenChanged         = 4,
+        ChildrenChanged = 4,
         /// <summary>
         /// Visible data changed event.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        VisibleDataChanged      = 5,
+        VisibleDataChanged = 5,
         /// <summary>
         /// Selection changed event.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        SelectionChanged        = 6,
+        SelectionChanged = 6,
         /// <summary>
         /// Model changed event.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        ModelChanged            = 7,
+        ModelChanged = 7,
         /// <summary>
         /// Active descendant changed event.
         /// </summary>
@@ -669,72 +669,72 @@ namespace Tizen.NUI.BaseComponents
         /// Row inserted event.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        RowInserted             = 9,
+        RowInserted = 9,
         /// <summary>
         /// Row reordered event.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        RowReordered            = 10,
+        RowReordered = 10,
         /// <summary>
         /// Row deleted event.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        RowDeleted              = 11,
+        RowDeleted = 11,
         /// <summary>
         /// Column inserted event.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        ColumnInserted          = 12,
+        ColumnInserted = 12,
         /// <summary>
         /// Column reordered event.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        ColumnReordered         = 13,
+        ColumnReordered = 13,
         /// <summary>
         /// Column deleted event.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        ColumnDeleted           = 14,
+        ColumnDeleted = 14,
         /// <summary>
         /// Text bounds changed event.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        TextBoundsChanged       = 15,
+        TextBoundsChanged = 15,
         /// <summary>
         /// Text selection changed event.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        TextSelectionChanged    = 16,
+        TextSelectionChanged = 16,
         /// <summary>
         /// Text changed event.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        TextChanged             = 17,
+        TextChanged = 17,
         /// <summary>
         /// Text attributes changed event.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        TextAttributesChanged   = 18,
+        TextAttributesChanged = 18,
         /// <summary>
         /// Text caret moved event.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        TextCaretMoved          = 19,
+        TextCaretMoved = 19,
         /// <summary>
         /// Attributes changed event.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        AttributesChanged       = 20,
+        AttributesChanged = 20,
         /// <summary>
         /// Moved out event.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        MovedOut                = 21,
+        MovedOut = 21,
         /// <summary>
         /// Window changed event.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        WindowChanged           = 22,
+        WindowChanged = 22,
     };
 
     /// <summary>

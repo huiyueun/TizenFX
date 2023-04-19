@@ -427,7 +427,7 @@ namespace Tizen.NUI.BaseComponents
         {
             if (converter == null) throw new ArgumentNullException(nameof(converter));
 
-            Selector<TOut> result = new Selector<TOut>();            
+            Selector<TOut> result = new Selector<TOut>();
             result.SelectorItems = SelectorItems.ConvertAll<SelectorItem<TOut>>(m => new SelectorItem<TOut>(m.State, converter(m.Value)));
             UpdateAllLink();
 
@@ -503,7 +503,7 @@ namespace Tizen.NUI.BaseComponents
             int hash = 17;
             hash = (hash * 23) + (All == null ? 0 : All.GetHashCode());
             hash = (hash * 23) + SelectorItems.Count;
-            
+
             // Order of items should not effect to the result value.
             int itemSum = 0;
             foreach (var item in SelectorItems)
@@ -541,7 +541,7 @@ namespace Tizen.NUI.BaseComponents
             int index = SelectorItems.FindIndex(x => x.State == ControlState.All);
             if (index >= 0)
             {
-                all = SelectorItems[index];   
+                all = SelectorItems[index];
             }
             else
             {

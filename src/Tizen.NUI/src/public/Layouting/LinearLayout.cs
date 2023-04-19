@@ -183,7 +183,7 @@ namespace Tizen.NUI
                         break;
                 }
             }
-         }
+        }
 
         /// <summary>
         /// Get/Set the horizontal alignment in the layout

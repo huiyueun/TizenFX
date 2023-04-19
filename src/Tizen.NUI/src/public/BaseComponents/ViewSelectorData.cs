@@ -27,14 +27,14 @@ namespace Tizen.NUI.BaseComponents
     {
         internal ViewSelectorData() { }
 
-        public TriggerableSelector<Color> BackgroundColor{ get; set; }
-        public TriggerableSelector<string> BackgroundImage{ get; set; }
-        public TriggerableSelector<Rectangle> BackgroundImageBorder{ get; set; }
-        public TriggerableSelector<Color> Color{ get; set; }
-        public TriggerableSelector<float?> Opacity{ get; set; }
-        public TriggerableSelector<ImageShadow> ImageShadow{ get; set; }
-        public TriggerableSelector<Shadow> BoxShadow{ get; set; }
-        public TriggerableSelector<Color> BorderlineColor{ get; set; }
+        public TriggerableSelector<Color> BackgroundColor { get; set; }
+        public TriggerableSelector<string> BackgroundImage { get; set; }
+        public TriggerableSelector<Rectangle> BackgroundImageBorder { get; set; }
+        public TriggerableSelector<Color> Color { get; set; }
+        public TriggerableSelector<float?> Opacity { get; set; }
+        public TriggerableSelector<ImageShadow> ImageShadow { get; set; }
+        public TriggerableSelector<Shadow> BoxShadow { get; set; }
+        public TriggerableSelector<Color> BorderlineColor { get; set; }
 
         public void ClearBackground(View view)
         {

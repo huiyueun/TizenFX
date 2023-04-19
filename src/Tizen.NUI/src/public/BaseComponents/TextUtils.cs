@@ -1096,7 +1096,7 @@ namespace Tizen.NUI.BaseComponents
             var fontList = new List<FontInfo>();
             if (fontArray != null)
             {
-                for (uint i = 0 ; i < fontArray.Count(); i ++)
+                for (uint i = 0; i < fontArray.Count(); i++)
                 {
                     using (var fontInfoMap = new PropertyMap())
                     using (var propertyValue = fontArray[i])

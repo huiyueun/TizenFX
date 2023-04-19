@@ -81,14 +81,14 @@ namespace Tizen.NUI
         [EditorBrowsable(EditorBrowsableState.Never)]
         public enum BorderDirection
         {
-            None        = ResizeDirection.None,
-            TopLeft     = ResizeDirection.TopLeft,
-            Top         = ResizeDirection.Top,
-            TopRight    = ResizeDirection.TopRight,
-            Left        = ResizeDirection.Left,
-            Right       = ResizeDirection.Right,
-            BottomLeft  = ResizeDirection.BottomLeft,
-            Bottom      = ResizeDirection.Bottom,
+            None = ResizeDirection.None,
+            TopLeft = ResizeDirection.TopLeft,
+            Top = ResizeDirection.Top,
+            TopRight = ResizeDirection.TopRight,
+            Left = ResizeDirection.Left,
+            Right = ResizeDirection.Right,
+            BottomLeft = ResizeDirection.BottomLeft,
+            Bottom = ResizeDirection.Bottom,
             BottomRight = ResizeDirection.BottomRight,
             Move,
         }
@@ -99,18 +99,18 @@ namespace Tizen.NUI
         [EditorBrowsable(EditorBrowsableState.Never)]
         public enum BorderResizePolicyType
         {
-          /// <summary>
-          /// The window can be resized freely.
-          /// </summary>
-          Free = 0,
-          /// <summary>
-          /// The window is resized according to the ratio.
-          /// </summary>
-          KeepRatio = 1,
-          /// <summary>
-          /// The window is not resized and is fixed.
-          /// </summary>
-          Fixed = 2,
+            /// <summary>
+            /// The window can be resized freely.
+            /// </summary>
+            Free = 0,
+            /// <summary>
+            /// The window is resized according to the ratio.
+            /// </summary>
+            KeepRatio = 1,
+            /// <summary>
+            /// The window is not resized and is fixed.
+            /// </summary>
+            Fixed = 2,
         }
         #endregion //Enums
 
@@ -186,14 +186,14 @@ namespace Tizen.NUI
                     SetMimimumSize(mimimumSize);
                     minSize = borderInterface.MinSize;
                 }
-                
+
                 if (maxSize != borderInterface.MaxSize || (borderInterface.MaxSize != null && isNeedResizeByLine == true))
                 {
                     using Size2D maximumSize = new Size2D((borderInterface.MaxSize?.Width + (int)borderLineThickness * 2 ?? 0), (borderInterface.MaxSize?.Height ?? 0) + (int)(borderHeight + borderLineThickness * 2));
                     SetMaximumSize(maximumSize);
                     maxSize = borderInterface.MaxSize;
                 }
-                
+
                 if (borderResizePolicy != borderInterface.ResizePolicy)
                 {
                     AddAuxiliaryHint("wm.policy.win.resize_aspect_ratio", "0");
@@ -203,7 +203,7 @@ namespace Tizen.NUI
                         AddAuxiliaryHint("wm.policy.win.resize_aspect_ratio", "1");
                     }
                 }
-                
+
             }
         }
         /// <summary>
@@ -348,14 +348,15 @@ namespace Tizen.NUI
                 BackgroundColor = Color.Transparent,
             };
 
-            ushort padding = (ushort) borderLineThickness;
+            ushort padding = (ushort)borderLineThickness;
             borderView = new BorderView()
             {
                 GrabTouchAfterLeave = true,
                 WidthResizePolicy = ResizePolicyType.FillToParent,
                 HeightResizePolicy = ResizePolicyType.FillToParent,
                 BackgroundColor = Color.Transparent,
-                Layout = new LinearLayout() {
+                Layout = new LinearLayout()
+                {
                     LinearOrientation = LinearLayout.Orientation.Vertical,
                     LinearAlignment = LinearLayout.Alignment.Top
                 },
@@ -422,7 +423,7 @@ namespace Tizen.NUI
                 direction = BorderDirection.BottomRight;
             }
             // check top left corner
-            else if (xPosition < borderInterface.TouchThickness && yPosition <  borderInterface.TouchThickness)
+            else if (xPosition < borderInterface.TouchThickness && yPosition < borderInterface.TouchThickness)
             {
                 direction = BorderDirection.TopLeft;
             }
@@ -546,7 +547,7 @@ namespace Tizen.NUI
 
             borderInterface.OnResized(resizeWidth, resizeHeight);
 
-             // reset borderHeight
+            // reset borderHeight
             borderHeight = 0;
             if (hasTopView) borderHeight += topView.SizeHeight;
             if (hasBottomView) borderHeight += bottomView.SizeHeight;

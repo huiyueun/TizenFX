@@ -7,7 +7,7 @@ namespace Tizen.NUI.EXaml
     internal class GetBaseType
     {
         private static List<Type> baseTypes;
-        
+
         internal static Type GetBaseTypeByIndex(int typeIndex)
         {
             if (null == baseTypes)
