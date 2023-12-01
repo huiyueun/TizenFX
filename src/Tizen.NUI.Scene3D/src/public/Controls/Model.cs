@@ -724,6 +724,7 @@ namespace Tizen.NUI.Scene3D
         /// EventHandler event.
         /// It will be invoked when collider mesh is hit.
         /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public event EventHandler<MeshHitEventArgs> MeshHitSignal
         {
             add
